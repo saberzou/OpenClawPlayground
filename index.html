@@ -8,13 +8,10 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="nav">
-        <div class="nav-content">
-            <div>
-                <div class="nav-title">Report Center</div>
-                <div class="nav-date" id="navDate"></div>
-            </div>
-        </div>
+        <div class="nav-title">Report Center</div>
+        <div class="nav-date" id="navDate"></div>
         <div class="nav-tabs">
             <button class="nav-tab active" data-section="news">News</button>
             <button class="nav-tab" data-section="movies">Movies</button>
@@ -23,42 +20,42 @@
         </div>
     </nav>
 
+    <!-- Main Content -->
     <main class="main">
         <!-- News Section -->
         <section id="news" class="section active">
             <div class="section-header">
                 <h2>Latest News</h2>
-                <p class="section-subtitle">AI & Tech</p>
+                <p>AI & Tech</p>
             </div>
-            <div class="hero-news" id="heroNews"></div>
-            <div class="news-grid" id="newsGrid"></div>
+            <div id="newsContent"></div>
         </section>
 
         <!-- Movies Section -->
         <section id="movies" class="section">
             <div class="section-header">
                 <h2>Movie Picks</h2>
-                <p class="section-subtitle">Weekly Recommendations</p>
+                <p>Weekly Recommendations</p>
             </div>
-            <div class="movies-grid" id="moviesGrid"></div>
+            <div id="moviesContent"></div>
         </section>
 
         <!-- Books Section -->
         <section id="books" class="section">
             <div class="section-header">
                 <h2>Reading List</h2>
-                <p class="section-subtitle">Design & AI</p>
+                <p>Design & AI</p>
             </div>
-            <div class="books-grid" id="booksGrid"></div>
+            <div id="booksContent"></div>
         </section>
 
         <!-- Tools Section -->
         <section id="tools" class="section">
             <div class="section-header">
                 <h2>AI Tools</h2>
-                <p class="section-subtitle">Curated Collection</p>
+                <p>Curated Collection</p>
             </div>
-            <div class="tools-grid" id="toolsGrid"></div>
+            <div id="toolsContent"></div>
         </section>
     </main>
 
