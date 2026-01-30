@@ -3,40 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Center</title>
+    <title>Morning Briefing</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: #000; color: #fff; padding: 60px 16px 40px; max-width: 600px; margin: 0 auto; 
+            background: #000; color: #fff; padding: 56px 16px 48px; max-width: 600px; margin: 0 auto; 
         }
-        h1 { font-size: 24px; margin-bottom: 4px; }
+        h1 { font-size: 24px; font-weight: 700; margin-bottom: 2px; }
         .date { color: #888; font-size: 14px; margin-bottom: 20px; }
-        .nav { display: flex; gap: 8px; margin-bottom: 24px; overflow-x: auto; }
+        .nav { display: flex; gap: 6px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 4px; }
         .nav button { 
-            background: #333; border: none; color: #fff; padding: 8px 16px; 
-            border-radius: 20px; font-size: 14px; cursor: pointer; white-space: nowrap; 
+            background: #222; border: none; color: #999; padding: 8px 14px; 
+            border-radius: 18px; font-size: 13px; cursor: pointer; white-space: nowrap; 
         }
         .nav button.active { background: #fff; color: #000; }
         .section { display: none; }
         .section.active { display: block; }
-        h2 { font-size: 22px; margin-bottom: 16px; border-bottom: 1px solid #333; padding-bottom: 8px; }
-        .card { background: #1a1a1a; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
-        .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; background: #333; }
-        .card h3 { font-size: 16px; margin-bottom: 6px; }
-        .card p { color: #999; font-size: 13px; line-height: 1.4; }
-        .card .meta { color: #666; font-size: 11px; margin-top: 8px; }
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .grid .card img { height: 100px; }
-        .grid .card h3 { font-size: 14px; }
-        .book { display: flex; gap: 12px; }
-        .book img { width: 50px; height: 70px; border-radius: 4px; margin-bottom: 0; }
-        .book-info { flex: 1; }
-        footer { text-align: center; color: #666; font-size: 12px; margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; }
+        h2 { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #fff; }
+        
+        .hero { background: #1a1a1a; border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+        .hero-img { width: 100%; height: 180px; object-fit: cover; background: #222; display: block; }
+        .hero-content { padding: 16px 18px 18px; }
+        .hero-label { color: #2997ff; font-size: 11px; font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
+        .hero-title { font-size: 19px; font-weight: 600; line-height: 1.3; margin-bottom: 8px; }
+        .hero-desc { color: #999; font-size: 14px; line-height: 1.5; margin-bottom: 10px; }
+        .hero-meta { color: #666; font-size: 11px; display: flex; gap: 12px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
+        .card { background: #1a1a1a; border-radius: 12px; overflow: hidden; }
+        .card-img { width: 100%; height: 90px; object-fit: cover; background: #222; display: block; }
+        .card-content { padding: 12px 14px; }
+        .card-label { color: #2997ff; font-size: 10px; font-weight: 600; text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 14px; font-weight: 600; line-height: 1.35; margin-bottom: 6px; }
+        .card-desc { color: #777; font-size: 12px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-meta { color: #555; font-size: 10px; margin-top: 6px; }
+        
+        .list-item { 
+            background: #1a1a1a; border-radius: 12px; padding: 14px 16px; 
+            margin-bottom: 10px; display: flex; gap: 14px; align-items: flex-start; 
+        }
+        .list-img { width: 60px; height: 85px; object-fit: cover; border-radius: 6px; background: #222; flex-shrink: 0; }
+        .list-info { flex: 1; min-width: 0; }
+        .list-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .list-meta { color: #888; font-size: 12px; margin-bottom: 4px; }
+        .list-desc { color: #666; font-size: 12px; line-height: 1.4; }
+        
+        .tool-item { 
+            background: #1a1a1a; border-radius: 12px; padding: 14px 16px; 
+            margin-bottom: 10px; display: flex; gap: 14px; align-items: center; 
+        }
+        .tool-icon { 
+            width: 44px; height: 44px; border-radius: 10px; 
+            display: flex; align-items: center; justify-content: center; font-size: 20px; 
+            flex-shrink: 0; 
+        }
+        .tool-info { flex: 1; }
+        .tool-name { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+        .tool-desc { color: #888; font-size: 13px; }
+        
+        footer { text-align: center; color: #444; font-size: 11px; margin-top: 32px; padding-top: 20px; border-top: 1px solid #222; }
     </style>
 </head>
 <body>
-    <h1>Report Center</h1>
+    <h1>Morning Briefing</h1>
     <div class="date" id="date"></div>
     <div class="nav">
         <button class="active" onclick="show('news')">News</button>
@@ -46,17 +76,17 @@
     </div>
 
     <div id="news" class="section active">
-        <h2>AI News</h2>
+        <h2>Today's Headlines</h2>
         <div id="newsContent"></div>
     </div>
 
     <div id="movies" class="section">
-        <h2>Movies</h2>
+        <h2>Movie Picks</h2>
         <div class="grid" id="moviesContent"></div>
     </div>
 
     <div id="books" class="section">
-        <h2>Books</h2>
+        <h2>Reading List</h2>
         <div id="booksContent"></div>
     </div>
 
@@ -65,7 +95,7 @@
         <div id="toolsContent"></div>
     </div>
 
-    <footer>Report Center</footer>
+    <footer>Morning Briefing • Anson</footer>
 
     <script>
         document.getElementById('date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
@@ -78,85 +108,139 @@
         }
 
         const news = [
-            { title: 'Amazon in Talks to Invest $50B in OpenAI', source: 'TechCrunch', time: '2h ago', color: '#3b82f6' },
-            { title: 'SpaceX, Tesla, xAI Merger Talks', source: 'Reuters', time: '5h ago', color: '#8b5cf6' },
-            { title: "Apple's AI Monetization Challenges", source: 'The Verge', time: '8h ago', color: '#10b981' },
-            { title: 'AI Content Labels Proposed', source: 'The Guardian', time: '12h ago', color: '#f59e0b' },
-            { title: 'Trillion-Dollar AI Stocks to Watch', source: 'Motley Fool', time: '1d ago', color: '#ef4444' },
-            { title: 'Claude & GPT-5 Updates', source: 'Ars Technica', time: '1d ago', color: '#ec4899' }
+            {
+                title: 'Amazon in Talks to Invest $50B in OpenAI',
+                category: 'Technology',
+                summary: 'The potential investment would reshape the AI landscape and make Amazon a major player in generative AI, potentially accelerating OpenAI\'s expansion into cloud services.',
+                source: 'TechCrunch',
+                time: '2 hours ago',
+                image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=300&fit=crop&q=80'
+            },
+            {
+                title: 'SpaceX, Tesla, xAI Reportedly in Merger Talks',
+                category: 'Business',
+                summary: 'Elon Musk\'s companies are discussing a potential merger that would unite SpaceX rockets, Tesla vehicles, and xAI\'s Grok chatbot under one corporate umbrella.',
+                source: 'Reuters',
+                time: '5 hours ago',
+                image: 'https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=400&h=200&fit=crop&q=80'
+            },
+            {
+                title: "Apple's AI Monetization Challenge",
+                category: 'Company',
+                summary: 'Analysts question how Apple will justify its AI investments as the company struggles to find clear revenue streams from its recent AI features.',
+                source: 'The Verge',
+                time: '8 hours ago',
+                image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=200&fit=crop&q=80'
+            },
+            {
+                title: 'AI Content Transparency Labels Proposed',
+                category: 'Policy',
+                summary: 'A new thinktank report suggests AI-generated content should carry "nutrition label" disclosures to help users understand what they\'re reading.',
+                source: 'The Guardian',
+                time: '12 hours ago',
+                image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop&q=80'
+            },
+            {
+                title: 'Five Trillion-Dollar AI Stocks to Watch',
+                category: 'Finance',
+                summary: 'Analysts identify the top AI companies poised to reach trillion-dollar valuations, including semiconductor leaders and emerging software platforms.',
+                source: 'Motley Fool',
+                time: '1 day ago',
+                image: 'https://images.unsplash.com/photo-1611974765270-ca12586343bb?w=400&h=200&fit=crop&q=80'
+            },
+            {
+                title: 'Claude and GPT-5 Development Updates',
+                category: 'Products',
+                summary: 'Insider reports suggest major AI models are approaching human-level reasoning capabilities, with new releases expected in the coming months.',
+                source: 'Ars Technica',
+                time: '1 day ago',
+                image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=200&fit=crop&q=80'
+            }
         ];
 
         const movies = [
-            { title: 'Her', rating: '8.0', color: '#3b82f6' },
-            { title: 'Ex Machina', rating: '7.7', color: '#8b5cf6' },
-            { title: 'Blade Runner 2049', rating: '8.0', color: '#10b981' },
-            { title: 'The Matrix', rating: '8.7', color: '#f59e0b' },
-            { title: 'Everything Everywhere', rating: '7.8', color: '#ef4444' },
-            { title: 'Past Lives', rating: '7.9', color: '#ec4899' }
+            { title: 'Her', year: 2013, rating: 8.0, desc: 'A lonely writer falls in love with an AI', img: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&h=400&fit=crop&q=80' },
+            { title: 'Ex Machina', year: 2014, rating: 7.7, desc: 'Testing an AI humanoid', img: 'https://images.unsplash.com/photo-1535378433864-48cf10419c5c?w=300&h=400&fit=crop&q=80' },
+            { title: 'Blade Runner 2049', year: 2017, rating: 8.0, desc: 'A replicant uncovers a secret', img: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=300&h=400&fit=crop&q=80' },
+            { title: 'The Matrix', year: 1999, rating: 8.7, desc: 'Reality is a simulation', img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=300&h=400&fit=crop&q=80' },
+            { title: 'Everything Everywhere', year: 2022, rating: 7.8, desc: 'Traversing multiverses', img: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=300&h=400&fit=crop&q=80' },
+            { title: 'Past Lives', year: 2023, rating: 7.9, desc: 'Two friends reconnect', img: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=300&h=400&fit=crop&q=80' }
         ];
 
         const books = [
-            { title: 'The Design of Everyday Things', author: 'Don Norman', rating: '4.5', color: '#3b82f6' },
-            { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', rating: '4.6', color: '#f59e0b' },
-            { title: 'Creativity Inc.', author: 'Ed Catmull', rating: '4.5', color: '#10b981' },
-            { title: 'Steve Jobs', author: 'Walter Isaacson', rating: '4.6', color: '#6366f1' },
-            { title: 'The Soul of a New Machine', author: 'Tracy Kidder', rating: '4.4', color: '#8b5cf6' }
+            { title: 'The Design of Everyday Things', author: 'Don Norman', rating: 4.5, desc: 'Foundational human-centered design principles', img: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=140&h=200&fit=crop&q=80' },
+            { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', rating: 4.6, desc: 'Understanding how we think', img: 'https://images.unsplash.com/photo-1555116505-38ab61800975?w=140&h=200&fit=crop&q=80' },
+            { title: 'Creativity Inc.', author: 'Ed Catmull', rating: 4.5, desc: 'Overcoming creative barriers', img: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=140&h=200&fit=crop&q=80' },
+            { title: 'Steve Jobs', author: 'Walter Isaacson', rating: 4.6, desc: 'Apple founder biography', img: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=140&h=200&fit=crop&q=80' },
+            { title: 'The Soul of a New Machine', author: 'Tracy Kidder', rating: 4.4, desc: 'Building a computer', img: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=140&h=200&fit=crop&q=80' }
         ];
 
         const tools = [
-            { name: 'Cursor', desc: 'AI code editor', icon: '⌨️', color: '#3b82f6' },
+            { name: 'Cursor', desc: 'AI-first code editor', icon: '⌨️', color: '#3b82f6' },
             { name: 'Midjourney', desc: 'AI image generation', icon: '🎨', color: '#8b5cf6' },
             { name: 'Figma Make', desc: 'Design to code', icon: '🎯', color: '#f59e0b' },
             { name: 'Claude', desc: 'AI assistant', icon: '💬', color: '#dc2626' },
-            { name: 'Perplexity', desc: 'AI search', icon: '🔍', color: '#10b981' },
+            { name: 'Perplexity', desc: 'AI-powered search', icon: '🔍', color: '#10b981' },
             { name: 'v0', desc: 'React UI generator', icon: '🧩', color: '#6366f1' },
-            { name: 'Lovable', desc: 'Vibe coding', icon: '🪄', color: '#ec4899' },
-            { name: 'Bolt.new', desc: 'AI IDE', icon: '⚡', color: '#0ea5e9' }
+            { name: 'Lovable', desc: 'Vibe coding app builder', icon: '🪄', color: '#ec4899' },
+            { name: 'Bolt.new', desc: 'AI development environment', icon: '⚡', color: '#0ea5e9' }
         ];
 
-        // Render
+        // Render News
         document.getElementById('newsContent').innerHTML = `
-            <div class="card" style="background: linear-gradient(135deg, ${news[0].color}40, #1a1a1a);">
-                <div style="height: 120px; background: ${news[0].color}30; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 12px;">📰</div>
-                <h3>${news[0].title}</h3>
-                <p>${news[0].source} • ${news[0].time}</p>
+            <div class="hero">
+                <img src="${news[0].image}" alt="${news[0].title}" class="hero-img" onerror="this.style.display='none'">
+                <div class="hero-content">
+                    <div class="hero-label">${news[0].category}</div>
+                    <div class="hero-title">${news[0].title}</div>
+                    <div class="hero-desc">${news[0].summary}</div>
+                    <div class="hero-meta"><span>${news[0].source}</span><span>${news[0].time}</span></div>
+                </div>
             </div>
             <div class="grid">
                 ${news.slice(1).map(n => `
                     <div class="card">
-                        <div style="height: 80px; background: ${n.color}30; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 10px;">📰</div>
-                        <h3>${n.title}</h3>
-                        <div class="meta">${n.source} • ${n.time}</div>
+                        <img src="${n.image}" alt="${n.title}" class="card-img" onerror="this.style.display='none'">
+                        <div class="card-content">
+                            <div class="card-label">${n.category}</div>
+                            <div class="card-title">${n.title}</div>
+                            <div class="card-meta">${n.source} • ${n.time}</div>
+                        </div>
                     </div>
                 `).join('')}
             </div>
         `;
 
+        // Render Movies
         document.getElementById('moviesContent').innerHTML = movies.map(m => `
-            <div class="card" style="text-align: center;">
-                <div style="height: 100px; background: ${m.color}30; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 8px;">🎬</div>
-                <h3>${m.title}</h3>
-                <div style="color: #fbbf24; font-size: 13px;">★ ${m.rating}</div>
-            </div>
-        `).join('');
-
-        document.getElementById('booksContent').innerHTML = books.map(b => `
-            <div class="card book">
-                <div style="width: 50px; height: 70px; background: ${b.color}; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 20px;">📖</div>
-                <div class="book-info">
-                    <h3>${b.title}</h3>
-                    <p style="color: #888;">${b.author}</p>
-                    <p style="color: #fbbf24; font-size: 12px;">★ ${b.rating}</p>
+            <div class="card">
+                <img src="${m.img}" alt="${m.title}" class="card-img" onerror="this.style.display='none'">
+                <div class="card-content">
+                    <div class="card-title">${m.title}</div>
+                    <div style="color: #fbbf24; font-size: 12px;">★ ${m.rating}</div>
                 </div>
             </div>
         `).join('');
 
+        // Render Books
+        document.getElementById('booksContent').innerHTML = books.map(b => `
+            <div class="list-item">
+                <img src="${b.img}" alt="${b.title}" class="list-img" onerror="this.style.display='none'">
+                <div class="list-info">
+                    <div class="list-title">${b.title}</div>
+                    <div class="list-meta">${b.author} • ★ ${b.rating}</div>
+                    <div class="list-desc">${b.desc}</div>
+                </div>
+            </div>
+        `).join('');
+
+        // Render Tools
         document.getElementById('toolsContent').innerHTML = tools.map(t => `
-            <div class="card" style="display: flex; gap: 12px; align-items: center;">
-                <div style="width: 44px; height: 44px; background: ${t.color}20; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">${t.icon}</div>
-                <div>
-                    <h3>${t.name}</h3>
-                    <p style="font-size: 12px; color: ${t.color};">${t.desc}</p>
+            <div class="tool-item">
+                <div class="tool-icon" style="background: ${t.color}20; color: ${t.color}">${t.icon}</div>
+                <div class="tool-info">
+                    <div class="tool-name">${t.name}</div>
+                    <div class="tool-desc">${t.desc}</div>
                 </div>
             </div>
         `).join('');
