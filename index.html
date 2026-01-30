@@ -30,12 +30,11 @@
         .hero-desc { color: #999; font-size: 14px; line-height: 1.5; margin-bottom: 10px; }
         .hero-meta { color: #666; font-size: 11px; display: flex; gap: 12px; }
         
-        .impact-box { 
-            background: #2997ff15; border-left: 3px solid #2997ff; 
-            padding: 12px 14px; margin: 12px 0; border-radius: 0 8px 8px 0; 
+        .tool-why { 
+            background: #333; border-radius: 8px; padding: 12px 14px; margin: 12px 0; 
         }
-        .impact-title { font-size: 11px; color: #2997ff; font-weight: 600; margin-bottom: 6px; }
-        .impact-desc { font-size: 13px; color: #ccc; line-height: 1.5; }
+        .tool-why-title { font-size: 11px; color: #2997ff; font-weight: 600; margin-bottom: 6px; }
+        .tool-why-desc { font-size: 13px; color: #ccc; line-height: 1.5; }
         
         .cta-btn { 
             display: inline-block; background: #fff; color: #000; 
@@ -189,9 +188,9 @@
                     <div class="hero-label">${n.category}</div>
                     <div class="hero-title">${n.title}</div>
                     <div class="hero-desc">${n.summary}</div>
-                    <div class="impact-box">
-                        <div class="impact-title">WHY IT MATTERS</div>
-                        <div class="impact-desc">${n.impact}</div>
+                    <div class="tool-why">
+                        <div class="tool-why-title">WHY IT MATTERS</div>
+                        <div class="tool-why-desc">${n.impact}</div>
                     </div>
                     <div class="hero-meta"><span>${n.source}</span><span>${n.time}</span></div>
                 </div>
