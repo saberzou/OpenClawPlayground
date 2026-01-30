@@ -4,66 +4,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Center</title>
-    <meta name="theme-color" content="#000000">
-    <meta name="description" content="Your daily morning briefing - AI news, movies, books & tools">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&family=SF+Pro+Text:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: #000; color: #fff; padding: 60px 16px 40px; max-width: 600px; margin: 0 auto; 
+        }
+        h1 { font-size: 24px; margin-bottom: 4px; }
+        .date { color: #888; font-size: 14px; margin-bottom: 20px; }
+        .nav { display: flex; gap: 8px; margin-bottom: 24px; overflow-x: auto; }
+        .nav button { 
+            background: #333; border: none; color: #fff; padding: 8px 16px; 
+            border-radius: 20px; font-size: 14px; cursor: pointer; white-space: nowrap; 
+        }
+        .nav button.active { background: #fff; color: #000; }
+        .section { display: none; }
+        .section.active { display: block; }
+        h2 { font-size: 22px; margin-bottom: 16px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+        .card { background: #1a1a1a; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+        .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; background: #333; }
+        .card h3 { font-size: 16px; margin-bottom: 6px; }
+        .card p { color: #999; font-size: 13px; line-height: 1.4; }
+        .card .meta { color: #666; font-size: 11px; margin-top: 8px; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .grid .card img { height: 100px; }
+        .grid .card h3 { font-size: 14px; }
+        .book { display: flex; gap: 12px; }
+        .book img { width: 50px; height: 70px; border-radius: 4px; margin-bottom: 0; }
+        .book-info { flex: 1; }
+        footer { text-align: center; color: #666; font-size: 12px; margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="header-top">
-                <h1 class="logo">Report Center</h1>
-                <div class="date" id="currentDate"></div>
+    <h1>Report Center</h1>
+    <div class="date" id="date"></div>
+    <div class="nav">
+        <button class="active" onclick="show('news')">News</button>
+        <button onclick="show('movies')">Movies</button>
+        <button onclick="show('books')">Books</button>
+        <button onclick="show('tools')">Tools</button>
+    </div>
+
+    <div id="news" class="section active">
+        <h2>AI News</h2>
+        <div id="newsContent"></div>
+    </div>
+
+    <div id="movies" class="section">
+        <h2>Movies</h2>
+        <div class="grid" id="moviesContent"></div>
+    </div>
+
+    <div id="books" class="section">
+        <h2>Books</h2>
+        <div id="booksContent"></div>
+    </div>
+
+    <div id="tools" class="section">
+        <h2>AI Tools</h2>
+        <div id="toolsContent"></div>
+    </div>
+
+    <footer>Report Center</footer>
+
+    <script>
+        document.getElementById('date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+        
+        function show(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        const news = [
+            { title: 'Amazon in Talks to Invest $50B in OpenAI', source: 'TechCrunch', time: '2h ago', color: '#3b82f6' },
+            { title: 'SpaceX, Tesla, xAI Merger Talks', source: 'Reuters', time: '5h ago', color: '#8b5cf6' },
+            { title: "Apple's AI Monetization Challenges", source: 'The Verge', time: '8h ago', color: '#10b981' },
+            { title: 'AI Content Labels Proposed', source: 'The Guardian', time: '12h ago', color: '#f59e0b' },
+            { title: 'Trillion-Dollar AI Stocks to Watch', source: 'Motley Fool', time: '1d ago', color: '#ef4444' },
+            { title: 'Claude & GPT-5 Updates', source: 'Ars Technica', time: '1d ago', color: '#ec4899' }
+        ];
+
+        const movies = [
+            { title: 'Her', rating: '8.0', color: '#3b82f6' },
+            { title: 'Ex Machina', rating: '7.7', color: '#8b5cf6' },
+            { title: 'Blade Runner 2049', rating: '8.0', color: '#10b981' },
+            { title: 'The Matrix', rating: '8.7', color: '#f59e0b' },
+            { title: 'Everything Everywhere', rating: '7.8', color: '#ef4444' },
+            { title: 'Past Lives', rating: '7.9', color: '#ec4899' }
+        ];
+
+        const books = [
+            { title: 'The Design of Everyday Things', author: 'Don Norman', rating: '4.5', color: '#3b82f6' },
+            { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', rating: '4.6', color: '#f59e0b' },
+            { title: 'Creativity Inc.', author: 'Ed Catmull', rating: '4.5', color: '#10b981' },
+            { title: 'Steve Jobs', author: 'Walter Isaacson', rating: '4.6', color: '#6366f1' },
+            { title: 'The Soul of a New Machine', author: 'Tracy Kidder', rating: '4.4', color: '#8b5cf6' }
+        ];
+
+        const tools = [
+            { name: 'Cursor', desc: 'AI code editor', icon: '⌨️', color: '#3b82f6' },
+            { name: 'Midjourney', desc: 'AI image generation', icon: '🎨', color: '#8b5cf6' },
+            { name: 'Figma Make', desc: 'Design to code', icon: '🎯', color: '#f59e0b' },
+            { name: 'Claude', desc: 'AI assistant', icon: '💬', color: '#dc2626' },
+            { name: 'Perplexity', desc: 'AI search', icon: '🔍', color: '#10b981' },
+            { name: 'v0', desc: 'React UI generator', icon: '🧩', color: '#6366f1' },
+            { name: 'Lovable', desc: 'Vibe coding', icon: '🪄', color: '#ec4899' },
+            { name: 'Bolt.new', desc: 'AI IDE', icon: '⚡', color: '#0ea5e9' }
+        ];
+
+        // Render
+        document.getElementById('newsContent').innerHTML = `
+            <div class="card" style="background: linear-gradient(135deg, ${news[0].color}40, #1a1a1a);">
+                <div style="height: 120px; background: ${news[0].color}30; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 12px;">📰</div>
+                <h3>${news[0].title}</h3>
+                <p>${news[0].source} • ${news[0].time}</p>
             </div>
-            <nav class="nav-tabs">
-                <button class="nav-tab active" data-section="news">News</button>
-                <button class="nav-tab" data-section="movies">Movies</button>
-                <button class="nav-tab" data-section="books">Books</button>
-                <button class="nav-tab" data-section="tools">Tools</button>
-            </nav>
-        </div>
-    </header>
+            <div class="grid">
+                ${news.slice(1).map(n => `
+                    <div class="card">
+                        <div style="height: 80px; background: ${n.color}30; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 10px;">📰</div>
+                        <h3>${n.title}</h3>
+                        <div class="meta">${n.source} • ${n.time}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
 
-    <!-- Main Content -->
-    <main class="main">
-        <!-- News Section -->
-        <section id="news" class="section active">
-            <div class="section-label">Today's Briefing</div>
-            <h2 class="section-title">AI & Tech News</h2>
-            <div class="news-container" id="newsContainer"></div>
-        </section>
+        document.getElementById('moviesContent').innerHTML = movies.map(m => `
+            <div class="card" style="text-align: center;">
+                <div style="height: 100px; background: ${m.color}30; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 8px;">🎬</div>
+                <h3>${m.title}</h3>
+                <div style="color: #fbbf24; font-size: 13px;">★ ${m.rating}</div>
+            </div>
+        `).join('');
 
-        <!-- Movies Section -->
-        <section id="movies" class="section">
-            <div class="section-label">Weekly Picks</div>
-            <h2 class="section-title">Movie Recommendations</h2>
-            <div class="movies-container" id="moviesContainer"></div>
-        </section>
+        document.getElementById('booksContent').innerHTML = books.map(b => `
+            <div class="card book">
+                <div style="width: 50px; height: 70px; background: ${b.color}; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 20px;">📖</div>
+                <div class="book-info">
+                    <h3>${b.title}</h3>
+                    <p style="color: #888;">${b.author}</p>
+                    <p style="color: #fbbf24; font-size: 12px;">★ ${b.rating}</p>
+                </div>
+            </div>
+        `).join('');
 
-        <!-- Books Section -->
-        <section id="books" class="section">
-            <div class="section-label">Reading List</div>
-            <h2 class="section-title">Design & AI Books</h2>
-            <div class="books-container" id="booksContainer"></div>
-        </section>
-
-        <!-- Tools Section -->
-        <section id="tools" class="section">
-            <div class="section-label">Curated</div>
-            <h2 class="section-title">AI Tools</h2>
-            <div class="tools-container" id="toolsContainer"></div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>Report Center • Morning Briefing</p>
-    </footer>
-
-    <script src="js/app.js"></script>
+        document.getElementById('toolsContent').innerHTML = tools.map(t => `
+            <div class="card" style="display: flex; gap: 12px; align-items: center;">
+                <div style="width: 44px; height: 44px; background: ${t.color}20; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">${t.icon}</div>
+                <div>
+                    <h3>${t.name}</h3>
+                    <p style="font-size: 12px; color: ${t.color};">${t.desc}</p>
+                </div>
+            </div>
+        `).join('');
+    </script>
 </body>
 </html>
