@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Her",
+    "year": 2013,
+    "rating": 8.0,
+    "genres": ["Romance", "Sci-Fi"],
+    "desc": "A lonely writer falls in love with an AI assistant"
+  },
+  {
+    "title": "Ex Machina",
+    "year": 2014,
+    "rating": 7.7,
+    "genres": ["Thriller", "Sci-Fi"],
+    "desc": "A programmer tests an AI humanoid"
+  },
+  {
+    "title": "Blade Runner 2049",
+    "year": 2017,
+    "rating": 8.0,
+    "genres": ["Sci-Fi", "Noir"],
+    "desc": "A replicant blade runner uncovers a secret"
+  },
+  {
+    "title": "The Matrix",
+    "year": 1999,
+    "rating": 8.7,
+    "genres": ["Action", "Sci-Fi"],
+    "desc": "A hacker discovers reality is a simulation"
+  },
+  {
+    "title": "Everything Everywhere All at Once",
+    "year": 2022,
+    "rating": 7.8,
+    "genres": ["Action", "Comedy"],
+    "desc": "A laundromat owner traverses multiverses"
+  },
+  {
+    "title": "Past Lives",
+    "year": 2023,
+    "rating": 7.9,
+    "genres": ["Romance", "Drama"],
+    "desc": "Two childhood friends reconnect after decades"
+  }
+]
