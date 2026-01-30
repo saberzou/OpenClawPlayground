@@ -277,73 +277,32 @@ body {
 }
 
 /* Movies Container */
-.movies-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-}
-
-@media (max-width: 650px) {
-    .movies-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 400px) {
-    .movies-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-.movie-card {
-    display: block;
-    background: var(--bg-secondary);
-    border-radius: var(--card-radius);
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease;
-}
-
-.movie-card:hover {
-    transform: translateY(-2px);
-}
-
-.movie-poster {
-    width: 100%;
-    aspect-ratio: 2/3;
-    object-fit: cover;
-    display: block;
-}
-
-.movie-info {
-    padding: 10px 12px;
-}
-
-.movie-title {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 2px;
-    color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.movie-meta {
+#moviesContent {
     display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.movie-rating {
-    color: var(--gold);
-    font-weight: 600;
+.movie-list-item {
+    display: flex;
+    gap: 14px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 12px 14px;
+    align-items: flex-start;
 }
 
-.movie-year {
-    color: var(--text-tertiary);
+.movie-list-img {
+    width: 60px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.movie-list-info {
+    flex: 1;
+    min-width: 0;
 }
 
 /* Books Container */

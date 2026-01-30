@@ -248,11 +248,13 @@
                 const movies = await Promise.all(promises);
                 console.log('Movies loaded:', movies.length);
                 document.getElementById('moviesContent').innerHTML = movies.map(m => `
-                    <div class="card">
-                        <img src="https://image.tmdb.org/t/p/w300${m.poster_path}" alt="${m.title}" class="card-img" onerror="this.innerHTML='🎬'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='28px';">
-                        <div class="card-content">
-                            <div class="card-title">${m.title}</div>
-                            <div style="color: #fbbf24; font-size: 12px;">★ ${m.vote_average.toFixed(1)}</div>
+                    <div class="list-item">
+                        <img src="https://image.tmdb.org/t/p/w200${m.poster_path}" alt="${m.title}" class="list-img" onerror="this.style.display='none'; this.parentElement.style.paddingLeft='0';">
+                        <div class="list-info">
+                            <div class="list-title">${m.title}</div>
+                            <div class="list-meta">${m.release_date?.split('-')[0] || ''}</div>
+                            <div class="list-rating">★ ${m.vote_average.toFixed(1)}</div>
+                            <div class="list-desc" style="color: #888; font-size: 13px; margin-top: 6px;">${m.overview?.substring(0, 100)}...</div>
                         </div>
                     </div>
                 `).join('');
