@@ -168,34 +168,21 @@
         ];
 
         // Render News
-        document.getElementById('newsContent').innerHTML = `
-            <div class="hero">
-                <img src="${news[0].image}" alt="${news[0].title}" class="hero-img" onerror="this.style.display='none'">
+        document.getElementById('newsContent').innerHTML = news.map(n => `
+            <div class="hero" style="margin-bottom: 20px;">
+                <img src="${n.image}" alt="${n.title}" class="hero-img" onerror="this.style.display='none'">
                 <div class="hero-content">
-                    <div class="hero-label">${news[0].category}</div>
-                    <div class="hero-title">${news[0].title}</div>
-                    <div class="hero-desc">${news[0].summary}</div>
+                    <div class="hero-label">${n.category}</div>
+                    <div class="hero-title">${n.title}</div>
+                    <div class="hero-desc">${n.summary}</div>
                     <div style="background: #2997ff20; border-left: 3px solid #2997ff; padding: 10px 12px; margin: 12px 0; border-radius: 0 8px 8px 0;">
                         <div style="font-size: 11px; color: #2997ff; font-weight: 600; margin-bottom: 4px;">WHY IT MATTERS</div>
-                        <div style="font-size: 13px; color: #ccc; line-height: 1.4;">${news[0].impact || 'This development could significantly impact the AI industry and your work.'}</div>
+                        <div style="font-size: 13px; color: #ccc; line-height: 1.4;">${n.impact}</div>
                     </div>
-                    <div class="hero-meta"><span>${news[0].source}</span><span>${news[0].time}</span></div>
+                    <div class="hero-meta"><span>${n.source}</span><span>${n.time}</span></div>
                 </div>
             </div>
-            <div class="grid">
-                ${news.slice(1).map(n => `
-                    <div class="card">
-                        <img src="${n.image}" alt="${n.title}" class="card-img" onerror="this.style.display='none'">
-                        <div class="card-content">
-                            <div class="card-label">${n.category}</div>
-                            <div class="card-title">${n.title}</div>
-                            <div style="color: #777; font-size: 12px; line-height: 1.4; margin-bottom: 8px;">${n.summary.substring(0, 60)}...</div>
-                            <div class="card-meta">${n.source} • ${n.time}</div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
+        `).join('');
 
         // Tools (static)
         const tools = [
