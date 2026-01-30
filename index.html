@@ -112,49 +112,55 @@
         // News (static for now)
         const news = [
             {
-                title: 'Amazon in Talks to Invest $50B in OpenAI',
+                title: 'Amazon in Talks to Invest $50B in OpenAI — Could Reshape AI Industry',
                 category: 'Technology',
-                summary: 'The potential investment would reshape the AI landscape and make Amazon a major player in generative AI.',
+                summary: 'Amazon is in discussions to invest up to $50 billion in OpenAI, potentially making it a major AI investor. This deal would be one of the largest AI investments in history.',
+                impact: 'Could accelerate AI adoption in AWS cloud services and challenge Microsoft\'s exclusive partnership with OpenAI. If you use AWS or Azure, this affects your AI tool options.',
                 source: 'TechCrunch',
                 time: '2 hours ago',
                 image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=300&fit=crop&q=80'
             },
             {
-                title: 'SpaceX, Tesla, xAI Reportedly in Merger Talks',
+                title: 'SpaceX, Tesla, xAI Merger — Elon Musk Reportedly Exploring Deal',
                 category: 'Business',
-                summary: 'Elon Musk\'s companies are discussing a potential merger that would unite rockets, vehicles, and AI under one roof.',
+                summary: 'Musk is reportedly considering merging his companies (SpaceX rockets, Tesla vehicles, xAI chatbot) under one corporate structure.',
+                impact: 'Could create a unified pipeline from AI (Grok) to physical products. May accelerate autonomous vehicles and space exploration AI.',
                 source: 'Reuters',
                 time: '5 hours ago',
                 image: 'https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=400&h=200&fit=crop&q=80'
             },
             {
-                title: "Apple's AI Monetization Challenge",
+                title: "Apple's $100B AI Bet — But Monetization Strategy Remains Unclear",
                 category: 'Company',
-                summary: 'Analysts question how Apple will justify its AI investments as the company struggles to find clear revenue streams.',
+                summary: 'Apple has invested heavily in AI features (Apple Intelligence, Siri improvements) but analysts question how the company will turn this into revenue.',
+                impact: 'Affects future iPhone pricing and which AI features remain free. Could influence how AI assistants are monetized industry-wide.',
                 source: 'The Verge',
                 time: '8 hours ago',
                 image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=200&fit=crop&q=80'
             },
             {
-                title: 'AI Content Transparency Labels Proposed',
+                title: 'AI Content Labels — Thinktank Calls for "Nutrition Facts" on Generated News',
                 category: 'Policy',
-                summary: 'A new thinktank report suggests AI-generated content should carry "nutrition label" disclosures.',
+                summary: 'A new report proposes mandatory disclosures for AI-generated content, similar to food nutrition labels, requiring creators to label AI-written or AI-assisted work.',
+                impact: 'Helps you distinguish AI-generated articles from human-written news. May become mandatory for all AI content creators.',
                 source: 'The Guardian',
                 time: '12 hours ago',
                 image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop&q=80'
             },
             {
-                title: 'Five Trillion-Dollar AI Stocks to Watch',
+                title: 'Nvidia, Microsoft, Google — Five AI Stocks Poised to Reach $1 Trillion',
                 category: 'Finance',
-                summary: 'Analysts identify the top AI companies poised to reach trillion-dollar valuations.',
+                summary: 'Analysts identify the top AI companies positioned for massive growth, including chipmakers (Nvidia), platforms (Microsoft, Google), and emerging players.',
+                impact: 'If you invest in tech, these are stocks to watch. Shows which companies analysts believe will dominate the AI era.',
                 source: 'Motley Fool',
                 time: '1 day ago',
                 image: 'https://images.unsplash.com/photo-1611974765270-ca12586343bb?w=400&h=200&fit=crop&q=80'
             },
             {
-                title: 'Claude and GPT-5 Development Updates',
+                title: 'GPT-5 and Claude 4 — New Models Approaching Human-Level Reasoning',
                 category: 'Products',
-                summary: 'Insider reports suggest major AI models are approaching human-level reasoning capabilities.',
+                summary: 'Insider reports suggest major AI models are getting closer to AGI capabilities, with new releases expected within the next few months.',
+                impact: 'Could significantly change how you work with AI assistants. Better reasoning means more complex tasks could be automated.',
                 source: 'Ars Technica',
                 time: '1 day ago',
                 image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=200&fit=crop&q=80'
@@ -169,6 +175,10 @@
                     <div class="hero-label">${news[0].category}</div>
                     <div class="hero-title">${news[0].title}</div>
                     <div class="hero-desc">${news[0].summary}</div>
+                    <div style="background: #2997ff20; border-left: 3px solid #2997ff; padding: 10px 12px; margin: 12px 0; border-radius: 0 8px 8px 0;">
+                        <div style="font-size: 11px; color: #2997ff; font-weight: 600; margin-bottom: 4px;">WHY IT MATTERS</div>
+                        <div style="font-size: 13px; color: #ccc; line-height: 1.4;">${news[0].impact || 'This development could significantly impact the AI industry and your work.'}</div>
+                    </div>
                     <div class="hero-meta"><span>${news[0].source}</span><span>${news[0].time}</span></div>
                 </div>
             </div>
@@ -179,6 +189,7 @@
                         <div class="card-content">
                             <div class="card-label">${n.category}</div>
                             <div class="card-title">${n.title}</div>
+                            <div style="color: #777; font-size: 12px; line-height: 1.4; margin-bottom: 8px;">${n.summary.substring(0, 60)}...</div>
                             <div class="card-meta">${n.source} • ${n.time}</div>
                         </div>
                     </div>
