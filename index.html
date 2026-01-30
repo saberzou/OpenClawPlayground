@@ -86,10 +86,10 @@
     <h1>Morning Briefing</h1>
     <div class="date" id="date"></div>
     <div class="nav">
-        <button class="active" onclick="show('news')">News</button>
-        <button onclick="show('movies')">Movies</button>
-        <button onclick="show('books')">Books</button>
-        <button onclick="show('tools')">Tools</button>
+        <button class="active" data-section="news" onclick="show('news')">News</button>
+        <button data-section="movies" onclick="show('movies')">Movies</button>
+        <button data-section="books" onclick="show('books')">Books</button>
+        <button data-section="tools" onclick="show('tools')">Tools</button>
     </div>
 
     <div id="news" class="section active">
@@ -122,6 +122,18 @@
             document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             event.target.classList.add('active');
+            localStorage.setItem('activeTab', id);
+        }
+
+        // Restore last active tab
+        const lastTab = localStorage.getItem('activeTab') || 'news';
+        if (lastTab !== 'news') {
+            document.querySelectorAll('.nav button').forEach(b => {
+                if (b.dataset.section === lastTab) {
+                    b.classList.add('active');
+                    document.getElementById(lastTab).classList.add('active');
+                }
+            });
         }
 
         const news = [
