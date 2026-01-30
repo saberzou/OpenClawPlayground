@@ -237,11 +237,16 @@
 
             const movieIds = ['152601', '264660', '335984', '603', '545611', '666277'];
             try {
+                console.log('Fetching movies from TMDB...');
                 const promises = movieIds.map(id => 
                     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`)
-                        .then(r => r.json())
+                        .then(r => { 
+                            if (!r.ok) throw new Error('API error');
+                            return r.json();
+                        })
                 );
                 const movies = await Promise.all(promises);
+                console.log('Movies loaded:', movies.length);
                 document.getElementById('moviesContent').innerHTML = movies.map(m => `
                     <div class="card">
                         <img src="https://image.tmdb.org/t/p/w300${m.poster_path}" alt="${m.title}" class="card-img" onerror="this.innerHTML='🎬'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='28px';">
@@ -252,7 +257,8 @@
                     </div>
                 `).join('');
             } catch (e) {
-                document.getElementById('moviesContent').innerHTML = '<div class="loading">Failed to load movies</div>';
+                console.error('Movie load error:', e);
+                document.getElementById('moviesContent').innerHTML = '<div class="loading">Failed to load movies. Check console.</div>';
             }
         }
 
