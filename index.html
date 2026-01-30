@@ -36,18 +36,17 @@
         .card-content { padding: 12px 14px; }
         .card-label { color: #2997ff; font-size: 10px; font-weight: 600; text-transform: uppercase; margin-bottom: 4px; }
         .card-title { font-size: 14px; font-weight: 600; line-height: 1.35; margin-bottom: 6px; }
-        .card-desc { color: #777; font-size: 12px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-meta { color: #555; font-size: 10px; margin-top: 6px; }
         
         .list-item { 
             background: #1a1a1a; border-radius: 12px; padding: 14px 16px; 
             margin-bottom: 10px; display: flex; gap: 14px; align-items: flex-start; 
         }
-        .list-img { width: 60px; height: 85px; object-fit: cover; border-radius: 6px; background: #222; flex-shrink: 0; }
+        .list-img { width: 50px; height: 75px; object-fit: cover; border-radius: 4px; background: #222; flex-shrink: 0; }
         .list-info { flex: 1; min-width: 0; }
         .list-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
         .list-meta { color: #888; font-size: 12px; margin-bottom: 4px; }
-        .list-desc { color: #666; font-size: 12px; line-height: 1.4; }
+        .list-rating { color: #fbbf24; font-size: 12px; margin-bottom: 4px; }
         
         .tool-item { 
             background: #1a1a1a; border-radius: 12px; padding: 14px 16px; 
@@ -61,6 +60,8 @@
         .tool-info { flex: 1; }
         .tool-name { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
         .tool-desc { color: #888; font-size: 13px; }
+        
+        .loading { color: #555; font-size: 13px; padding: 20px; text-align: center; }
         
         footer { text-align: center; color: #444; font-size: 11px; margin-top: 32px; padding-top: 20px; border-top: 1px solid #222; }
     </style>
@@ -82,12 +83,12 @@
 
     <div id="movies" class="section">
         <h2>Movie Picks</h2>
-        <div class="grid" id="moviesContent"></div>
+        <div id="moviesContent"><div class="loading">Add TMDB API key to fetch real posters</div></div>
     </div>
 
     <div id="books" class="section">
         <h2>Reading List</h2>
-        <div id="booksContent"></div>
+        <div id="booksContent"><div class="loading">Loading from Google Books...</div></div>
     </div>
 
     <div id="tools" class="section">
@@ -98,7 +99,8 @@
     <footer>Morning Briefing • Anson</footer>
 
     <script>
-        document.getElementById('date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+        const dateEl = document.getElementById('date');
+        dateEl.textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
         
         function show(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -107,11 +109,12 @@
             event.target.classList.add('active');
         }
 
+        // News (static for now)
         const news = [
             {
                 title: 'Amazon in Talks to Invest $50B in OpenAI',
                 category: 'Technology',
-                summary: 'The potential investment would reshape the AI landscape and make Amazon a major player in generative AI, potentially accelerating OpenAI\'s expansion into cloud services.',
+                summary: 'The potential investment would reshape the AI landscape and make Amazon a major player in generative AI.',
                 source: 'TechCrunch',
                 time: '2 hours ago',
                 image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=300&fit=crop&q=80'
@@ -119,7 +122,7 @@
             {
                 title: 'SpaceX, Tesla, xAI Reportedly in Merger Talks',
                 category: 'Business',
-                summary: 'Elon Musk\'s companies are discussing a potential merger that would unite SpaceX rockets, Tesla vehicles, and xAI\'s Grok chatbot under one corporate umbrella.',
+                summary: 'Elon Musk\'s companies are discussing a potential merger that would unite rockets, vehicles, and AI under one roof.',
                 source: 'Reuters',
                 time: '5 hours ago',
                 image: 'https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=400&h=200&fit=crop&q=80'
@@ -127,7 +130,7 @@
             {
                 title: "Apple's AI Monetization Challenge",
                 category: 'Company',
-                summary: 'Analysts question how Apple will justify its AI investments as the company struggles to find clear revenue streams from its recent AI features.',
+                summary: 'Analysts question how Apple will justify its AI investments as the company struggles to find clear revenue streams.',
                 source: 'The Verge',
                 time: '8 hours ago',
                 image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=200&fit=crop&q=80'
@@ -135,7 +138,7 @@
             {
                 title: 'AI Content Transparency Labels Proposed',
                 category: 'Policy',
-                summary: 'A new thinktank report suggests AI-generated content should carry "nutrition label" disclosures to help users understand what they\'re reading.',
+                summary: 'A new thinktank report suggests AI-generated content should carry "nutrition label" disclosures.',
                 source: 'The Guardian',
                 time: '12 hours ago',
                 image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop&q=80'
@@ -143,7 +146,7 @@
             {
                 title: 'Five Trillion-Dollar AI Stocks to Watch',
                 category: 'Finance',
-                summary: 'Analysts identify the top AI companies poised to reach trillion-dollar valuations, including semiconductor leaders and emerging software platforms.',
+                summary: 'Analysts identify the top AI companies poised to reach trillion-dollar valuations.',
                 source: 'Motley Fool',
                 time: '1 day ago',
                 image: 'https://images.unsplash.com/photo-1611974765270-ca12586343bb?w=400&h=200&fit=crop&q=80'
@@ -151,39 +154,11 @@
             {
                 title: 'Claude and GPT-5 Development Updates',
                 category: 'Products',
-                summary: 'Insider reports suggest major AI models are approaching human-level reasoning capabilities, with new releases expected in the coming months.',
+                summary: 'Insider reports suggest major AI models are approaching human-level reasoning capabilities.',
                 source: 'Ars Technica',
                 time: '1 day ago',
                 image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=200&fit=crop&q=80'
             }
-        ];
-
-        const movies = [
-            { title: 'Her', year: 2013, rating: 8.0, desc: 'A lonely writer falls in love with an AI', img: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&h=400&fit=crop&q=80' },
-            { title: 'Ex Machina', year: 2014, rating: 7.7, desc: 'Testing an AI humanoid', img: 'https://images.unsplash.com/photo-1535378433864-48cf10419c5c?w=300&h=400&fit=crop&q=80' },
-            { title: 'Blade Runner 2049', year: 2017, rating: 8.0, desc: 'A replicant uncovers a secret', img: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=300&h=400&fit=crop&q=80' },
-            { title: 'The Matrix', year: 1999, rating: 8.7, desc: 'Reality is a simulation', img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=300&h=400&fit=crop&q=80' },
-            { title: 'Everything Everywhere', year: 2022, rating: 7.8, desc: 'Traversing multiverses', img: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=300&h=400&fit=crop&q=80' },
-            { title: 'Past Lives', year: 2023, rating: 7.9, desc: 'Two friends reconnect', img: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=300&h=400&fit=crop&q=80' }
-        ];
-
-        const books = [
-            { title: 'The Design of Everyday Things', author: 'Don Norman', rating: 4.5, desc: 'Foundational human-centered design principles', img: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=140&h=200&fit=crop&q=80' },
-            { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', rating: 4.6, desc: 'Understanding how we think', img: 'https://images.unsplash.com/photo-1555116505-38ab61800975?w=140&h=200&fit=crop&q=80' },
-            { title: 'Creativity Inc.', author: 'Ed Catmull', rating: 4.5, desc: 'Overcoming creative barriers', img: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=140&h=200&fit=crop&q=80' },
-            { title: 'Steve Jobs', author: 'Walter Isaacson', rating: 4.6, desc: 'Apple founder biography', img: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=140&h=200&fit=crop&q=80' },
-            { title: 'The Soul of a New Machine', author: 'Tracy Kidder', rating: 4.4, desc: 'Building a computer', img: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=140&h=200&fit=crop&q=80' }
-        ];
-
-        const tools = [
-            { name: 'Cursor', desc: 'AI-first code editor', icon: '⌨️', color: '#3b82f6' },
-            { name: 'Midjourney', desc: 'AI image generation', icon: '🎨', color: '#8b5cf6' },
-            { name: 'Figma Make', desc: 'Design to code', icon: '🎯', color: '#f59e0b' },
-            { name: 'Claude', desc: 'AI assistant', icon: '💬', color: '#dc2626' },
-            { name: 'Perplexity', desc: 'AI-powered search', icon: '🔍', color: '#10b981' },
-            { name: 'v0', desc: 'React UI generator', icon: '🧩', color: '#6366f1' },
-            { name: 'Lovable', desc: 'Vibe coding app builder', icon: '🪄', color: '#ec4899' },
-            { name: 'Bolt.new', desc: 'AI development environment', icon: '⚡', color: '#0ea5e9' }
         ];
 
         // Render News
@@ -211,30 +186,18 @@
             </div>
         `;
 
-        // Render Movies
-        document.getElementById('moviesContent').innerHTML = movies.map(m => `
-            <div class="card">
-                <img src="${m.img}" alt="${m.title}" class="card-img" onerror="this.style.display='none'">
-                <div class="card-content">
-                    <div class="card-title">${m.title}</div>
-                    <div style="color: #fbbf24; font-size: 12px;">★ ${m.rating}</div>
-                </div>
-            </div>
-        `).join('');
+        // Tools (static)
+        const tools = [
+            { name: 'Cursor', desc: 'AI-first code editor', icon: '⌨️', color: '#3b82f6' },
+            { name: 'Midjourney', desc: 'AI image generation', icon: '🎨', color: '#8b5cf6' },
+            { name: 'Figma Make', desc: 'Design to code', icon: '🎯', color: '#f59e0b' },
+            { name: 'Claude', desc: 'AI assistant', icon: '💬', color: '#dc2626' },
+            { name: 'Perplexity', desc: 'AI-powered search', icon: '🔍', color: '#10b981' },
+            { name: 'v0', desc: 'React UI generator', icon: '🧩', color: '#6366f1' },
+            { name: 'Lovable', desc: 'Vibe coding app builder', icon: '🪄', color: '#ec4899' },
+            { name: 'Bolt.new', desc: 'AI development environment', icon: '⚡', color: '#0ea5e9' }
+        ];
 
-        // Render Books
-        document.getElementById('booksContent').innerHTML = books.map(b => `
-            <div class="list-item">
-                <img src="${b.img}" alt="${b.title}" class="list-img" onerror="this.style.display='none'">
-                <div class="list-info">
-                    <div class="list-title">${b.title}</div>
-                    <div class="list-meta">${b.author} • ★ ${b.rating}</div>
-                    <div class="list-desc">${b.desc}</div>
-                </div>
-            </div>
-        `).join('');
-
-        // Render Tools
         document.getElementById('toolsContent').innerHTML = tools.map(t => `
             <div class="tool-item">
                 <div class="tool-icon" style="background: ${t.color}20; color: ${t.color}">${t.icon}</div>
@@ -244,6 +207,100 @@
                 </div>
             </div>
         `).join('');
+
+        // Movies - TMDB API (requires key)
+        // To enable: Add const TMDB_API_KEY = 'YOUR_KEY';
+        // Get key from: https://www.themoviedb.org/settings/api
+        const TMDB_API_KEY = ''; // Add your key here
+        
+        async function loadMovies() {
+            if (!TMDB_API_KEY) {
+                const movies = [
+                    { title: 'Her', year: 2013, rating: 8.0, poster: null },
+                    { title: 'Ex Machina', year: 2014, rating: 7.7, poster: null },
+                    { title: 'Blade Runner 2049', year: 2017, rating: 8.0, poster: null },
+                    { title: 'The Matrix', year: 1999, rating: 8.7, poster: null },
+                    { title: 'Everything Everywhere', year: 2022, rating: 7.8, poster: null },
+                    { title: 'Past Lives', year: 2023, rating: 7.9, poster: null }
+                ];
+                document.getElementById('moviesContent').innerHTML = movies.map(m => `
+                    <div class="card">
+                        <div class="card-img" style="display:flex;align-items:center;justify-content:center;font-size:28px;">🎬</div>
+                        <div class="card-content">
+                            <div class="card-title">${m.title}</div>
+                            <div style="color: #fbbf24; font-size: 12px;">★ ${m.rating}</div>
+                        </div>
+                    </div>
+                `).join('');
+                return;
+            }
+
+            const movieIds = ['106646', '109091', '335984', '603', '5456112', '743912'];
+            try {
+                const promises = movieIds.map(id => 
+                    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`)
+                        .then(r => r.json())
+                );
+                const movies = await Promise.all(promises);
+                document.getElementById('moviesContent').innerHTML = movies.map(m => `
+                    <div class="card">
+                        <img src="https://image.tmdb.org/t/p/w300${m.poster_path}" alt="${m.title}" class="card-img" onerror="this.innerHTML='🎬'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='28px';">
+                        <div class="card-content">
+                            <div class="card-title">${m.title}</div>
+                            <div style="color: #fbbf24; font-size: 12px;">★ ${m.vote_average.toFixed(1)}</div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                document.getElementById('moviesContent').innerHTML = '<div class="loading">Failed to load movies</div>';
+            }
+        }
+
+        // Books - Google Books API (open, no key needed)
+        async function loadBooks() {
+            const bookQueries = [
+                'isbn:9780465050659',  // Design of Everyday Things
+                'isbn:9780374533657',  // Thinking, Fast and Slow
+                'isbn:9780812993031',  // Creativity Inc.
+                'isbn:1451648537',     // Steve Jobs
+                '9780316491977'        // Soul of a New Machine
+            ];
+
+            try {
+                const promises = bookQueries.map(q => 
+                    fetch(`https://www.googleapis.com/books/v1/volumes?q=${q}`)
+                        .then(r => r.json())
+                );
+                const results = await Promise.all(promises);
+                
+                const books = results.map(r => {
+                    const item = r.items?.[0]?.volumeInfo;
+                    return {
+                        title: item?.title || 'Unknown',
+                        authors: item?.authors?.[0] || 'Unknown',
+                        rating: item?.averageRating || 4.0,
+                        image: item?.imageLinks?.thumbnail?.replace('http:', 'https:')
+                    };
+                });
+
+                document.getElementById('booksContent').innerHTML = books.map(b => `
+                    <div class="list-item">
+                        <img src="${b.image}" alt="${b.title}" class="list-img" onerror="this.style.display='none'; this.parentElement.style.paddingLeft='0';">
+                        <div class="list-info">
+                            <div class="list-title">${b.title}</div>
+                            <div class="list-meta">${b.authors}</div>
+                            <div class="list-rating">★ ${b.rating}</div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                document.getElementById('booksContent').innerHTML = '<div class="loading">Failed to load books</div>';
+            }
+        }
+
+        // Initialize
+        loadMovies();
+        loadBooks();
     </script>
 </body>
 </html>
