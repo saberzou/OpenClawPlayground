@@ -22,7 +22,7 @@
         .section.active { display: block; }
         h2 { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #fff; }
         
-        .hero { background: #1a1a1a; border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+        .hero { background: #1a1a1a; border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
         .hero-img { width: 100%; height: 180px; object-fit: cover; background: #222; display: block; }
         .hero-content { padding: 16px 18px 18px; }
         .hero-label { color: #2997ff; font-size: 11px; font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
@@ -30,13 +30,44 @@
         .hero-desc { color: #999; font-size: 14px; line-height: 1.5; margin-bottom: 10px; }
         .hero-meta { color: #666; font-size: 11px; display: flex; gap: 12px; }
         
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
-        .card { background: #1a1a1a; border-radius: 12px; overflow: hidden; }
-        .card-img { width: 100%; height: 90px; object-fit: cover; background: #222; display: block; }
-        .card-content { padding: 12px 14px; }
-        .card-label { color: #2997ff; font-size: 10px; font-weight: 600; text-transform: uppercase; margin-bottom: 4px; }
-        .card-title { font-size: 14px; font-weight: 600; line-height: 1.35; margin-bottom: 6px; }
-        .card-meta { color: #555; font-size: 10px; margin-top: 6px; }
+        .impact-box { 
+            background: #2997ff15; border-left: 3px solid #2997ff; 
+            padding: 12px 14px; margin: 12px 0; border-radius: 0 8px 8px 0; 
+        }
+        .impact-title { font-size: 11px; color: #2997ff; font-weight: 600; margin-bottom: 6px; }
+        .impact-desc { font-size: 13px; color: #ccc; line-height: 1.5; }
+        
+        .cta-btn { 
+            display: inline-block; background: #fff; color: #000; 
+            padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
+            text-decoration: none; margin-top: 10px; 
+        }
+        .cta-btn:hover { background: #ddd; }
+        
+        .tool-item { 
+            background: #1a1a1a; border-radius: 12px; padding: 16px; 
+            margin-bottom: 12px; 
+        }
+        .tool-header { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+        .tool-icon { 
+            width: 44px; height: 44px; border-radius: 10px; 
+            display: flex; align-items: center; justify-content: center; font-size: 20px; 
+            flex-shrink: 0; 
+        }
+        .tool-info { flex: 1; }
+        .tool-name { font-size: 16px; font-weight: 600; margin-bottom: 3px; }
+        .tool-tag { 
+            display: inline-block; background: #333; color: #999; 
+            padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-bottom: 6px; 
+        }
+        .tool-desc { color: #888; font-size: 13px; line-height: 1.4; margin-bottom: 10px; }
+        .tool-why { 
+            background: #333; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; 
+        }
+        .tool-why-title { font-size: 11px; color: #2997ff; font-weight: 600; margin-bottom: 4px; }
+        .tool-why-desc { font-size: 12px; color: #aaa; line-height: 1.4; }
+        .tool-link { color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; }
+        .tool-link:hover { text-decoration: underline; }
         
         .list-item { 
             background: #1a1a1a; border-radius: 12px; padding: 14px 16px; 
@@ -48,21 +79,7 @@
         .list-meta { color: #888; font-size: 12px; margin-bottom: 4px; }
         .list-rating { color: #fbbf24; font-size: 12px; margin-bottom: 4px; }
         
-        .tool-item { 
-            background: #1a1a1a; border-radius: 12px; padding: 14px 16px; 
-            margin-bottom: 10px; display: flex; gap: 14px; align-items: center; 
-        }
-        .tool-icon { 
-            width: 44px; height: 44px; border-radius: 10px; 
-            display: flex; align-items: center; justify-content: center; font-size: 20px; 
-            flex-shrink: 0; 
-        }
-        .tool-info { flex: 1; }
-        .tool-name { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
-        .tool-desc { color: #888; font-size: 13px; }
-        
         .loading { color: #555; font-size: 13px; padding: 20px; text-align: center; }
-        
         footer { text-align: center; color: #444; font-size: 11px; margin-top: 32px; padding-top: 20px; border-top: 1px solid #222; }
     </style>
 </head>
@@ -83,24 +100,23 @@
 
     <div id="movies" class="section">
         <h2>Movie Picks</h2>
-        <div id="moviesContent"><div class="loading">Add TMDB API key to fetch real posters</div></div>
+        <div id="moviesContent"></div>
     </div>
 
     <div id="books" class="section">
         <h2>Reading List</h2>
-        <div id="booksContent"><div class="loading">Loading from Google Books...</div></div>
+        <div id="booksContent"></div>
     </div>
 
     <div id="tools" class="section">
-        <h2>AI Tools</h2>
+        <h2>Trending AI Tools</h2>
         <div id="toolsContent"></div>
     </div>
 
     <footer>Morning Briefing • Anson</footer>
 
     <script>
-        const dateEl = document.getElementById('date');
-        dateEl.textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+        document.getElementById('date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
         
         function show(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -109,266 +125,115 @@
             event.target.classList.add('active');
         }
 
-        // News (static for now)
         const news = [
             {
-                title: 'Amazon in Talks to Invest $50B in OpenAI — Could Reshape AI Industry',
+                title: 'Amazon in Talks to Invest $50B in OpenAI',
                 category: 'Technology',
-                summary: 'Amazon is in discussions to invest up to $50 billion in OpenAI, potentially making it a major AI investor. This deal would be one of the largest AI investments in history.',
-                impact: 'Could accelerate AI adoption in AWS cloud services and challenge Microsoft\'s exclusive partnership with OpenAI. If you use AWS or Azure, this affects your AI tool options.',
+                summary: 'Amazon is in discussions to invest up to $50 billion in OpenAI, potentially making it a major AI investor.',
+                impact: 'Could accelerate AI adoption in AWS cloud services and challenge Microsoft\'s exclusive partnership. If you use AWS or Azure, this affects your AI tool options.',
                 source: 'TechCrunch',
                 time: '2 hours ago',
                 image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=300&fit=crop&q=80'
             },
             {
-                title: 'SpaceX, Tesla, xAI Merger — Elon Musk Reportedly Exploring Deal',
+                title: 'SpaceX, Tesla, xAI Merger — Elon Musk Exploring Deal',
                 category: 'Business',
-                summary: 'Musk is reportedly considering merging his companies (SpaceX rockets, Tesla vehicles, xAI chatbot) under one corporate structure.',
-                impact: 'Could create a unified pipeline from AI (Grok) to physical products. May accelerate autonomous vehicles and space exploration AI.',
+                summary: 'Musk is reportedly considering merging his companies (SpaceX rockets, Tesla vehicles, xAI chatbot) under one structure.',
+                impact: 'Could create a unified AI-to-reality pipeline from Grok to Mars missions. May accelerate autonomous vehicles.',
                 source: 'Reuters',
                 time: '5 hours ago',
                 image: 'https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=400&h=200&fit=crop&q=80'
             },
             {
-                title: "Apple's $100B AI Bet — But Monetization Strategy Remains Unclear",
+                title: "Apple's $100B AI Bet — Monetization Unclear",
                 category: 'Company',
-                summary: 'Apple has invested heavily in AI features (Apple Intelligence, Siri improvements) but analysts question how the company will turn this into revenue.',
-                impact: 'Affects future iPhone pricing and which AI features remain free. Could influence how AI assistants are monetized industry-wide.',
+                summary: 'Apple has invested heavily in AI features but analysts question how the company will turn this into revenue.',
+                impact: 'Affects future iPhone pricing and which AI features remain free. Could influence industry-wide AI monetization.',
                 source: 'The Verge',
                 time: '8 hours ago',
                 image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=200&fit=crop&q=80'
             },
             {
-                title: 'AI Content Labels — Thinktank Calls for "Nutrition Facts" on Generated News',
+                title: 'AI Content Labels — "Nutrition Facts" Proposed',
                 category: 'Policy',
-                summary: 'A new report proposes mandatory disclosures for AI-generated content, similar to food nutrition labels, requiring creators to label AI-written or AI-assisted work.',
-                impact: 'Helps you distinguish AI-generated articles from human-written news. May become mandatory for all AI content creators.',
+                summary: 'A new report proposes mandatory disclosures for AI-generated content, similar to food nutrition labels.',
+                impact: 'Helps you distinguish AI-generated articles from human-written news. May become mandatory for all AI content.',
                 source: 'The Guardian',
                 time: '12 hours ago',
                 image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop&q=80'
             },
             {
-                title: 'Nvidia, Microsoft, Google — Five AI Stocks Poised to Reach $1 Trillion',
-                category: 'Finance',
-                summary: 'Analysts identify the top AI companies positioned for massive growth, including chipmakers (Nvidia), platforms (Microsoft, Google), and emerging players.',
-                impact: 'If you invest in tech, these are stocks to watch. Shows which companies analysts believe will dominate the AI era.',
-                source: 'Motley Fool',
-                time: '1 day ago',
-                image: 'https://images.unsplash.com/photo-1611974765270-ca12586343bb?w=400&h=200&fit=crop&q=80'
-            },
-            {
-                title: 'GPT-5 and Claude 4 — New Models Approaching Human-Level Reasoning',
+                title: 'GPT-5 and Claude 4 — Approaching Human-Level Reasoning',
                 category: 'Products',
-                summary: 'Insider reports suggest major AI models are getting closer to AGI capabilities, with new releases expected within the next few months.',
-                impact: 'Could significantly change how you work with AI assistants. Better reasoning means more complex tasks could be automated.',
+                summary: 'Insider reports suggest major AI models are getting closer to AGI capabilities.',
+                impact: 'Could significantly change how you work with AI assistants. Better reasoning means more complex tasks automated.',
                 source: 'Ars Technica',
                 time: '1 day ago',
                 image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=200&fit=crop&q=80'
+            },
+            {
+                title: 'Five AI Stocks Poised to Reach $1 Trillion',
+                category: 'Finance',
+                summary: 'Analysts identify the top AI companies positioned for massive growth.',
+                impact: 'If you invest in tech, these are stocks to watch. Shows which companies will dominate the AI era.',
+                source: 'Motley Fool',
+                time: '1 day ago',
+                image: 'https://images.unsplash.com/photo-1611974765270-ca12586343bb?w=400&h=200&fit=crop&q=80'
             }
         ];
 
-        // Render News
         document.getElementById('newsContent').innerHTML = news.map(n => `
-            <div class="hero" style="margin-bottom: 20px;">
+            <div class="hero">
                 <img src="${n.image}" alt="${n.title}" class="hero-img" onerror="this.style.display='none'">
                 <div class="hero-content">
                     <div class="hero-label">${n.category}</div>
                     <div class="hero-title">${n.title}</div>
                     <div class="hero-desc">${n.summary}</div>
-                    <div style="background: #2997ff20; border-left: 3px solid #2997ff; padding: 10px 12px; margin: 12px 0; border-radius: 0 8px 8px 0;">
-                        <div style="font-size: 11px; color: #2997ff; font-weight: 600; margin-bottom: 4px;">WHY IT MATTERS</div>
-                        <div style="font-size: 13px; color: #ccc; line-height: 1.4;">${n.impact}</div>
+                    <div class="impact-box">
+                        <div class="impact-title">WHY IT MATTERS</div>
+                        <div class="impact-desc">${n.impact}</div>
                     </div>
                     <div class="hero-meta"><span>${n.source}</span><span>${n.time}</span></div>
                 </div>
             </div>
         `).join('');
 
-        // Tools - Fetch from Product Hunt
-        async function loadTools() {
-            try {
-                const response = await fetch('https://www.producthunt.com/feed');
-                const text = await response.text();
-                
-                // Parse RSS feed
-                const entries = [];
-                const entryRegex = /<entry>[\s\S]*?<title>([^<]+)<\/title>[\s\S]*?<published>([^<]+)<\/published>[\s\S]*?<link[^>]*href="([^"]+)"[^>]*>[\s\S]*?<content[^>]*>([^<]+)<\/content>/g;
-                let match;
-                
-                while ((match = entryRegex.exec(text)) !== null && entries.length < 10) {
-                    entries.push({
-                        title: match[1],
-                        date: match[2],
-                        url: match[3],
-                        desc: match[4].replace(/<[^>]+>/g, '').trim()
-                    });
-                }
-
-                // AI-related keywords to filter
-                const aiKeywords = ['ai', 'chatgpt', 'claude', 'cursor', 'midjourney', 'gpt', 'llm', 'agent', 'generative', 'copilot', 'notion', 'perplexity', 'v0', 'bolt', 'lovable', 'figma', 'replit', 'langchain', 'autogen', 'crewai', 'mastra', 'supabase', 'vercel', 'factory', 'devin', 'sweep', 'gitHub', 'linear', 'raycast', 'hugging', 'runway', 'pika', 'suno', 'eleven', 'heygen', 'loom'];
-                
-                // Filter and score AI tools
-                const aiTools = entries
-                    .map(tool => {
-                        const score = aiKeywords.reduce((acc, kw) => 
-                            acc + (tool.title.toLowerCase().includes(kw) || tool.desc.toLowerCase().includes(kw) ? 1 : 0), 0);
-                        return { ...tool, score };
-                    })
-                    .filter(tool => tool.score > 0)
-                    .sort((a, b) => b.score - a.score)
-                    .slice(0, 8);
-
-                // Fallback if no AI tools found
-                if (aiTools.length === 0) {
-                    aiTools.push(
-                        { title: 'Cursor', desc: 'AI-first code editor', url: 'https://cursor.sh', score: 3 },
-                        { title: 'Claude', desc: 'AI assistant by Anthropic', url: 'https://claude.ai', score: 3 },
-                        { title: 'Midjourney', desc: 'AI image generation', url: 'https://midjourney.com', score: 3 },
-                        { title: 'Perplexity', desc: 'AI-powered search', url: 'https://perplexity.ai', score: 2 },
-                        { title: 'Bolt.new', desc: 'AI development environment', url: 'https://bolt.new', score: 2 },
-                        { title: 'v0', desc: 'React UI generator by Vercel', url: 'https://v0.dev', score: 2 },
-                        { title: 'Lovable', desc: 'Build apps with AI', url: 'https://lovable.dev', score: 2 },
-                        { title: 'Figma Make', desc: 'Design to code with AI', url: 'https://www.figma.com/ai', score: 2 }
-                    );
-                }
-
-                // Icons based on keywords
-                const getIcon = (title, desc) => {
-                    const text = (title + ' ' + desc).toLowerCase();
-                    if (text.includes('code') || text.includes('dev')) return '⌨️';
-                    if (text.includes('image') || text.includes('design')) return '🎨';
-                    if (text.includes('chat') || text.includes('write')) return '💬';
-                    if (text.includes('search') || text.includes('research')) return '🔍';
-                    if (text.includes('video') || text.includes('audio')) return '🎬';
-                    if (text.includes('music') || text.includes('sound')) return '🎵';
-                    if (text.includes('build') || text.includes('make')) return '🛠️';
-                    return '✨';
-                };
-
-                const colors = ['#3b82f6', '#8b5cf6', '#f59e0b', '#10b981', '#ec4899', '#0ea5e9', '#ef4444', '#6366f1'];
-
-                document.getElementById('toolsContent').innerHTML = aiTools.map((t, i) => `
-                    <a href="${t.url}" target="_blank" class="tool-item">
-                        <div class="tool-icon" style="background: ${colors[i % colors.length]}20; color: ${colors[i % colors.length]}">${getIcon(t.title, t.desc)}</div>
-                        <div class="tool-info">
-                            <div class="tool-name">${t.title}</div>
-                            <div class="tool-desc">${t.desc || 'Check it out on Product Hunt'}</div>
-                        </div>
-                    </a>
-                `).join('');
-            } catch (e) {
-                console.error('Failed to load tools from Product Hunt:', e);
-                // Fallback to curated list
-                const fallbackTools = [
-                    { name: 'Cursor', desc: 'AI-first code editor', url: 'https://cursor.sh', icon: '⌨️', color: '#3b82f6' },
-                    { name: 'Midjourney', desc: 'AI image generation', url: 'https://midjourney.com', icon: '🎨', color: '#8b5cf6' },
-                    { name: 'Claude', desc: 'AI assistant', url: 'https://claude.ai', icon: '💬', color: '#dc2626' },
-                    { name: 'Perplexity', desc: 'AI-powered search', url: 'https://perplexity.ai', icon: '🔍', color: '#10b981' },
-                    { name: 'Bolt.new', desc: 'AI development environment', url: 'https://bolt.new', icon: '⚡', color: '#0ea5e9' },
-                    { name: 'v0', desc: 'React UI generator', url: 'https://v0.dev', icon: '🧩', color: '#6366f1' },
-                    { name: 'Lovable', desc: 'Vibe coding app builder', url: 'https://lovable.dev', icon: '🪄', color: '#ec4899' },
-                    { name: 'Figma Make', desc: 'Design to code', url: 'https://www.figma.com/ai', icon: '🎯', color: '#f59e0b' }
-                ];
-                document.getElementById('toolsContent').innerHTML = fallbackTools.map(t => `
-                    <a href="${t.url}" target="_blank" class="tool-item">
-                        <div class="tool-icon" style="background: ${t.color}20; color: ${t.color}">${t.icon}</div>
-                        <div class="tool-info">
-                            <div class="tool-name">${t.name}</div>
-                            <div class="tool-desc">${t.desc}</div>
-                        </div>
-                    </a>
-                `).join('');
-            }
-        }
-
-        loadTools();
-
-        // Movies - TMDB API (requires key)
-        // To enable: Add const TMDB_API_KEY = 'YOUR_KEY';
-        // Get key from: https://www.themoviedb.org/settings/api
-        const TMDB_API_KEY = '3783979c6021378e3461274a428e7c64';
-        
         async function loadMovies() {
-            if (!TMDB_API_KEY) {
-                const movies = [
-                    { title: 'Her', year: 2013, rating: 8.0, poster: null },
-                    { title: 'Ex Machina', year: 2014, rating: 7.7, poster: null },
-                    { title: 'Blade Runner 2049', year: 2017, rating: 8.0, poster: null },
-                    { title: 'The Matrix', year: 1999, rating: 8.7, poster: null },
-                    { title: 'Everything Everywhere', year: 2022, rating: 7.8, poster: null },
-                    { title: 'Past Lives', year: 2023, rating: 7.9, poster: null }
-                ];
-                document.getElementById('moviesContent').innerHTML = movies.map(m => `
-                    <div class="card">
-                        <div class="card-img" style="display:flex;align-items:center;justify-content:center;font-size:28px;">🎬</div>
-                        <div class="card-content">
-                            <div class="card-title">${m.title}</div>
-                            <div style="color: #fbbf24; font-size: 12px;">★ ${m.rating}</div>
-                        </div>
-                    </div>
-                `).join('');
-                return;
-            }
-
+            const TMDB_API_KEY = '3783979c6021378e3461274a428e7c64';
             const movieIds = ['152601', '264660', '335984', '603', '545611', '666277'];
             try {
-                console.log('Fetching movies from TMDB...');
                 const promises = movieIds.map(id => 
-                    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`)
-                        .then(r => { 
-                            if (!r.ok) throw new Error('API error');
-                            return r.json();
-                        })
+                    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`).then(r => r.json())
                 );
                 const movies = await Promise.all(promises);
-                console.log('Movies loaded:', movies.length);
                 document.getElementById('moviesContent').innerHTML = movies.map(m => `
                     <div class="list-item">
-                        <img src="https://image.tmdb.org/t/p/w200${m.poster_path}" alt="${m.title}" class="list-img" onerror="this.style.display='none'; this.parentElement.style.paddingLeft='0';">
+                        <img src="https://image.tmdb.org/t/p/w200${m.poster_path}" alt="${m.title}" class="list-img" onerror="this.style.display='none'">
                         <div class="list-info">
                             <div class="list-title">${m.title}</div>
                             <div class="list-meta">${m.release_date?.split('-')[0] || ''}</div>
                             <div class="list-rating">★ ${m.vote_average.toFixed(1)}</div>
-                            <div class="list-desc" style="color: #888; font-size: 13px; margin-top: 6px;">${m.overview?.substring(0, 100)}...</div>
+                            <div style="color: #888; font-size: 13px; margin-top: 6px;">${m.overview?.substring(0, 80)}...</div>
                         </div>
                     </div>
                 `).join('');
             } catch (e) {
-                console.error('Movie load error:', e);
-                document.getElementById('moviesContent').innerHTML = '<div class="loading">Failed to load movies. Check console.</div>';
+                document.getElementById('moviesContent').innerHTML = '<div class="loading">Failed to load movies</div>';
             }
         }
 
-        // Books - Google Books API (open, no key needed)
         async function loadBooks() {
-            const bookQueries = [
-                'isbn:9780465050659',  // Design of Everyday Things
-                'isbn:9780374533657',  // Thinking, Fast and Slow
-                'isbn:9780812993031',  // Creativity Inc.
-                'isbn:1451648537',     // Steve Jobs
-                '9780316491977'        // Soul of a New Machine
-            ];
-
+            const bookQueries = ['isbn:9780465050659', 'isbn:9780374533657', 'isbn:9780812993031', 'isbn:1451648537', '9780316491977'];
             try {
-                const promises = bookQueries.map(q => 
-                    fetch(`https://www.googleapis.com/books/v1/volumes?q=${q}`)
-                        .then(r => r.json())
-                );
+                const promises = bookQueries.map(q => fetch(`https://www.googleapis.com/books/v1/volumes?q=${q}`).then(r => r.json()));
                 const results = await Promise.all(promises);
-                
                 const books = results.map(r => {
                     const item = r.items?.[0]?.volumeInfo;
-                    return {
-                        title: item?.title || 'Unknown',
-                        authors: item?.authors?.[0] || 'Unknown',
-                        rating: item?.averageRating || 4.0,
-                        image: item?.imageLinks?.thumbnail?.replace('http:', 'https:')
-                    };
+                    return { title: item?.title || 'Unknown', authors: item?.authors?.[0] || 'Unknown', rating: item?.averageRating || 4.0, image: item?.imageLinks?.thumbnail?.replace('http:', 'https:') };
                 });
-
                 document.getElementById('booksContent').innerHTML = books.map(b => `
                     <div class="list-item">
-                        <img src="${b.image}" alt="${b.title}" class="list-img" onerror="this.style.display='none'; this.parentElement.style.paddingLeft='0';">
+                        <img src="${b.image}" alt="${b.title}" class="list-img" onerror="this.style.display='none'">
                         <div class="list-info">
                             <div class="list-title">${b.title}</div>
                             <div class="list-meta">${b.authors}</div>
@@ -381,10 +246,102 @@
             }
         }
 
-        // Initialize
+        // Curated AI Tools with why it matters
+        const curatedTools = [
+            { 
+                name: 'Cursor', 
+                tag: 'Code Editor',
+                desc: 'AI-first code editor built on VS Code with intelligent autocomplete and refactoring.',
+                why: 'Replaces your dev environment with AI. Write code 2-3x faster with context-aware suggestions.',
+                url: 'https://cursor.sh',
+                icon: '⌨️',
+                color: '#3b82f6'
+            },
+            { 
+                name: 'Claude', 
+                tag: 'AI Assistant',
+                desc: 'Anthropic\'s AI assistant excelling at reasoning, writing, and coding tasks.',
+                why: 'Best for complex reasoning and nuanced conversations. Use for design reviews and strategy.',
+                url: 'https://claude.ai',
+                icon: '💬',
+                color: '#dc2626'
+            },
+            { 
+                name: 'Midjourney', 
+                tag: 'Image Generation',
+                desc: 'AI-powered image generation known for artistic and photorealistic outputs.',
+                why: 'Create concept art and visuals instantly. Great for moodboards and design ideation.',
+                url: 'https://midjourney.com',
+                icon: '🎨',
+                color: '#8b5cf6'
+            },
+            { 
+                name: 'Perplexity', 
+                tag: 'AI Search',
+                desc: 'AI-powered search engine with cited sources and conversational responses.',
+                why: 'Replaces Google for research. Gets you answers with sources, not just links.',
+                url: 'https://perplexity.ai',
+                icon: '🔍',
+                color: '#10b981'
+            },
+            { 
+                name: 'Bolt.new', 
+                tag: 'AI IDE',
+                desc: 'Full-stack AI development environment. Build, edit, and deploy in browser.',
+                why: 'Spin up complete apps in minutes. Perfect for prototyping and vibe coding.',
+                url: 'https://bolt.new',
+                icon: '⚡',
+                color: '#0ea5e9'
+            },
+            { 
+                name: 'v0', 
+                tag: 'UI Generator',
+                desc: 'Generate React UI components from text descriptions using Vercel AI SDK.',
+                why: 'Turn your design specs into working React code instantly.',
+                url: 'https://v0.dev',
+                icon: '🧩',
+                color: '#6366f1'
+            },
+            { 
+                name: 'Lovable', 
+                tag: 'Vibe Coding',
+                desc: 'Build full-stack applications by describing what you want in plain language.',
+                why: 'Describe your idea, get a working app. Fastest way from concept to prototype.',
+                url: 'https://lovable.dev',
+                icon: '🪄',
+                color: '#ec4899'
+            },
+            { 
+                name: 'Figma Make', 
+                tag: 'Design to Code',
+                desc: 'Turn Figma designs into code with AI. Generate React, HTML/CSS, and iOS components.',
+                why: 'Bridge design and development. Auto-generate clean code from your designs.',
+                url: 'https://www.figma.com/ai',
+                icon: '🎯',
+                color: '#f59e0b'
+            }
+        ];
+
+        document.getElementById('toolsContent').innerHTML = curatedTools.map(t => `
+            <div class="tool-item">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: ${t.color}20; color: ${t.color}">${t.icon}</div>
+                    <div class="tool-info">
+                        <div class="tool-name">${t.name}</div>
+                        <div class="tool-tag">${t.tag}</div>
+                    </div>
+                </div>
+                <div class="tool-desc">${t.desc}</div>
+                <div class="tool-why">
+                    <div class="tool-why-title">WHY IT MATTERS</div>
+                    <div class="tool-why-desc">${t.why}</div>
+                </div>
+                <a href="${t.url}" target="_blank" class="tool-link">Try ${t.name} →</a>
+            </div>
+        `).join('');
+
         loadMovies();
         loadBooks();
-        loadTools();
     </script>
 </body>
 </html>
