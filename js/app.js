@@ -40,49 +40,49 @@ async function loadAllContent() {
 async function loadNews() {
     const container = document.getElementById('newsContainer');
 
-                    const heroNews = {
-        title: 'AI Developments Continue at Rapid Pace - January 31',
+                        const heroNews = {
+        title: 'The Top 3 Artificial Intelligence (AI) Chip Stocks to Buy With $50,000 in 2026 - The Motley Fool',
         category: 'Technology',
         summary: 'The latest developments in artificial intelligence and technology.',
-        source: 'Industry News',
-        time: 'Today',
+        source: 'The Motley Fool',
+        time: '3 days ago',
         image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop&q=80'
     };
 
     const newsList = [
         {
-            title: 'New Machine Learning Models Set Performance Records',
+            title: 'Ex-Google engineer convicted of stealing AI trade secrets to benefit China - Los Angeles Times',
             category: 'Technology',
-            source: 'Tech Weekly',
-            time: '4 hours ago',
+            source: 'Los Angeles Times',
+            time: '2 hours ago',
             image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         },
         {
-            title: 'Enterprise AI Adoption Accelerates in Q1',
+            title: 'Artificial intelligence will cost jobs, admits Liz Kendall - The Guardian',
             category: 'Technology',
-            source: 'Business Insider',
-            time: '6 hours ago',
+            source: 'The Guardian',
+            time: '2 days ago',
             image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         },
         {
-            title: 'Open Source AI Tools Gain Popularity',
+            title: '2 Trillion-Dollar Artificial Intelligence (AI) Stocks To Double Up on Right Now - Yahoo Finance',
             category: 'Technology',
-            source: 'Developer News',
-            time: '8 hours ago',
+            source: 'Yahoo Finance',
+            time: '21 hours ago',
             image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         },
         {
-            title: 'AI Regulations Discussion Continues Globally',
+            title: 'Opinion | Young People Are Using A.I. to Skip the Hardest Part of Growing Up - The New York Times',
             category: 'Technology',
-            source: 'Policy Watch',
-            time: '12 hours ago',
+            source: 'The New York Times',
+            time: '18 hours ago',
             image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         },
         {
-            title: 'Breakthrough in Natural Language Processing',
+            title: 'The philosophical puzzle of rational artificial intelligence - MIT News',
             category: 'Technology',
-            source: 'Research Daily',
-            time: '1 day ago',
+            source: 'MIT News',
+            time: '7 hours ago',
             image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         }
     ];
