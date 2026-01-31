@@ -14,7 +14,7 @@ import urllib.parse
 
 # Configuration
 BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY", "")
-REPO_DIR = "/Users/saberzou/clawd/workspace/report-center"
+REPO_DIR = "/Users/saberzou/.openclaw/workspace/report-center"
 DATA_DIR = f"{REPO_DIR}/data"
 NEWS_FILE = f"{DATA_DIR}/news.json"
 APP_JS = f"{REPO_DIR}/js/app.js"
