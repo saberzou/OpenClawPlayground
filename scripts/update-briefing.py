@@ -84,8 +84,9 @@ def fetch_news_from_rss(feed_url):
             if source.startswith('http'):
                 source = source.split('/')[-1] if '/' in source else source
             
-            # Generate summary from description (remove HTML tags)
-            summary = re.sub(r'<[^>]+>', ' ', description).strip()
+            # Generate summary from description (remove HTML tags and entities)
+            summary = re.sub(r'<[^>]+>', ' ', description)
+            summary = re.sub(r'&[a-z]+;', ' ', summary)
             summary = re.sub(r'\s+', ' ', summary).strip()
             # Remove common prefixes and clean up
             summary = re.sub(r'^(News|Update|Report|Alert):\s*', '', summary, flags=re.IGNORECASE)
