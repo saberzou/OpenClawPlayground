@@ -13,6 +13,7 @@ import urllib.parse
 import xml.etree.ElementTree as ET
 import re
 import html
+import random
 
 # Configuration
 REPO_DIR = "/Users/saberzou/.openclaw/workspace/report-center"
@@ -28,17 +29,51 @@ RSS_FEEDS = [
 
 # AI topics for generating contextual summaries
 AI_TOPICS = {
-    "chip": {"category": "Hardware", "impact": "AI chips are the foundation of all AI systems. Better chips mean faster, cheaper AI."},
-    "stock": {"category": "Finance", "impact": "AI stocks are surging. Understanding which companies benefit helps with investment decisions."},
-    "china": {"category": "Geopolitics", "impact": "US-China AI competition shapes the future of technology and national security."},
-    "google": {"category": "Tech Giant", "impact": "Google's AI moves affect billions of users and set industry standards."},
-    "microsoft": {"category": "Tech Giant", "impact": "Microsoft's AI investments are reshaping enterprise software and cloud services."},
-    "openai": {"category": "AI Labs", "impact": "OpenAI developments signal the direction of generative AI capabilities."},
-    "regulation": {"category": "Policy", "impact": "AI regulations affect how companies develop and deploy AI systems."},
-    "job": {"category": "Workforce", "impact": "AI is transforming jobs. Understanding the impact helps with career planning."},
-    "ethic": {"category": "Ethics", "impact": "AI ethics shape responsible development and deployment of AI systems."},
-    "research": {"category": "Research", "impact": "New AI research often leads to breakthroughs in capabilities and applications."}
+    "chip": {"category": "Hardware", "impact": "AI chips are the foundation of all AI systems. Better chips mean faster, cheaper AI.", "keywords": ["chip", "nvidia", "gpu", "semiconductor", "processor"]},
+    "stock": {"category": "Finance", "impact": "AI stocks are surging. Understanding which companies benefit helps with investment decisions.", "keywords": ["stock", "share", "market", "invest", "buy", "sell", "trillion", "billion"]},
+    "china": {"category": "Geopolitics", "impact": "US-China AI competition shapes the future of technology and national security.", "keywords": ["china", "chinese", "beijing"]},
+    "google": {"category": "Tech Giant", "impact": "Google's AI moves affect billions of users and set industry standards.", "keywords": ["google", "Alphabet"]},
+    "microsoft": {"category": "Tech Giant", "impact": "Microsoft's AI investments are reshaping enterprise software and cloud services.", "keywords": ["microsoft", "openai"]},
+    "openai": {"category": "AI Labs", "impact": "OpenAI developments signal the direction of generative AI capabilities.", "keywords": ["openai", "chatgpt", "gpt", "sam altman"]},
+    "regulation": {"category": "Policy", "impact": "AI regulations affect how companies develop and deploy AI systems.", "keywords": ["regulation", "bill", "law", "government", "senate", "congress", "policy", "license"]},
+    "job": {"category": "Workforce", "impact": "AI is transforming jobs. Understanding the impact helps with career planning.", "keywords": ["job", "workforce", "layoff", "employment", "worker"]},
+    "ethic": {"category": "Ethics", "impact": "AI ethics shape responsible development and deployment of AI systems.", "keywords": ["ethical", "ethics", "danger", "risk", "harm"]},
+    "research": {"category": "Research", "impact": "New AI research often leads to breakthroughs in capabilities and applications.", "keywords": ["research", "study", "university", "professor", "harvard", "mit", "stanford"]},
+    "agent": {"category": "Agents", "impact": "AI agents are becoming autonomous - understanding their capabilities helps you use them effectively.", "keywords": ["agent", "autonomous", "agentic"]},
+    "apple": {"category": "Tech Giant", "impact": "Apple's AI strategy affects iPhone users and the broader consumer AI market.", "keywords": ["apple", "siri", "iphone"]},
+    "musk": {"category": "Business", "impact": "Musk's companies (Tesla, SpaceX, xAI) are integrating AI across industries.", "keywords": ["musk", "elon", "tesla", "spacex"]},
+    "amazon": {"category": "Tech Giant", "impact": "Amazon's AI investments (AWS, Alexa) shape cloud and consumer AI.", "keywords": ["amazon", "aws", "bedrock"]},
 }
+
+# Summary templates based on patterns
+SUMMARY_TEMPLATES = {
+    "stock": ["Analysis of top AI stocks positioned for growth in the current market.", "Investment outlook for leading AI companies.", "Which AI stocks are analysts watching closely."],
+    "job": ["How AI is reshaping the workforce and what it means for workers.", "The changing nature of work in the AI era.", "AI's impact on employment and skills."],
+    "regulation": ["New policy developments affecting AI deployment and development.", "Government approaches to AI governance.", "What the latest AI regulations mean for the industry."],
+    "research": ["Latest findings from AI research institutions.", "Academic progress in artificial intelligence.", "New scientific insights into AI capabilities."],
+    "chip": ["Developments in AI hardware and semiconductor technology.", "The battle for AI chip supremacy.", "How AI chips are getting more powerful."],
+    "default": ["Latest developments in artificial intelligence and technology.", "Breaking news from the AI world.", "Key updates in the AI industry."]
+}
+
+def generate_summary_from_title(title, category):
+    """Generate a contextual summary from the title"""
+    title_lower = title.lower()
+    
+    # Check for specific patterns
+    if "stock" in title_lower or "buy" in title_lower or "invest" in title_lower:
+        return random.choice(SUMMARY_TEMPLATES["stock"])
+    elif "job" in title_lower or "work" in title_lower or "layoff" in title_lower:
+        return random.choice(SUMMARY_TEMPLATES["job"])
+    elif any(k in title_lower for k in ["regulation", "bill", "law", "government", "senate"]):
+        return random.choice(SUMMARY_TEMPLATES["regulation"])
+    elif "research" in title_lower or any(k in title_lower for k in ["university", "mit", "harvard", "stanford", "professor"]):
+        return random.choice(SUMMARY_TEMPLATES["research"])
+    elif any(k in title_lower for k in ["chip", "nvidia", "gpu", "semiconductor"]):
+        return random.choice(SUMMARY_TEMPLATES["chip"])
+    elif category == "Technology":
+        return "Latest updates from the technology sector with a focus on artificial intelligence developments."
+    else:
+        return f"Latest {category.lower()} news related to artificial intelligence and its applications."
 
 def parse_rss_date(date_str):
     """Parse RSS date and return relative time"""
@@ -85,26 +120,19 @@ def fetch_news_from_rss(feed_url):
             if source.startswith('http'):
                 source = source.split('/')[-1] if '/' in source else source
             
-            # Generate summary from description (remove HTML tags and entities)
-            summary = re.sub(r'<[^>]+>', ' ', description)
-            summary = html.unescape(summary)
-            summary = re.sub(r'\s+', ' ', summary).strip()
-            summary = re.sub(r'^(News|Update|Report|Alert):\s*', '', summary, flags=re.IGNORECASE)
-            if len(summary) > 200:
-                summary = summary[:197] + "..."
-            elif len(summary) < 20:
-                summary = f"Latest report on {title.split()[0:4]}..." if title else "Latest AI news update."
-            
-            # Determine category and impact based on keywords
+            # Determine category and impact based on keywords FIRST (before summary)
             title_lower = title.lower()
             category = "Technology"
             impact = "This development affects the broader AI landscape and industry trends."
             
             for keyword, info in AI_TOPICS.items():
-                if keyword in title_lower:
+                if any(kw in title_lower for kw in info["keywords"]):
                     category = info["category"]
                     impact = info["impact"]
                     break
+            
+            # Generate contextual summary from title
+            summary = generate_summary_from_title(title, category)
             
             news.append({
                 "title": title,

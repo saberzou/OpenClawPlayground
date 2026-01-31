@@ -40,10 +40,10 @@ async function loadAllContent() {
 async function loadNews() {
     const container = document.getElementById('newsContainer');
 
-                                        const heroNews = {
+                                            const heroNews = {
         title: 'The Top 3 Artificial Intelligence (AI) Chip Stocks to Buy With $50,000 in 2026 - The Motley Fool',
         category: 'Hardware',
-        summary: 'The Top 3 Artificial Intelligence (AI) Chip Stocks to Buy With $50,000 in 2026 The Motley Fool',
+        summary: 'Which AI stocks are analysts watching closely.',
         impact: 'AI chips are the foundation of all AI systems. Better chips mean faster, cheaper AI.',
         source: 'The Motley Fool',
         time: '3 days ago',
@@ -52,18 +52,9 @@ async function loadNews() {
 
     const newsList = [
         {
-            title: 'Ex-Google engineer convicted of stealing AI trade secrets to benefit China - Los Angeles Times',
-            category: 'Geopolitics',
-            summary: 'Ex-Google engineer convicted of stealing AI trade secrets to benefit China Los Angeles Times',
-            impact: 'US-China AI competition shapes the future of technology and national security.',
-            source: 'Los Angeles Times',
-            time: '2 hours ago',
-            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
-        },
-        {
             title: 'Artificial intelligence will cost jobs, admits Liz Kendall - The Guardian',
             category: 'Workforce',
-            summary: 'Artificial intelligence will cost jobs, admits Liz Kendall The Guardian',
+            summary: 'How AI is reshaping the workforce and what it means for workers.',
             impact: 'AI is transforming jobs. Understanding the impact helps with career planning.',
             source: 'The Guardian',
             time: '2 days ago',
@@ -72,7 +63,7 @@ async function loadNews() {
         {
             title: '2 Trillion-Dollar Artificial Intelligence (AI) Stocks To Double Up on Right Now - Yahoo Finance',
             category: 'Finance',
-            summary: '2 Trillion-Dollar Artificial Intelligence (AI) Stocks To Double Up on Right Now Yahoo Finance',
+            summary: 'Analysis of top AI stocks positioned for growth in the current market.',
             impact: 'AI stocks are surging. Understanding which companies benefit helps with investment decisions.',
             source: 'Yahoo Finance',
             time: '21 hours ago',
@@ -81,7 +72,7 @@ async function loadNews() {
         {
             title: 'Opinion | Young People Are Using A.I. to Skip the Hardest Part of Growing Up - The New York Times',
             category: 'Technology',
-            summary: 'Opinion | Young People Are Using A.I. to Skip the Hardest Part of Growing Up The New York Times',
+            summary: 'Latest updates from the technology sector with a focus on artificial intelligence developments.',
             impact: 'This development affects the broader AI landscape and industry trends.',
             source: 'The New York Times',
             time: '19 hours ago',
@@ -89,11 +80,20 @@ async function loadNews() {
         },
         {
             title: 'The philosophical puzzle of rational artificial intelligence - MIT News',
-            category: 'Technology',
-            summary: 'The philosophical puzzle of rational artificial intelligence MIT News',
-            impact: 'This development affects the broader AI landscape and industry trends.',
+            category: 'Research',
+            summary: 'Latest findings from AI research institutions.',
+            impact: 'New AI research often leads to breakthroughs in capabilities and applications.',
             source: 'MIT News',
             time: '7 hours ago',
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
+        },
+        {
+            title: 'Cornell Appoints Prof. Thorsten Joachims As New Vice Provost for Artificial Intelligence Strategy...',
+            category: 'Technology',
+            summary: 'Latest updates from the technology sector with a focus on artificial intelligence developments.',
+            impact: 'This development affects the broader AI landscape and industry trends.',
+            source: 'The Cornell Daily Sun',
+            time: 'Yesterday',
             image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         }
     ];
