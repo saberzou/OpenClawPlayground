@@ -40,7 +40,7 @@ async function loadAllContent() {
 async function loadNews() {
     const container = document.getElementById('newsContainer');
 
-                                    const heroNews = {
+                                        const heroNews = {
         title: 'The Top 3 Artificial Intelligence (AI) Chip Stocks to Buy With $50,000 in 2026 - The Motley Fool',
         category: 'Hardware',
         summary: 'The Top 3 Artificial Intelligence (AI) Chip Stocks to Buy With $50,000 in 2026 The Motley Fool',

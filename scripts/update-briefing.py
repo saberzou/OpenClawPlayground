@@ -12,6 +12,7 @@ import urllib.request
 import urllib.parse
 import xml.etree.ElementTree as ET
 import re
+import html
 
 # Configuration
 REPO_DIR = "/Users/saberzou/.openclaw/workspace/report-center"
@@ -86,9 +87,8 @@ def fetch_news_from_rss(feed_url):
             
             # Generate summary from description (remove HTML tags and entities)
             summary = re.sub(r'<[^>]+>', ' ', description)
-            summary = re.sub(r'&[a-z]+;', ' ', summary)
+            summary = html.unescape(summary)
             summary = re.sub(r'\s+', ' ', summary).strip()
-            # Remove common prefixes and clean up
             summary = re.sub(r'^(News|Update|Report|Alert):\s*', '', summary, flags=re.IGNORECASE)
             if len(summary) > 200:
                 summary = summary[:197] + "..."
