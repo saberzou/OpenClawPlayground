@@ -751,7 +751,7 @@
     async function getToken() {
       let token = localStorage.getItem('github_token');
       if (!token) {
-        await showTokenModal();
+        const result = await showTokenModal();
         token = localStorage.getItem('github_token');
       }
       return token;
@@ -759,7 +759,10 @@
 
     function showTokenModal() {
       return new Promise((resolve) => {
-        if (tokenModal) return;
+        if (tokenModal) {
+          resolve(false);
+          return;
+        }
         tokenModal = document.createElement('div');
         tokenModal.id = 'tokenModal';
         tokenModal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:2000;';
@@ -984,10 +987,13 @@
         });
       }
 
+      // Save to localStorage immediately
       localStorage.setItem('briefing_notes', JSON.stringify(notes));
       renderNotes();
       closeNoteModal();
-      await saveNotesToGist();
+
+      // Sync to Gist in background (no await)
+      saveNotesToGist().catch(console.error);
     }
 
     function editNote(id) {
@@ -999,7 +1005,8 @@
         notes = notes.filter(n => n.id !== id);
         localStorage.setItem('briefing_notes', JSON.stringify(notes));
         renderNotes();
-        await saveNotesToGist();
+        // Sync to Gist in background (no await)
+        saveNotesToGist().catch(console.error);
       }
     }
 
