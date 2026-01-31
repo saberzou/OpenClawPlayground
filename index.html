@@ -665,6 +665,15 @@
 
     <!-- News Section -->
     <section class="section active" id="newsSection">
+      <div class="section-header">
+        <span class="section-title">daily briefing</span>
+        <button class="add-btn-small" onclick="enableBraveNews()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;">
+            <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+          </svg>
+          live
+        </button>
+      </div>
       <div class="news-hero">
         <img class="hero-image" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop&q=80" alt="Hero News" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 200%22><rect fill=%22%231c1c1e%22 width=%22800%22 height=%22200%22/></svg>'">
         <div class="hero-content">
@@ -1011,25 +1020,25 @@
     // Brave Search API
     const BRAVE_API_URL = 'https://api.search.brave.com/res/v1/web/search';
 
-    async function getBraveToken() {
-      let token = localStorage.getItem('brave_token');
-      if (!token) {
-        const saved = prompt('Enter your Brave Search API key for real-time news:');
-        if (saved) {
-          localStorage.setItem('brave_token', saved);
-          token = saved;
-        }
+    function getBraveToken() {
+      return localStorage.getItem('brave_token');
+    }
+
+    async function enableBraveNews() {
+      const saved = prompt('Enter your Brave Search API key for real-time news:');
+      if (saved) {
+        localStorage.setItem('brave_token', saved);
+        fetchNews();
       }
-      return token;
     }
 
     async function fetchNews() {
-      const token = await getBraveToken();
+      const token = getBraveToken();
       const newsGrid = document.getElementById('newsGrid');
       const heroContent = document.querySelector('.hero-content');
 
       if (!token) {
-        // Fallback to cached/static news if no token
+        // Load fallback news without prompting
         loadFallbackNews();
         return;
       }
@@ -1152,13 +1161,13 @@
 
       heroContent.innerHTML = `
         <span class="hero-category">AI News</span>
-        <h2 class="hero-title">Enable Brave API for real-time news</h2>
+        <h2 class="hero-title">Latest AI headlines</h2>
         <div class="hero-why">
           <span class="hero-why-label">why it matters</span>
-          Add your Brave Search API key to get the latest AI news directly from the source.
+          Stay informed about the latest developments in artificial intelligence.
         </div>
         <div class="hero-meta">
-          <span>fallback mode</span>
+          <span>offline mode</span>
         </div>
       `;
 
