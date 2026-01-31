@@ -233,6 +233,15 @@
             }
         }
 
+        // Fallback curated books (when API is rate limited)
+        const fallbackBooks = [
+            { title: 'The Singularity Is Nearer', authors: 'Ray Kurzweil', rating: 4.5, image: 'https://books.google.com/books/content?id=_L9XEAAAQBAJ&printsec=frontcover&img=1&zoom=1' },
+            { title: 'Superintelligence', authors: 'Nick Bostrom', rating: 4.3, image: 'https://books.google.com/books/content?id=itM4DQAAQBAJ&printsec=frontcover&img=1&zoom=1' },
+            { title: 'Life 3.0', authors: 'Max Tegmark', rating: 4.4, image: 'https://books.google.com/books/content?id=R5JitAEACAAJ&printsec=frontcover&img=1&zoom=1' },
+            { title: 'The Almanack of Navalman', authors: 'Eric Jorgenson', rating: 4.6, image: 'https://books.google.com/books/content?id=5xSFDwAAQBAJ&printsec=frontcover&img=1&zoom=1' },
+            { title: 'Atomic Habits', authors: 'James Clear', rating: 4.7, image: 'https://books.google.com/books/content?id=ikg8DwAAQBAJ&printsec=frontcover&img=1&zoom=1' }
+        ];
+
         async function loadBooks() {
             const bookQueries = ['isbn:9780465050659', 'isbn:9780374533657', 'isbn:9780812993031', 'isbn:1451648537', '9780316491977'];
             try {
@@ -240,21 +249,26 @@
                 const results = await Promise.all(promises);
                 const books = results.map(r => {
                     const item = r.items?.[0]?.volumeInfo;
-                    return { title: item?.title || 'Unknown', authors: item?.authors?.[0] || 'Unknown', rating: item?.averageRating || 4.0, image: item?.imageLinks?.thumbnail?.replace('http:', 'https:') };
+                    if (!item) return fallbackBooks.shift() || fallbackBooks[0];
+                    return { title: item?.title || 'Unknown', authors: item?.authors?.[0] || 'Unknown', rating: item?.averageRating || 4.0, image: item?.imageLinks?.thumbnail?.replace('http:', 'https:') || fallbackBooks[0].image };
                 });
-                document.getElementById('booksContent').innerHTML = books.map(b => `
-                    <div class="list-item">
-                        <img src="${b.image}" alt="${b.title}" class="list-img" onerror="this.style.display='none'">
-                        <div class="list-info">
-                            <div class="list-title">${b.title}</div>
-                            <div class="list-meta">${b.authors}</div>
-                            <div class="list-rating">★ ${b.rating}</div>
-                        </div>
-                    </div>
-                `).join('');
+                renderBooks(books.slice(0, 5));
             } catch (e) {
-                document.getElementById('booksContent').innerHTML = '<div class="loading">Failed to load books</div>';
+                renderBooks(fallbackBooks);
             }
+        }
+
+        function renderBooks(books) {
+            document.getElementById('booksContent').innerHTML = books.map(b => `
+                <div class="list-item">
+                    <img src="${b.image}" alt="${b.title}" class="list-img" onerror="this.style.display='none'">
+                    <div class="list-info">
+                        <div class="list-title">${b.title}</div>
+                        <div class="list-meta">${b.authors}</div>
+                        <div class="list-rating">★ ${b.rating}</div>
+                    </div>
+                </div>
+            `).join('');
         }
 
         // Curated AI Tools with why it matters

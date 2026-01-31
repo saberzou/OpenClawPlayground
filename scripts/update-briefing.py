@@ -13,7 +13,7 @@ import urllib.request
 import urllib.parse
 
 # Configuration
-BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY", "BSAyPX-ytFdeie-0yVzhDi_pnympuHa")
+BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY", "")
 REPO_DIR = "/Users/saberzou/clawd/workspace/report-center"
 DATA_DIR = f"{REPO_DIR}/data"
 NEWS_FILE = f"{DATA_DIR}/news.json"
