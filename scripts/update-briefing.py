@@ -85,11 +85,14 @@ def fetch_news_from_rss(feed_url):
                 source = source.split('/')[-1] if '/' in source else source
             
             # Generate summary from description (remove HTML tags)
-            summary = re.sub(r'<[^>]+>', '', description).strip()
+            summary = re.sub(r'<[^>]+>', ' ', description).strip()
+            summary = re.sub(r'\s+', ' ', summary).strip()
+            # Remove common prefixes and clean up
+            summary = re.sub(r'^(News|Update|Report|Alert):\s*', '', summary, flags=re.IGNORECASE)
             if len(summary) > 200:
                 summary = summary[:197] + "..."
-            elif not summary:
-                summary = f"Latest {source} report on {title.split()[0:3]}..." if title else "Latest AI news update."
+            elif len(summary) < 20:
+                summary = f"Latest report on {title.split()[0:4]}..." if title else "Latest AI news update."
             
             # Determine category and impact based on keywords
             title_lower = title.lower()
