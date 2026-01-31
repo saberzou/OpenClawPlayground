@@ -40,10 +40,11 @@ async function loadAllContent() {
 async function loadNews() {
     const container = document.getElementById('newsContainer');
 
-                        const heroNews = {
+                            const heroNews = {
         title: 'The Top 3 Artificial Intelligence (AI) Chip Stocks to Buy With $50,000 in 2026 - The Motley Fool',
-        category: 'Technology',
-        summary: 'The latest developments in artificial intelligence and technology.',
+        category: 'Hardware',
+        summary: 'The Top 3 Artificial Intelligence (AI) Chip Stocks to Buy With $50,000 in 2026&nbsp;&nbsp;The Motley Fool',
+        impact: 'AI chips are the foundation of all AI systems. Better chips mean faster, cheaper AI.',
         source: 'The Motley Fool',
         time: '3 days ago',
         image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop&q=80'
@@ -52,21 +53,27 @@ async function loadNews() {
     const newsList = [
         {
             title: 'Ex-Google engineer convicted of stealing AI trade secrets to benefit China - Los Angeles Times',
-            category: 'Technology',
+            category: 'Geopolitics',
+            summary: 'Ex-Google engineer convicted of stealing AI trade secrets to benefit China&nbsp;&nbsp;Los Angeles Times',
+            impact: 'US-China AI competition shapes the future of technology and national security.',
             source: 'Los Angeles Times',
             time: '2 hours ago',
             image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         },
         {
             title: 'Artificial intelligence will cost jobs, admits Liz Kendall - The Guardian',
-            category: 'Technology',
+            category: 'Workforce',
+            summary: 'Artificial intelligence will cost jobs, admits Liz Kendall&nbsp;&nbsp;The Guardian',
+            impact: 'AI is transforming jobs. Understanding the impact helps with career planning.',
             source: 'The Guardian',
             time: '2 days ago',
             image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         },
         {
             title: '2 Trillion-Dollar Artificial Intelligence (AI) Stocks To Double Up on Right Now - Yahoo Finance',
-            category: 'Technology',
+            category: 'Finance',
+            summary: '2 Trillion-Dollar Artificial Intelligence (AI) Stocks To Double Up on Right Now&nbsp;&nbsp;Yahoo Finance',
+            impact: 'AI stocks are surging. Understanding which companies benefit helps with investment decisions.',
             source: 'Yahoo Finance',
             time: '21 hours ago',
             image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
@@ -74,13 +81,17 @@ async function loadNews() {
         {
             title: 'Opinion | Young People Are Using A.I. to Skip the Hardest Part of Growing Up - The New York Times',
             category: 'Technology',
+            summary: 'Opinion | Young People Are Using A.I. to Skip the Hardest Part of Growing Up&nbsp;&nbsp;The New York Times',
+            impact: 'This development affects the broader AI landscape and industry trends.',
             source: 'The New York Times',
-            time: '18 hours ago',
+            time: '19 hours ago',
             image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         },
         {
             title: 'The philosophical puzzle of rational artificial intelligence - MIT News',
             category: 'Technology',
+            summary: 'The philosophical puzzle of rational artificial intelligence&nbsp;&nbsp;MIT News',
+            impact: 'This development affects the broader AI landscape and industry trends.',
             source: 'MIT News',
             time: '7 hours ago',
             image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
