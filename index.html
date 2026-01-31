@@ -1247,4 +1247,16 @@
     document.getElementById('toolsGrid').innerHTML = toolsData.map(tool => `
       <div class="tool-card">
         <div class="tool-icon" style="background: ${tool.color}15; color: ${tool.color}">${tool.icon}</div>
-        <div class="tool
+        <div class="tool        <div class="tool-info">
+          <div class="tool-name">${tool.name}</div>
+          <div class="tool-category">${tool.category}</div>
+          <p class="tool-desc">${tool.desc}</p>
+        </div>
+      </div>
+    `).join('');
+
+    // Initialize
+    fetchNotes();
+  </script>
+</body>
+</html>
