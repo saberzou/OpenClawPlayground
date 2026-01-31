@@ -21,6 +21,16 @@
         .section { display: none; }
         .section.active { display: block; }
         h2 { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #fff; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .section-header h2 { margin-bottom: 0; }
+        .refresh-btn { 
+            background: #222; border: none; padding: 8px 12px; border-radius: 8px; 
+            cursor: pointer; font-size: 16px; transition: transform 0.3s; 
+        }
+        .refresh-btn:hover { transform: rotate(180deg); }
+        .refresh-btn:active { transform: rotate(180deg) scale(0.9); }
+        .refresh-status { color: #888; font-size: 13px; text-align: center; padding: 10px; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         
         .hero { background: #1a1a1a; border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
         .hero-img { width: 100%; height: 180px; object-fit: cover; background: #222; display: block; }
@@ -93,8 +103,12 @@
     </div>
 
     <div id="news" class="section active">
-        <h2>Today's Headlines</h2>
+        <div class="section-header">
+            <h2>Today's Headlines</h2>
+            <button class="refresh-btn" onclick="refreshNews()" title="Refresh news">🔄</button>
+        </div>
         <div id="newsContent"></div>
+        <div id="refreshStatus" class="refresh-status" style="display:none;">Updating...</div>
     </div>
 
     <div id="movies" class="section">
@@ -125,6 +139,50 @@
             document.getElementById(id).classList.add('active');
             btn.classList.add('active');
             localStorage.setItem('activeTab', id);
+        }
+
+        // Refresh news from RSS
+        async function refreshNews() {
+            const statusEl = document.getElementById('refreshStatus');
+            const refreshBtn = document.querySelector('.refresh-btn');
+            
+            statusEl.style.display = 'block';
+            statusEl.textContent = '🔄 Fetching latest news...';
+            refreshBtn.style.animation = 'spin 1s linear infinite';
+            
+            try {
+                const response = await fetch('data/news.json?t=' + Date.now());
+                const news = await response.json();
+                
+                // Update hero
+                const hero = news[0];
+                document.querySelector('.hero-title').textContent = hero.title;
+                document.querySelector('.hero-meta span:first-child').textContent = hero.source;
+                document.querySelector('.hero-meta span:last-child').textContent = hero.time;
+                
+                // Update list
+                const newsHTML = news.slice(1).map(n => `
+                    <div class="hero">
+                        <img src="${n.image || hero.image}" alt="${n.title}" class="hero-img" onerror="this.style.display='none'">
+                        <div class="hero-content">
+                            <div class="hero-label">${n.category || 'Technology'}</div>
+                            <div class="hero-title">${n.title}</div>
+                            <div class="hero-desc">${n.summary || ''}</div>
+                            <div class="hero-meta"><span>${n.source}</span><span>${n.time}</span></div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('newsContent').innerHTML = newsHTML;
+                
+                statusEl.textContent = '✅ Updated!';
+                setTimeout(() => statusEl.style.display = 'none', 2000);
+            } catch (e) {
+                statusEl.textContent = '❌ Failed to update. Pull down to retry.';
+                console.error('Refresh error:', e);
+            }
+            
+            refreshBtn.style.animation = '';
         }
 
         // Restore last active tab
