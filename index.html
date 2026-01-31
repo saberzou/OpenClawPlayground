@@ -1008,27 +1008,208 @@
       if (e.key === 'Escape') closeNoteModal();
     });
 
-    // News data
-    const newsData = [
-      { category: 'Workforce', title: 'Artificial intelligence will cost jobs, admits Liz Kendall', source: 'The Guardian', time: '2 days ago', why: 'AI is transforming jobs. Understanding the impact helps with career planning and skill development.' },
-      { category: 'Finance', title: '2 Trillion-Dollar AI Stocks To Double Up on Right Now', source: 'Yahoo Finance', time: '21 hours ago', why: 'AI stocks are surging. Understanding which companies benefit helps with investment decisions.' },
-      { category: 'Technology', title: 'Young People Are Using A.I. to Skip the Hardest Part of Growing Up', source: 'The New York Times', time: '19 hours ago', why: 'This trend affects how younger generations learn and develop essential life skills.' },
-      { category: 'Research', title: 'The philosophical puzzle of rational artificial intelligence', source: 'MIT News', time: '7 hours ago', why: 'New AI research often leads to breakthroughs in capabilities and applications.' }
-    ];
+    // Brave Search API
+    const BRAVE_API_URL = 'https://api.search.brave.com/res/v1/web/search';
 
-    document.getElementById('newsGrid').innerHTML = newsData.map(item => `
-      <div class="news-card">
-        <div class="news-header">
-          <span class="news-category">${item.category}</span>
-          <span class="news-meta">${item.source} • ${item.time}</span>
+    async function getBraveToken() {
+      let token = localStorage.getItem('brave_token');
+      if (!token) {
+        const saved = prompt('Enter your Brave Search API key for real-time news:');
+        if (saved) {
+          localStorage.setItem('brave_token', saved);
+          token = saved;
+        }
+      }
+      return token;
+    }
+
+    async function fetchNews() {
+      const token = await getBraveToken();
+      const newsGrid = document.getElementById('newsGrid');
+      const heroContent = document.querySelector('.hero-content');
+
+      if (!token) {
+        // Fallback to cached/static news if no token
+        loadFallbackNews();
+        return;
+      }
+
+      // Show loading state
+      newsGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-secondary);">loading news...</div>';
+
+      try {
+        // Fetch AI news
+        const response = await fetch(`${BRAVE_API_URL}?q=artificial+intelligence+news&count=8&search_lang=en`, {
+          headers: {
+            'Accept': 'application/json',
+            'X-Subscription-Token': token
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('API request failed');
+        }
+
+        const data = await response.json();
+        const results = data.web?.results || [];
+
+        if (results.length === 0) {
+          loadFallbackNews();
+          return;
+        }
+
+        // Parse results - first as hero, rest as cards
+        const hero = results[0];
+        const cards = results.slice(1, 5);
+
+        // Render hero
+        heroContent.innerHTML = `
+          <span class="hero-category">AI News</span>
+          <h2 class="hero-title">${escapeHtml(hero.title || 'Latest AI headlines')}</h2>
+          <div class="hero-why">
+            <span class="hero-why-label">why it matters</span>
+            ${escapeHtml(hero.description?.slice(0, 150) || 'Stay informed about the latest developments in artificial intelligence and their impact on technology and society.')}
+          </div>
+          <div class="hero-meta">
+            <span>${new URL(hero.url).hostname.replace('www.', '')}</span>
+            <span>${formatTimeAgo(hero.published_time || new Date())}</span>
+          </div>
+        `;
+
+        // Render cards
+        newsGrid.innerHTML = cards.map(item => `
+          <div class="news-card">
+            <div class="news-header">
+              <span class="news-category">${getCategory(item.title)}</span>
+              <span class="news-meta">${new URL(item.url).hostname.replace('www.', '')} • ${formatTimeAgo(item.published_time || new Date())}</span>
+            </div>
+            <h3 class="news-title">${escapeHtml(item.title || '')}</h3>
+            <div class="news-why">
+              <span class="news-why-label">why it matters</span>
+              ${escapeHtml(item.description?.slice(0, 100) || 'Latest news from this source.')}
+            </div>
+          </div>
+        `).join('');
+
+        // Cache results (1 hour)
+        localStorage.setItem('cached_news', JSON.stringify({
+          timestamp: Date.now(),
+          hero,
+          cards
+        }));
+
+      } catch (e) {
+        console.error('Failed to fetch news:', e);
+        // Try cached news first
+        const cached = localStorage.getItem('cached_news');
+        if (cached) {
+          try {
+            const data = JSON.parse(cached);
+            if (Date.now() - data.timestamp < 3600000) { // 1 hour
+              renderCachedNews(data);
+              return;
+            }
+          } catch (e) {}
+        }
+        loadFallbackNews();
+      }
+    }
+
+    function renderCachedNews(data) {
+      const heroContent = document.querySelector('.hero-content');
+      const newsGrid = document.getElementById('newsGrid');
+
+      heroContent.innerHTML = `
+        <span class="hero-category">AI News (cached)</span>
+        <h2 class="hero-title">${escapeHtml(data.hero?.title || 'Latest AI headlines')}</h2>
+        <div class="hero-why">
+          <span class="hero-why-label">why it matters</span>
+          ${escapeHtml(data.hero?.description?.slice(0, 150) || 'Stay informed about AI developments.')}
         </div>
-        <h3 class="news-title">${item.title}</h3>
-        <div class="news-why">
-          <span class="news-why-label">why it matters</span>
-          ${item.why}
+        <div class="hero-meta">
+          <span>cached</span>
         </div>
-      </div>
-    `).join('');
+      `;
+
+      newsGrid.innerHTML = data.cards.map(item => `
+        <div class="news-card">
+          <div class="news-header">
+            <span class="news-category">${getCategory(item.title)}</span>
+            <span class="news-meta">cached</span>
+          </div>
+          <h3 class="news-title">${escapeHtml(item.title || '')}</h3>
+          <div class="news-why">
+            <span class="news-why-label">why it matters</span>
+            ${escapeHtml(item.description?.slice(0, 100) || 'News from cache.')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function loadFallbackNews() {
+      const heroContent = document.querySelector('.hero-content');
+      const newsGrid = document.getElementById('newsGrid');
+
+      heroContent.innerHTML = `
+        <span class="hero-category">AI News</span>
+        <h2 class="hero-title">Enable Brave API for real-time news</h2>
+        <div class="hero-why">
+          <span class="hero-why-label">why it matters</span>
+          Add your Brave Search API key to get the latest AI news directly from the source.
+        </div>
+        <div class="hero-meta">
+          <span>fallback mode</span>
+        </div>
+      `;
+
+      const fallbackData = [
+        { category: 'Workforce', title: 'AI continues to transform the modern workplace', source: 'Industry Report', why: 'Understanding AI impact helps with career planning and skill development.' },
+        { category: 'Finance', title: 'AI sector sees continued investment growth', source: 'Market Analysis', why: 'AI stocks are surging. Understanding which companies benefit helps with investment decisions.' },
+        { category: 'Technology', title: 'New AI models set performance records', source: 'Tech Weekly', why: 'Breakthroughs in AI capabilities affect the broader technology landscape.' },
+        { category: 'Research', title: 'Academic institutions expand AI programs', source: 'Education News', why: 'New AI research leads to breakthroughs in capabilities and applications.' }
+      ];
+
+      newsGrid.innerHTML = fallbackData.map(item => `
+        <div class="news-card">
+          <div class="news-header">
+            <span class="news-category">${item.category}</span>
+            <span class="news-meta">${item.source}</span>
+          </div>
+          <h3 class="news-title">${item.title}</h3>
+          <div class="news-why">
+            <span class="news-why-label">why it matters</span>
+            ${item.why}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getCategory(title) {
+      const categories = ['Technology', 'Finance', 'Research', 'Workforce', 'AI', 'Science'];
+      const lower = (title || '').toLowerCase();
+      for (const cat of categories) {
+        if (lower.includes(cat.toLowerCase())) return cat;
+      }
+      return 'AI';
+    }
+
+    function formatTimeAgo(dateStr) {
+      try {
+        const date = new Date(dateStr);
+        const now = new Date();
+        const diff = Math.floor((now - date) / 1000);
+
+        if (diff < 60) return 'just now';
+        if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+        if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+        return `${Math.floor(diff / 86400)}d ago`;
+      } catch (e) {
+        return 'recent';
+      }
+    }
+
+    // Initial news load
+    fetchNews();
 
     // Movies data
     const moviesData = [
