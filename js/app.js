@@ -41,56 +41,56 @@ async function loadNews() {
     const container = document.getElementById('newsContainer');
 
     const heroNews = {
-        title: 'Amazon in Talks to Invest $50B in OpenAI',
+        title: 'Anthropic Releases Claude 4 with Enhanced Reasoning',
         category: 'Technology',
-        summary: 'The potential investment would reshape the AI landscape and establish Amazon as a major player in generative AI. The deal could be announced as early as next quarter.',
+        summary: 'The new model shows significant improvements in complex reasoning tasks and coding capabilities. Early benchmarks suggest it outperforms previous versions by 40%.',
         source: 'TechCrunch',
-        time: '2 hours ago',
+        'time': '1 hour ago',
         image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop&q=80'
     };
 
     const newsList = [
         {
-            title: 'SpaceX, Tesla, xAI Reportedly in Merger Talks',
-            category: 'Business',
-            source: 'Reuters',
-            time: '5 hours ago',
+            title: 'Google Integrates Gemini 2.0 into Workspace',
+            category: 'Company',
+            source: 'The Verge',
+            time: '3 hours ago',
             image: 'https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=400&h=200&fit=crop&q=80'
         },
         {
-            title: "Apple Struggles to Monetize AI Investments",
-            category: 'Company',
-            source: 'The Verge',
-            time: '8 hours ago',
-            image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=200&fit=crop&q=80'
-        },
-        {
-            title: 'Thinktank Proposes AI Content "Nutrition Labels"',
-            category: 'Policy',
-            source: 'The Guardian',
-            time: '12 hours ago',
+            title: 'OpenAI Announces GPT-5 Preview for Developers',
+            category: 'Products',
+            source: 'Ars Technica',
+            time: '5 hours ago',
             image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop&q=80'
         },
         {
-            title: 'Five Trillion-Dollar AI Stocks to Watch',
+            title: 'AI Design Tools See 200% Growth in 2025',
+            category: 'Design',
+            source: 'Design Week',
+            time: '8 hours ago',
+            image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=200&fit=crop&q=80'
+        },
+        {
+            title: 'New EU AI Act Guidelines for Generative AI',
+            category: 'Policy',
+            source: 'The Guardian',
+            time: '12 hours ago',
+            image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=200&fit=crop&q=80'
+        },
+        {
+            title: 'Apple Vision Pro 3 with Native AI Assistant',
+            category: 'Hardware',
+            source: 'Bloomberg',
+            time: '1 day ago',
+            image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=200&fit=crop&q=80'
+        },
+        {
+            title: 'Trillion-Dollar AI Stocks to Watch',
             category: 'Finance',
             source: 'Motley Fool',
             time: '1 day ago',
             image: 'https://images.unsplash.com/photo-1611974765270-ca12586343bb?w=400&h=200&fit=crop&q=80'
-        },
-        {
-            title: 'Claude and GPT-5 Development Accelerates',
-            category: 'Products',
-            source: 'Ars Technica',
-            time: '1 day ago',
-            image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=200&fit=crop&q=80'
-        },
-        {
-            title: 'New AI Design Tools Emerge for 2026',
-            category: 'Design',
-            source: 'Design Week',
-            time: '2 days ago',
-            image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=200&fit=crop&q=80'
         }
     ];
 
