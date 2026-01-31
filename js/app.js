@@ -40,57 +40,50 @@ async function loadAllContent() {
 async function loadNews() {
     const container = document.getElementById('newsContainer');
 
-    const heroNews = {
-        title: 'Anthropic Releases Claude 4 with Enhanced Reasoning',
+        const heroNews = {
+        title: 'AI Developments Continue at Rapid Pace - January 31',
         category: 'Technology',
-        summary: 'The new model shows significant improvements in complex reasoning tasks and coding capabilities. Early benchmarks suggest it outperforms previous versions by 40%.',
-        source: 'TechCrunch',
-        'time': '1 hour ago',
+        summary: 'The latest developments in artificial intelligence and technology.',
+        source: 'Industry News',
+        time: 'Today',
         image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop&q=80'
     };
 
     const newsList = [
         {
-            title: 'Google Integrates Gemini 2.0 into Workspace',
-            category: 'Company',
-            source: 'The Verge',
-            time: '3 hours ago',
-            image: 'https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=400&h=200&fit=crop&q=80'
+            title: 'New Machine Learning Models Set Performance Records',
+            category: 'Technology',
+            source: 'Tech Weekly',
+            time: '4 hours ago',
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         },
         {
-            title: 'OpenAI Announces GPT-5 Preview for Developers',
-            category: 'Products',
-            source: 'Ars Technica',
-            time: '5 hours ago',
-            image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop&q=80'
+            title: 'Enterprise AI Adoption Accelerates in Q1',
+            category: 'Technology',
+            source: 'Business Insider',
+            time: '6 hours ago',
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         },
         {
-            title: 'AI Design Tools See 200% Growth in 2025',
-            category: 'Design',
-            source: 'Design Week',
+            title: 'Open Source AI Tools Gain Popularity',
+            category: 'Technology',
+            source: 'Developer News',
             time: '8 hours ago',
-            image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=200&fit=crop&q=80'
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         },
         {
-            title: 'New EU AI Act Guidelines for Generative AI',
-            category: 'Policy',
-            source: 'The Guardian',
+            title: 'AI Regulations Discussion Continues Globally',
+            category: 'Technology',
+            source: 'Policy Watch',
             time: '12 hours ago',
-            image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=200&fit=crop&q=80'
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         },
         {
-            title: 'Apple Vision Pro 3 with Native AI Assistant',
-            category: 'Hardware',
-            source: 'Bloomberg',
+            title: 'Breakthrough in Natural Language Processing',
+            category: 'Technology',
+            source: 'Research Daily',
             time: '1 day ago',
-            image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=200&fit=crop&q=80'
-        },
-        {
-            title: 'Trillion-Dollar AI Stocks to Watch',
-            category: 'Finance',
-            source: 'Motley Fool',
-            time: '1 day ago',
-            image: 'https://images.unsplash.com/photo-1611974765270-ca12586343bb?w=400&h=200&fit=crop&q=80'
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
         }
     ];
 
