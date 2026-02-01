@@ -208,7 +208,9 @@ def fetch_news():
     
     all_news = []
     for feed_url in RSS_FEEDS:
+        print(f"🔍 Fetching from {feed_url[:50]}...")
         news = fetch_news_from_rss(feed_url)
+        print(f"   Result: {type(news)}, len={len(news) if news else 0}")
         if news:
             all_news.extend(news)
             print(f"✅ Fetched {len(news)} items")
