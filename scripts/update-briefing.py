@@ -130,12 +130,14 @@ def fetch_news_from_rss(feed_url):
 
         news = []
         seen_titles = set()
-        for item in items[:15]:  # Check more items
+        print(f"   Processing {len(items)} items")
+        for i, item in enumerate(items[:15]):  # Check more items
             # Handle different RSS formats
             title_elem = item.find('title') or item.find('{http://search.yahoo.com/mrss/}title')
             title = title_elem.text if title_elem is not None and title_elem.text else ""
 
             if not title or title.lower() in seen_titles:
+                print(f"   Skipping: empty or duplicate title")
                 continue
             seen_titles.add(title.lower())
 
@@ -196,7 +198,8 @@ def fetch_news_from_rss(feed_url):
                 "time": parse_rss_date(pub_date),
                 "url": link
             })
-
+        
+        print(f"   Parsed {len(news)} items from feed")
         return news
     except Exception as e:
         print(f"⚠️  RSS fetch error for {feed_url}: {e}")
