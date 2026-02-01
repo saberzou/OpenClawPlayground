@@ -79,12 +79,13 @@ def generate_summary_from_title(title, category):
         return f"Latest {category.lower()} news related to artificial intelligence and its applications."
 
 def parse_rss_date(date_str):
-    """Parse RSS date and return relative time"""
+    """Parse RSS/Atom date and return relative time"""
     try:
         # Handle different date formats
         formats = [
             "%a, %d %b %Y %H:%M:%S GMT",
             "%a, %d %b %Y %H:%M:%S %z",
+            "%a, %d %b %Y %H:%M:%S +0000",
             "%Y-%m-%dT%H:%M:%S%z",
             "%Y-%m-%dT%H:%M:%SZ",
         ]
@@ -119,7 +120,10 @@ def fetch_news_from_rss(feed_url):
             xml_content = response.read().decode('utf-8')
 
         root = ET.fromstring(xml_content)
+        # Handle both RSS (<item>) and Atom (<entry>) formats
         items = root.findall('.//item')
+        if not items:
+            items = root.findall('.//entry')
 
         news = []
         seen_titles = set()
@@ -135,13 +139,14 @@ def fetch_news_from_rss(feed_url):
             link_elem = item.find('link')
             link = ""
             if link_elem is not None:
-                link = link_elem.text
+                # Atom links have href attribute, RSS links have text content
+                link = link_elem.get('href') or link_elem.text or ""
             else:
                 link_elem = item.find('{http://purl.org/dc/elements/1.1/}identifier')
                 if link_elem is not None:
                     link = link_elem.text
 
-            pub_date_elem = item.find('pubDate') or item.find('{http://purl.org/dc/elements/1.1/}date')
+            pub_date_elem = item.find('pubDate') or item.find('{http://purl.org/dc/elements/1.1/}date') or item.find('updated') or item.find('published')
             pub_date = pub_date_elem.text if pub_date_elem is not None and pub_date_elem.text else ""
 
             # Extract source from feed URL
@@ -156,7 +161,7 @@ def fetch_news_from_rss(feed_url):
             # Skip items older than 2 days
             item_dt = None
             if pub_date:
-                for fmt in ["%a, %d %b %Y %H:%M:%S", "%a, %d %b %Y %H:%M:%S %z", "%a, %d %b %Y %H:%M:%S +0000"]:
+                for fmt in ["%a, %d %b %Y %H:%M:%S", "%a, %d %b %Y %H:%M:%S %z", "%a, %d %b %Y %H:%M:%S +0000", "%Y-%m-%dT%H:%M:%S%z"]:
                     try:
                         item_dt = datetime.strptime(pub_date[:25], fmt)
                         break
