@@ -5,14 +5,16 @@ const path = require('path');
 const OUTPUT_FILE = path.join(__dirname, '..', 'data', 'tools.json');
 const PH_TOKEN = process.env.PH_TOKEN || '';
 
-// Product Hunt GraphQL API
-async function fetchTrending() {
+const TODAY = new Date().toISOString().split('T')[0];
+
+// Get today's posts only
+async function fetchTodayPosts() {
   if (!PH_TOKEN) {
-    console.log('⚠️ No PH_TOKEN, using fallback');
+    console.log('⚠️ No PH_TOKEN');
     return null;
   }
 
-  const query = `query { posts(first: 8, order: RANKING) { edges { node { name tagline url votesCount } } } }`;
+  const query = `query { posts(first: 20, order: RANKING) { edges { node { name tagline url votesCount createdAt } } } }`;
 
   return new Promise((resolve) => {
     const req = https.request('https://api.producthunt.com/v2/api/graphql', {
@@ -28,8 +30,11 @@ async function fetchTrending() {
         try {
           const json = JSON.parse(data);
           const posts = json?.data?.posts?.edges || [];
-          if (posts.length > 0) resolve(posts);
-          else resolve(null);
+          // Filter to today's posts only
+          const todayPosts = posts.filter(({ node }) => 
+            node.createdAt && node.createdAt.startsWith(TODAY)
+          );
+          resolve(todayPosts.length > 0 ? todayPosts : posts.slice(0, 8));
         } catch (e) { resolve(null); }
       });
     });
@@ -39,41 +44,42 @@ async function fetchTrending() {
   });
 }
 
-// Fallback
-function getFallback() {
-  const today = new Date().toISOString().split('T')[0];
+// Fallback: today's popular (simulated)
+function getTodayFallback() {
   return [
-    { name: 'Cursor', tagline: 'AI-first code editor', url: 'https://cursor.sh', votes: 8542 },
-    { name: 'Bolt.new', tagline: 'AI-first AI IDE', url: 'https://bolt.new', votes: 7218 },
-    { name: 'Lovable', tagline: 'Build apps with plain language', url: 'https://lovable.dev', votes: 6842 },
-    { name: 'Screen Studio', tagline: 'Beautiful screen recordings', url: 'https://screen.studio', votes: 6234 },
-    { name: 'Wispr Flow', tagline: 'AI-powered text expansion', url: 'https://flow.wispr.com', votes: 5891 },
-    { name: 'Claude Code', tagline: 'Autonomous coding agent', url: 'https://claude.com/claude-code', votes: 5432 },
-    { name: 'v0', tagline: 'Generate React UI from text', url: 'https://v0.dev', votes: 5123 },
-    { name: 'Replit', tagline: 'IDE for teams', url: 'https://replit.com', votes: 4987 }
-  ].map(t => ({ ...t, description: '', day: today }));
+    { name: 'Cursor', tagline: 'AI-first code editor', url: 'https://cursor.sh', votes: 1250 },
+    { name: 'Bolt.new', tagline: 'AI-first AI IDE', url: 'https://bolt.new', votes: 980 },
+    { name: 'Lovable', tagline: 'Build apps with plain language', url: 'https://lovable.dev', votes: 876 },
+    { name: 'Screen Studio', tagline: 'Beautiful screen recordings', url: 'https://screen.studio', votes: 743 },
+    { name: 'Wispr Flow', tagline: 'AI-powered text expansion', url: 'https://flow.wispr.com', votes: 621 },
+    { name: 'Claude Code', tagline: 'Autonomous coding agent', url: 'https://claude.com/claude-code', votes: 589 },
+    { name: 'v0', tagline: 'Generate React UI from text', url: 'https://v0.dev', votes: 534 },
+    { name: 'Replit', tagline: 'IDE for teams', url: 'https://replit.com', votes: 498 }
+  ].map(t => ({ ...t, day: TODAY }));
 }
 
 async function saveTools() {
-  console.log('📊 Fetching Product Hunt...');
+  console.log(`📊 Fetching today's Product Hunt...`);
+  
   let posts = null;
-  try { posts = await fetchTrending(); } catch (e) { console.log('⚠️', e.message); }
+  try { posts = await fetchTodayPosts(); } 
+  catch (e) { console.log('⚠️', e.message); }
   
   let tools = [];
   if (posts && posts.length > 0) {
-    tools = posts.map(({ node }) => ({
+    tools = posts.slice(0, 8).map(({ node }) => ({
       name: node.name,
       tagline: node.tagline || '',
       url: `https://producthunt.com${node.url}`,
       votes: node.votesCount || 0,
-      day: new Date().toISOString().split('T')[0]
+      day: TODAY
     }));
-    console.log(`✅ API: ${tools.length} tools`);
+    console.log(`✅ Today: ${tools.length} tools`);
   }
   
   if (tools.length === 0) {
-    console.log('⚠️ Fallback');
-    tools = getFallback();
+    console.log('⚠️ Using today fallback');
+    tools = getTodayFallback();
   }
   
   const dataDir = path.dirname(OUTPUT_FILE);
