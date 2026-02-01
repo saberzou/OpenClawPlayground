@@ -564,6 +564,13 @@
       line-height: 1.4;
     }
 
+    .tool-votes {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
     /* Modal */
     .modal-overlay {
       position: fixed;
@@ -1112,28 +1119,47 @@
     loadMovies();
 
     // Tools data
-    // Tools - Top 8 trending from Product Hunt January 2026
-    const toolsData = [
-      { name: 'Cursor', category: 'Code Editor', desc: 'AI-first code editor, fork of VS Code', icon: '⌨️', color: '#3b82f6', url: 'https://cursor.sh' },
-      { name: 'bolt.new', category: 'AI IDE', desc: 'Full-stack AI coding in your browser', icon: '⚡', color: '#0ea5e9', url: 'https://bolt.new' },
-      { name: 'Lovable', category: 'Vibe Coding', desc: 'Build polished apps with plain language', icon: '🪄', color: '#ec4899', url: 'https://lovable.dev' },
-      { name: 'Screen Studio', category: 'Screen Recording', desc: 'Beautiful screen recordings, effortless', icon: '🎬', color: '#f59e0b', url: 'https://screen.studio' },
-      { name: 'Wispr Flow', category: 'Productivity', desc: 'AI-powered text expansion & shortcuts', icon: '💨', color: '#10b981', url: 'https://flow.wispr.com' },
-      { name: 'Framer', category: 'Design', desc: 'Design, prototype, and ship sites', icon: '🎯', color: '#8b5cf6', url: 'https://framer.com' },
-      { name: 'Replit', category: 'Coding', desc: 'IDE for fast-growing companies', icon: '🚀', color: '#6366f1', url: 'https://replit.com' },
-      { name: 'Claude Code', category: 'AI Coding', desc: 'Anthropic CLI for autonomous coding', icon: '🤖', color: '#dc2626', url: 'https://claude.com/claude-code' }
-    ];
+    // Tools - Top 8 trending from Product Hunt (auto-updated daily)
+    async function loadTools() {
+      try {
+        const response = await fetch('data/tools.json?t=' + Date.now());
+        const data = await response.json();
+        
+        document.getElementById('toolsGrid').innerHTML = data.tools.map(tool => `
+          <a href="${tool.url}" target="_blank" class="tool-card">
+            <div class="tool-icon" style="background: ${getColor(tool.name)}15; color: ${getColor(tool.name)}">${getIcon(tool.name)}</div>
+            <div class="tool-info">
+              <div class="tool-name">${tool.name}</div>
+              <div class="tool-category">${tool.tagline || ''}</div>
+              <p class="tool-desc">${tool.description || ''}</p>
+            </div>
+            <div class="tool-votes">▲ ${tool.votes}</div>
+          </a>
+        `).join('');
+      } catch (e) {
+        console.error('Failed to load tools:', e);
+      }
+    }
 
-    document.getElementById('toolsGrid').innerHTML = toolsData.map(tool => `
-      <a href="${tool.url}" target="_blank" class="tool-card">
-        <div class="tool-icon" style="background: ${tool.color}15; color: ${tool.color}">${tool.icon}</div>
-        <div class="tool-info">
-          <div class="tool-name">${tool.name}</div>
-          <div class="tool-category">${tool.category}</div>
-          <p class="tool-desc">${tool.desc}</p>
-        </div>
-      </a>
-    `).join('');
+    function getColor(name) {
+      const colors = {
+        'Cursor': '#3b82f6', 'bolt.new': '#0ea5e9', 'Lovable': '#ec4899',
+        'Screen Studio': '#f59e0b', 'Wispr Flow': '#10b981', 'Framer': '#8b5cf6',
+        'Replit': '#6366f1', 'Claude Code': '#dc2626'
+      };
+      return colors[name] || '#6b7280';
+    }
+
+    function getIcon(name) {
+      const icons = {
+        'Cursor': '⌨️', 'bolt.new': '⚡', 'Lovable': '🪄',
+        'Screen Studio': '🎬', 'Wispr Flow': '💨', 'Framer': '🎯',
+        'Replit': '🚀', 'Claude Code': '🤖'
+      };
+      return icons[name] || '🛠️';
+    }
+
+    loadTools();
 
     // Initialize
     renderNotes();
