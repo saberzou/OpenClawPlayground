@@ -40,7 +40,7 @@ async function loadAllContent() {
 async function loadNews() {
     const container = document.getElementById('newsContainer');
 
-                                                                                const heroNews = {
+                                                                                    const heroNews = {
         title: 'AI Developments Continue at Rapid Pace - February 02',
         category: 'Technology',
         summary: 'The latest developments in artificial intelligence and technology.',
