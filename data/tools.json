@@ -1,61 +1,69 @@
 {
-  "updated": "2026-02-01T08:15:54.604Z",
+  "updated": "2026-02-01T14:11:04.741Z",
   "tools": [
     {
       "name": "Cursor",
       "tagline": "AI-first code editor",
       "url": "https://cursor.sh",
       "votes": 850,
-      "description": "Fork of VS Code with AI built-in"
+      "description": "Fork of VS Code with AI built-in",
+      "day": "2026-02-01"
     },
     {
       "name": "bolt.new",
       "tagline": "AI-first AI IDE",
       "url": "https://bolt.new",
       "votes": 720,
-      "description": "Full-stack development in browser"
+      "description": "Full-stack development in browser",
+      "day": "2026-02-01"
     },
     {
       "name": "Lovable",
       "tagline": "Build apps with plain language",
       "url": "https://lovable.dev",
       "votes": 680,
-      "description": "AI-powered app builder"
+      "description": "AI-powered app builder",
+      "day": "2026-02-01"
     },
     {
       "name": "Screen Studio",
       "tagline": "Beautiful screen recordings",
       "url": "https://screen.studio",
       "votes": 620,
-      "description": "Effortless screen capture"
+      "description": "Effortless screen capture",
+      "day": "2026-02-01"
     },
     {
       "name": "Wispr Flow",
       "tagline": "AI-powered text expansion",
       "url": "https://flow.wispr.com",
       "votes": 580,
-      "description": "Smart shortcuts for text"
+      "description": "Smart shortcuts for text",
+      "day": "2026-02-01"
     },
     {
       "name": "Framer",
       "tagline": "Design and ship sites",
       "url": "https://framer.com",
       "votes": 550,
-      "description": "No-code design platform"
+      "description": "No-code design platform",
+      "day": "2026-02-01"
     },
     {
       "name": "Replit",
       "tagline": "IDE for teams",
       "url": "https://replit.com",
       "votes": 520,
-      "description": "Collaborative coding"
+      "description": "Collaborative coding",
+      "day": "2026-02-01"
     },
     {
       "name": "Claude Code",
       "tagline": "Autonomous coding agent",
       "url": "https://claude.com/claude-code",
       "votes": 490,
-      "description": "CLI for Claude"
+      "description": "CLI for Claude",
+      "day": "2026-02-01"
     }
   ]
 }
