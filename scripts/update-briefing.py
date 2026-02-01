@@ -156,7 +156,7 @@ def fetch_news_from_rss(feed_url):
             # Skip items older than 2 days
             item_dt = None
             if pub_date:
-                for fmt in ["%a, %d %b %Y %H:%M:%S", "%a, %d %b %Y %H:%M:%S %z"]:
+                for fmt in ["%a, %d %b %Y %H:%M:%S", "%a, %d %b %Y %H:%M:%S %z", "%a, %d %b %Y %H:%M:%S +0000"]:
                     try:
                         item_dt = datetime.strptime(pub_date[:25], fmt)
                         break
