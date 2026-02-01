@@ -81,10 +81,25 @@ def generate_summary_from_title(title, category):
 def parse_rss_date(date_str):
     """Parse RSS date and return relative time"""
     try:
-        dt = datetime.strptime(date_str, "%a, %d %b %Y %H:%M:%S GMT")
+        # Handle different date formats
+        formats = [
+            "%a, %d %b %Y %H:%M:%S GMT",
+            "%a, %d %b %Y %H:%M:%S %z",
+            "%Y-%m-%dT%H:%M:%S%z",
+            "%Y-%m-%dT%H:%M:%SZ",
+        ]
+        dt = None
+        for fmt in formats:
+            try:
+                dt = datetime.strptime(date_str[:25], fmt)
+                break
+            except:
+                continue
+        if dt is None:
+            return "Just now"
         now = datetime.utcnow()
         diff = now - dt
-        
+
         if diff < timedelta(minutes=60):
             return f"{int(diff.total_seconds() // 60)} min ago"
         elif diff < timedelta(hours=24):
@@ -107,17 +122,21 @@ def fetch_news_from_rss(feed_url):
         items = root.findall('.//item')
 
         news = []
-        for item in items[:10]:
+        seen_titles = set()
+        for item in items[:15]:  # Check more items
             # Handle different RSS formats
             title_elem = item.find('title') or item.find('{http://search.yahoo.com/mrss/}title')
             title = title_elem.text if title_elem is not None and title_elem.text else ""
+
+            if not title or title.lower() in seen_titles:
+                continue
+            seen_titles.add(title.lower())
 
             link_elem = item.find('link')
             link = ""
             if link_elem is not None:
                 link = link_elem.text
             else:
-                # Try to find link in content:encoded or other elements
                 link_elem = item.find('{http://purl.org/dc/elements/1.1/}identifier')
                 if link_elem is not None:
                     link = link_elem.text
@@ -125,7 +144,7 @@ def fetch_news_from_rss(feed_url):
             pub_date_elem = item.find('pubDate') or item.find('{http://purl.org/dc/elements/1.1/}date')
             pub_date = pub_date_elem.text if pub_date_elem is not None and pub_date_elem.text else ""
 
-            # Extract source from feed URL if not in item
+            # Extract source from feed URL
             source = feed_url.split('/')[2] if '/' in feed_url else "News"
             source = source.replace('www.', '').replace('.com', '').replace('.org', '')
 
@@ -134,14 +153,17 @@ def fetch_news_from_rss(feed_url):
             if len(title) > 100:
                 title = title[:97] + "..."
 
-            # Skip very old items
+            # Skip items older than 2 days
+            item_dt = None
             if pub_date:
-                try:
-                    dt = datetime.strptime(pub_date[:25], "%a, %d %b %Y %H:%M:%S")
-                    if (datetime.utcnow() - dt) > timedelta(days=3):
+                for fmt in ["%a, %d %b %Y %H:%M:%S", "%a, %d %b %Y %H:%M:%S %z"]:
+                    try:
+                        item_dt = datetime.strptime(pub_date[:25], fmt)
+                        break
+                    except:
                         continue
-                except:
-                    pass
+                if item_dt and (datetime.utcnow() - item_dt) > timedelta(days=2):
+                    continue
 
             # Determine category and impact based on keywords
             title_lower = title.lower()

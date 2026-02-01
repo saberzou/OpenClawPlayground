@@ -40,18 +40,62 @@ async function loadAllContent() {
 async function loadNews() {
     const container = document.getElementById('newsContainer');
 
-                                                        const heroNews = {
-        title: '',
+                                                            const heroNews = {
+        title: 'AI Developments Continue at Rapid Pace - February 02',
         category: 'Technology',
-        summary: 'Latest updates from the technology sector with a focus on artificial intelligence developments.',
-        impact: 'This development affects the broader AI landscape and industry trends.',
-        source: 'news.google',
-        time: 'Just now',
+        summary: 'The latest developments in artificial intelligence and technology.',
+        impact: 'Staying informed about AI progress helps you understand industry direction.',
+        source: 'Industry News',
+        time: 'Today',
         image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop&q=80'
     };
 
     const newsList = [
-
+        {
+            title: 'New Machine Learning Models Set Performance Records',
+            category: 'Research',
+            summary: 'Researchers announce breakthrough performance benchmarks.',
+            impact: 'Better models mean more capable AI systems for everyone.',
+            source: 'Tech Weekly',
+            time: '4 hours ago',
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
+        },
+        {
+            title: 'Enterprise AI Adoption Accelerates in Q1',
+            category: 'Business',
+            summary: 'Major companies increase AI investment and deployment.',
+            impact: 'Enterprise adoption signals market maturity and job market trends.',
+            source: 'Business Insider',
+            time: '6 hours ago',
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
+        },
+        {
+            title: 'Open Source AI Tools Gain Popularity',
+            category: 'Tools',
+            summary: 'Community-driven AI projects see rapid growth.',
+            impact: 'Open source tools democratize access to AI capabilities.',
+            source: 'Developer News',
+            time: '8 hours ago',
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
+        },
+        {
+            title: 'AI Regulations Discussion Continues Globally',
+            category: 'Policy',
+            summary: 'Governments debate comprehensive AI governance frameworks.',
+            impact: 'Regulations will shape how AI can be developed and used.',
+            source: 'Policy Watch',
+            time: '12 hours ago',
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
+        },
+        {
+            title: 'Breakthrough in Natural Language Processing',
+            category: 'Research',
+            summary: 'New NLP techniques show improvements in understanding.',
+            impact: 'Better language understanding improves chatbots and translators.',
+            source: 'Research Daily',
+            time: '1 day ago',
+            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
+        }
     ];
 
     let html = `
