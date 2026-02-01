@@ -1,68 +1,68 @@
 {
-  "updated": "2026-02-01T14:14:45.038Z",
+  "updated": "2026-02-01T15:02:48.333Z",
   "tools": [
     {
       "name": "Cursor",
       "tagline": "AI-first code editor",
+      "votes": 8542,
       "url": "https://cursor.sh",
-      "votes": 850,
-      "description": "Fork of VS Code with AI built-in",
+      "description": "",
       "day": "2026-02-01"
     },
     {
-      "name": "bolt.new",
+      "name": "Bolt.new",
       "tagline": "AI-first AI IDE",
+      "votes": 7218,
       "url": "https://bolt.new",
-      "votes": 720,
-      "description": "Full-stack development in browser",
+      "description": "",
       "day": "2026-02-01"
     },
     {
       "name": "Lovable",
       "tagline": "Build apps with plain language",
+      "votes": 6842,
       "url": "https://lovable.dev",
-      "votes": 680,
-      "description": "AI-powered app builder",
+      "description": "",
       "day": "2026-02-01"
     },
     {
       "name": "Screen Studio",
       "tagline": "Beautiful screen recordings",
+      "votes": 6234,
       "url": "https://screen.studio",
-      "votes": 620,
-      "description": "Effortless screen capture",
+      "description": "",
       "day": "2026-02-01"
     },
     {
       "name": "Wispr Flow",
       "tagline": "AI-powered text expansion",
+      "votes": 5891,
       "url": "https://flow.wispr.com",
-      "votes": 580,
-      "description": "Smart shortcuts for text",
-      "day": "2026-02-01"
-    },
-    {
-      "name": "Framer",
-      "tagline": "Design and ship sites",
-      "url": "https://framer.com",
-      "votes": 550,
-      "description": "No-code design platform",
-      "day": "2026-02-01"
-    },
-    {
-      "name": "Replit",
-      "tagline": "IDE for teams",
-      "url": "https://replit.com",
-      "votes": 520,
-      "description": "Collaborative coding",
+      "description": "",
       "day": "2026-02-01"
     },
     {
       "name": "Claude Code",
       "tagline": "Autonomous coding agent",
+      "votes": 5432,
       "url": "https://claude.com/claude-code",
-      "votes": 490,
-      "description": "CLI for Claude",
+      "description": "",
+      "day": "2026-02-01"
+    },
+    {
+      "name": "v0",
+      "tagline": "Generate React UI from text",
+      "votes": 5123,
+      "url": "https://v0.dev",
+      "description": "",
+      "day": "2026-02-01"
+    },
+    {
+      "name": "Replit",
+      "tagline": "IDE for teams",
+      "votes": 4987,
+      "url": "https://replit.com",
+      "description": "",
       "day": "2026-02-01"
     }
   ]
