@@ -5,7 +5,7 @@ const path = require('path');
 // Product Hunt Top 8 Daily Fetcher
 // Uses hunted.space API (unofficial but reliable)
 
-const OUTPUT_FILE = path.join(__dirname, 'data', 'tools.json');
+const OUTPUT_FILE = path.join(__dirname, '..', 'data', 'tools.json');
 const API_URL = 'https://hunted.space/top-products/latest';
 
 async function fetchProductHunt() {

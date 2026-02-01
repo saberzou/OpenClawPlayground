@@ -1,0 +1,61 @@
+{
+  "updated": "2026-02-01T08:15:54.604Z",
+  "tools": [
+    {
+      "name": "Cursor",
+      "tagline": "AI-first code editor",
+      "url": "https://cursor.sh",
+      "votes": 850,
+      "description": "Fork of VS Code with AI built-in"
+    },
+    {
+      "name": "bolt.new",
+      "tagline": "AI-first AI IDE",
+      "url": "https://bolt.new",
+      "votes": 720,
+      "description": "Full-stack development in browser"
+    },
+    {
+      "name": "Lovable",
+      "tagline": "Build apps with plain language",
+      "url": "https://lovable.dev",
+      "votes": 680,
+      "description": "AI-powered app builder"
+    },
+    {
+      "name": "Screen Studio",
+      "tagline": "Beautiful screen recordings",
+      "url": "https://screen.studio",
+      "votes": 620,
+      "description": "Effortless screen capture"
+    },
+    {
+      "name": "Wispr Flow",
+      "tagline": "AI-powered text expansion",
+      "url": "https://flow.wispr.com",
+      "votes": 580,
+      "description": "Smart shortcuts for text"
+    },
+    {
+      "name": "Framer",
+      "tagline": "Design and ship sites",
+      "url": "https://framer.com",
+      "votes": 550,
+      "description": "No-code design platform"
+    },
+    {
+      "name": "Replit",
+      "tagline": "IDE for teams",
+      "url": "https://replit.com",
+      "votes": 520,
+      "description": "Collaborative coding"
+    },
+    {
+      "name": "Claude Code",
+      "tagline": "Autonomous coding agent",
+      "url": "https://claude.com/claude-code",
+      "votes": 490,
+      "description": "CLI for Claude"
+    }
+  ]
+}
