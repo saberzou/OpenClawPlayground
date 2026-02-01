@@ -123,7 +123,10 @@ def fetch_news_from_rss(feed_url):
         # Handle both RSS (<item>) and Atom (<entry>) formats
         items = root.findall('.//item')
         if not items:
-            items = root.findall('.//entry')
+            # Atom feeds use namespaces, need wildcard search
+            items = root.findall('.//{*}entry')
+        if not items:
+            items = []
 
         news = []
         seen_titles = set()
