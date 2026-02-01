@@ -1,61 +1,23 @@
 {
-  "updated": "2026-02-01T15:47:50.090Z",
+  "updated": "2026-02-01T15:56:04.744Z",
   "tools": [
     {
-      "name": "Bolt.new",
-      "tagline": "AI-first AI IDE",
-      "url": "https://bolt.new",
-      "votes": 420,
-      "day": "2026-02-01"
+      "name": "Dottie",
+      "url": "https://www.producthunt.com/products/dottie",
+      "description": "",
+      "votes": 0
     },
     {
-      "name": "Lovable",
-      "tagline": "Build apps with plain language",
-      "url": "https://lovable.dev",
-      "votes": 380,
-      "day": "2026-02-01"
+      "name": "Good Assistant",
+      "url": "https://www.producthunt.com/products/good-assistant",
+      "description": "",
+      "votes": 0
     },
     {
-      "name": "Screen Studio",
-      "tagline": "Beautiful screen recordings",
-      "url": "https://screen.studio",
-      "votes": 340,
-      "day": "2026-02-01"
-    },
-    {
-      "name": "Cursor",
-      "tagline": "AI-first code editor",
-      "url": "https://cursor.sh",
-      "votes": 310,
-      "day": "2026-02-01"
-    },
-    {
-      "name": "Wispr Flow",
-      "tagline": "AI-powered text expansion",
-      "url": "https://flow.wispr.com",
-      "votes": 280,
-      "day": "2026-02-01"
-    },
-    {
-      "name": "Claude Code",
-      "tagline": "Autonomous coding agent",
-      "url": "https://claude.com/claude-code",
-      "votes": 250,
-      "day": "2026-02-01"
-    },
-    {
-      "name": "v0",
-      "tagline": "Generate React UI from text",
-      "url": "https://v0.dev",
-      "votes": 220,
-      "day": "2026-02-01"
-    },
-    {
-      "name": "Replit",
-      "tagline": "IDE for teams",
-      "url": "https://replit.com",
-      "votes": 190,
-      "day": "2026-02-01"
+      "name": "skills.sh",
+      "url": "https://www.producthunt.com/products/vercel",
+      "description": "",
+      "votes": 0
     }
   ]
 }
