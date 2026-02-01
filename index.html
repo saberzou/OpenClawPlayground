@@ -400,24 +400,30 @@
       text-transform: lowercase;
     }
 
-    /* Movies Grid */
+    /* Movies Grid - Beautiful poster cards with backdrop */
     .movies-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
     @media (max-width: 600px) {
       .movies-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
       }
     }
 
     .movie-card {
-      display: block;
-      background: var(--card-bg);
-      border-radius: var(--radius-sm);
+      position: relative;
+      border-radius: 20px;
       overflow: hidden;
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px;
+      background-size: cover;
+      background-position: center;
       box-shadow: var(--shadow-soft);
       transition: var(--transition);
     }
@@ -427,14 +433,55 @@
       box-shadow: var(--shadow-hover);
     }
 
-    .movie-poster {
-      width: 100%;
-      aspect-ratio: 2/3;
-      object-fit: cover;
+    .movie-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 0%, transparent 20%, rgba(0, 0, 0, 0.75) 100%);
+      z-index: 1;
     }
 
-    .movie-info {
-      padding: 14px;
+    .movie-card > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .movie-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .movie-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .movie-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 5px 11px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #fff;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .movie-rating .star {
+      color: #fbbf24;
+    }
+
+    .movie-year {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
     }
 
     .movie-title {
@@ -1034,25 +1081,22 @@
     // Initial news load
     fetchNews();
 
-    // Movies data
+    // Movies data - Beautiful backdrop cards
     const moviesData = [
-      { title: 'Her', year: 2013, rating: 8.0, poster: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&h=450&fit=crop&q=80' },
-      { title: 'Ex Machina', year: 2014, rating: 7.7, poster: 'https://images.unsplash.com/photo-1535378433864-48cf10419c5c?w=300&h=450&fit=crop&q=80' },
-      { title: 'Blade Runner 2049', year: 2017, rating: 8.0, poster: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=300&h=450&fit=crop&q=80' },
-      { title: 'Everything Everywhere', year: 2022, rating: 7.8, poster: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=300&h=450&fit=crop&q=80' },
-      { title: 'Past Lives', year: 2023, rating: 7.9, poster: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=300&h=450&fit=crop&q=80' },
-      { title: 'The Matrix', year: 1999, rating: 8.7, poster: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=300&h=450&fit=crop&q=80' }
+      { title: 'Blade Runner 2049', year: '2017', rating: '8.0', backdrop: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&h=340&fit=crop&q=80' },
+      { title: 'Interstellar', year: '2014', rating: '8.6', backdrop: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&h=340&fit=crop&q=80' },
+      { title: 'The Matrix', year: '1999', rating: '8.7', backdrop: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=340&fit=crop&q=80' },
+      { title: 'Inception', year: '2010', rating: '8.8', backdrop: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&h=340&fit=crop&q=80' },
+      { title: 'Her', year: '2013', rating: '8.0', backdrop: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=600&h=340&fit=crop&q=80' },
+      { title: 'Ex Machina', year: '2014', rating: '7.7', backdrop: 'https://images.unsplash.com/photo-1535378433864-48cf10419c5c?w=600&h=340&fit=crop&q=80' }
     ];
 
     document.getElementById('moviesGrid').innerHTML = moviesData.map(movie => `
-      <div class="movie-card">
-        <img class="movie-poster" src="${movie.poster}" alt="${movie.title}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 300%22><rect fill=%22%231c1c1e%22 width=%22200%22 height=%22300%22/></svg>'">
-        <div class="movie-info">
-          <div class="movie-title">${movie.title}</div>
-          <div class="movie-meta">
-            <span class="movie-rating">★ ${movie.rating}</span>
-            <span>${movie.year}</span>
-          </div>
+      <div class="movie-card" style="background-image: url('${movie.backdrop}')">
+        <div class="movie-title">${movie.title}</div>
+        <div class="movie-meta">
+          <span class="movie-rating"><span class="star">★</span> ${movie.rating}</span>
+          <span class="movie-year">${movie.year}</span>
         </div>
       </div>
     `).join('');
