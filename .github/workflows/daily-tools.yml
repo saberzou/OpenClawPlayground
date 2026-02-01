@@ -1,0 +1,50 @@
+name Tools
+
+: Daily Product Hunton:
+  schedule:
+    # Run daily at 7:30 AM UTC = 3:30 PM Beijing Time
+    - cron: '30 7 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/**'
+      - '.github/workflows/daily-tools.yml'
+
+jobs:
+  update-tools:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch Top 8 Tools
+        run: |
+          node scripts/fetch-tools.js
+
+      - name: Commit & Push
+        if: changes.filesChanged == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/tools.json
+          git commit -m "Update Product Hunt Top 8 - $(date +%Y-%m-%d)" || echo "No changes"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if [ -n "$(git status --porcelain data/tools.json)" ]; then
+            echo "filesChanged=true" >> $GITHUB_OUTPUT
+          else
+            echo "filesChanged=false" >> $GITHUB_OUTPUT
+          fi

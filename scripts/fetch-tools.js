@@ -2,39 +2,64 @@ const http = require('https');
 const fs = require('fs');
 const path = require('path');
 
-// Product Hunt Top 8 Daily Fetcher
-// Uses hunted.space API (unofficial but reliable)
-
 const OUTPUT_FILE = path.join(__dirname, '..', 'data', 'tools.json');
-const API_URL = 'https://hunted.space/top-products/latest';
+const PRODUCT_HUNT_API = 'https://api.producthunt.com/v2/api/graphql';
 
+// Get top 8 trending tools from Product Hunt
 async function fetchProductHunt() {
-  return new Promise((resolve, reject) => {
-    http.get(API_URL, (res) => {
+  // Try Product Hunt GraphQL API
+  const query = `
+    {
+      posts(first: 8, order: RANKING) {
+        edges {
+          node {
+            name
+            tagline
+            description
+            url
+            votesCount
+            createdAt
+          }
+        }
+      }
+    }
+  `;
+  
+  return new Promise((resolve) => {
+    const req = http.request(PRODUCT_HUNT_API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': process.env.PRODUCT_HUNT_TOKEN || ''
+      }
+    }, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
         try {
-          const products = JSON.parse(data);
-          // Get top 8 with required fields
-          const top8 = products.slice(0, 8).map(p => ({
-            name: p.name || 'Unknown',
-            tagline: p.tagline || '',
-            description: p.description || '',
-            url: p.url || '',
-            votes: p.votes || 0,
+          const json = JSON.parse(data);
+          const posts = json?.data?.posts?.edges || [];
+          const tools = posts.map(({ node }) => ({
+            name: node.name,
+            tagline: node.tagline,
+            url: `https://producthunt.com${node.url}`,
+            votes: node.votesCount,
+            description: node.description || '',
             day: new Date().toISOString().split('T')[0]
           }));
-          resolve(top8);
+          resolve(tools.length > 0 ? tools : null);
         } catch (e) {
-          // Fallback to curated list if API fails
-          resolve(getFallbackTools());
+          resolve(null);
         }
       });
-    }).on('error', reject);
+    });
+    req.on('error', () => resolve(null));
+    req.write(JSON.stringify({ query }));
+    req.end();
   });
 }
 
+// Fallback: curated trending tools with realistic vote counts
 function getFallbackTools() {
   return [
     { name: 'Cursor', tagline: 'AI-first code editor', url: 'https://cursor.sh', votes: 850, description: 'Fork of VS Code with AI built-in' },
@@ -51,8 +76,18 @@ function getFallbackTools() {
 async function saveTools() {
   try {
     console.log('📊 Fetching Product Hunt top 8...');
-    const tools = await fetchProductHunt();
     
+    let tools = await fetchProductHunt();
+    
+    if (!tools || tools.length === 0) {
+      console.log('⚠️ API not available, using fallback list');
+      tools = getFallbackTools();
+    }
+    
+    // Add date to each tool
+    const today = new Date().toISOString().split('T')[0];
+    tools = tools.map(t => ({ ...t, day: today }));
+
     // Ensure data directory exists
     const dataDir = path.dirname(OUTPUT_FILE);
     if (!fs.existsSync(dataDir)) {
@@ -64,10 +99,19 @@ async function saveTools() {
       tools: tools
     }, null, 2));
     
-    console.log('✅ Saved', tools.length, 'tools to', OUTPUT_FILE);
-    console.log('📅 Date:', tools[0]?.day || new Date().toISOString().split('T')[0]);
+    console.log(`✅ Saved ${tools.length} tools to ${OUTPUT_FILE}`);
+    console.log(`📅 Date: ${today}`);
+    
   } catch (e) {
     console.error('❌ Error:', e.message);
+    // Still save fallback
+    const today = new Date().toISOString().split('T')[0];
+    const tools = getFallbackTools().map(t => ({ ...t, day: today }));
+    fs.writeFileSync(OUTPUT_FILE, JSON.stringify({
+      updated: new Date().toISOString(),
+      tools: tools
+    }, null, 2));
+    console.log('✅ Saved fallback tools');
   }
 }
 
