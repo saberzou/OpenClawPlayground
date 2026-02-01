@@ -40,62 +40,18 @@ async function loadAllContent() {
 async function loadNews() {
     const container = document.getElementById('newsContainer');
 
-                                                    const heroNews = {
-        title: 'Artificial intelligence researchers hit by flood of ‘slop’ - Financial Times',
-        category: 'Research',
-        summary: 'Latest findings from AI research institutions.',
-        impact: 'New AI research often leads to breakthroughs in capabilities and applications.',
-        source: 'Financial Times',
-        time: '18 hours ago',
+                                                        const heroNews = {
+        title: '',
+        category: 'Technology',
+        summary: 'Latest updates from the technology sector with a focus on artificial intelligence developments.',
+        impact: 'This development affects the broader AI landscape and industry trends.',
+        source: 'news.google',
+        time: 'Just now',
         image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop&q=80'
     };
 
     const newsList = [
-        {
-            title: 'Better Artificial Intelligence (AI) Stock: Broadcom vs. Nvidia - The Motley Fool',
-            category: 'Hardware',
-            summary: 'Which AI stocks are analysts watching closely.',
-            impact: 'AI chips are the foundation of all AI systems. Better chips mean faster, cheaper AI.',
-            source: 'The Motley Fool',
-            time: 'Yesterday',
-            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
-        },
-        {
-            title: 'Could This Artificial Intelligence (AI) Stock Double in 2026? - Yahoo Finance',
-            category: 'Finance',
-            summary: 'Which AI stocks are analysts watching closely.',
-            impact: 'AI stocks are surging. Understanding which companies benefit helps with investment decisions.',
-            source: 'Yahoo Finance',
-            time: '2 hours ago',
-            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
-        },
-        {
-            title: 'Billionaires Are Piling Into This Artificial Intelligence (AI) Stock. Here\'s Why. - The Motley Fool',
-            category: 'Finance',
-            summary: 'Analysis of top AI stocks positioned for growth in the current market.',
-            impact: 'AI stocks are surging. Understanding which companies benefit helps with investment decisions.',
-            source: 'The Motley Fool',
-            time: '2 hours ago',
-            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
-        },
-        {
-            title: 'Why Wall Street Is Betting Big on This Artificial Intelligence (AI) Infrastructure Stock - The Mo...',
-            category: 'Finance',
-            summary: 'Investment outlook for leading AI companies.',
-            impact: 'AI stocks are surging. Understanding which companies benefit helps with investment decisions.',
-            source: 'The Motley Fool',
-            time: '1 hours ago',
-            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
-        },
-        {
-            title: 'The philosophical puzzle of rational artificial intelligence - MIT News',
-            category: 'Research',
-            summary: 'New scientific insights into AI capabilities.',
-            impact: 'New AI research often leads to breakthroughs in capabilities and applications.',
-            source: 'MIT News',
-            time: '2 days ago',
-            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&q=80'
-        }
+
     ];
 
     let html = `

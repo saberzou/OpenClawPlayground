@@ -97,46 +97,66 @@ def parse_rss_date(date_str):
         return "Just now"
 
 def fetch_news_from_rss(feed_url):
-    """Fetch news from Google News RSS feed"""
+    """Fetch news from any RSS feed (handles Google News, TechCrunch, etc.)"""
     try:
         req = urllib.request.Request(feed_url, headers={'User-Agent': 'Clawdbot-Briefing/1.0'})
         with urllib.request.urlopen(req, timeout=15) as response:
             xml_content = response.read().decode('utf-8')
-        
+
         root = ET.fromstring(xml_content)
         items = root.findall('.//item')
-        
+
         news = []
         for item in items[:10]:
-            title = item.find('title').text if item.find('title') is not None else ""
-            link = item.find('link').text if item.find('link') is not None else "#"
-            pub_date = item.find('pubDate').text if item.find('pubDate') is not None else ""
-            source = item.find('source').text if item.find('source') is not None else "News"
-            description = item.find('description').text if item.find('description') is not None else ""
-            
+            # Handle different RSS formats
+            title_elem = item.find('title') or item.find('{http://search.yahoo.com/mrss/}title')
+            title = title_elem.text if title_elem is not None and title_elem.text else ""
+
+            link_elem = item.find('link')
+            link = ""
+            if link_elem is not None:
+                link = link_elem.text
+            else:
+                # Try to find link in content:encoded or other elements
+                link_elem = item.find('{http://purl.org/dc/elements/1.1/}identifier')
+                if link_elem is not None:
+                    link = link_elem.text
+
+            pub_date_elem = item.find('pubDate') or item.find('{http://purl.org/dc/elements/1.1/}date')
+            pub_date = pub_date_elem.text if pub_date_elem is not None and pub_date_elem.text else ""
+
+            # Extract source from feed URL if not in item
+            source = feed_url.split('/')[2] if '/' in feed_url else "News"
+            source = source.replace('www.', '').replace('.com', '').replace('.org', '')
+
             # Clean up title
             title = re.sub(r'\s+', ' ', title).strip()
             if len(title) > 100:
                 title = title[:97] + "..."
-            
-            # Extract source name
-            if source.startswith('http'):
-                source = source.split('/')[-1] if '/' in source else source
-            
-            # Determine category and impact based on keywords FIRST (before summary)
+
+            # Skip very old items
+            if pub_date:
+                try:
+                    dt = datetime.strptime(pub_date[:25], "%a, %d %b %Y %H:%M:%S")
+                    if (datetime.utcnow() - dt) > timedelta(days=3):
+                        continue
+                except:
+                    pass
+
+            # Determine category and impact based on keywords
             title_lower = title.lower()
             category = "Technology"
             impact = "This development affects the broader AI landscape and industry trends."
-            
+
             for keyword, info in AI_TOPICS.items():
                 if any(kw in title_lower for kw in info["keywords"]):
                     category = info["category"]
                     impact = info["impact"]
                     break
-            
-            # Generate contextual summary from title
+
+            # Generate contextual summary
             summary = generate_summary_from_title(title, category)
-            
+
             news.append({
                 "title": title,
                 "category": category,
@@ -146,10 +166,10 @@ def fetch_news_from_rss(feed_url):
                 "time": parse_rss_date(pub_date),
                 "url": link
             })
-        
+
         return news
     except Exception as e:
-        print(f"⚠️  RSS fetch error: {e}")
+        print(f"⚠️  RSS fetch error for {feed_url}: {e}")
         return None
 
 def fetch_news():
