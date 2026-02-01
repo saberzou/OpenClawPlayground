@@ -1112,24 +1112,27 @@
     loadMovies();
 
     // Tools data
+    // Tools - Top 8 trending from Product Hunt January 2026
     const toolsData = [
-      { name: 'Cursor', category: 'Code Editor', desc: 'AI-first code editor built on VS Code', icon: '⌨️', color: '#3b82f6' },
-      { name: 'Midjourney', category: 'Image Generation', desc: 'AI-powered artistic image generation', icon: '🎨', color: '#8b5cf6' },
-      { name: 'Claude', category: 'AI Assistant', desc: 'Anthropic\'s AI assistant for reasoning & writing', icon: '💬', color: '#dc2626' },
-      { name: 'Perplexity', category: 'AI Search', desc: 'AI-powered search with cited sources', icon: '🔍', color: '#10b981' },
-      { name: 'v0', category: 'UI Generator', desc: 'Generate React UI from text descriptions', icon: '🧩', color: '#6366f1' },
-      { name: 'Lovable', category: 'Vibe Coding', desc: 'Build full-stack apps with plain language', icon: '🪄', color: '#ec4899' }
+      { name: 'Cursor', category: 'Code Editor', desc: 'AI-first code editor, fork of VS Code', icon: '⌨️', color: '#3b82f6', url: 'https://cursor.sh' },
+      { name: 'bolt.new', category: 'AI IDE', desc: 'Full-stack AI coding in your browser', icon: '⚡', color: '#0ea5e9', url: 'https://bolt.new' },
+      { name: 'Lovable', category: 'Vibe Coding', desc: 'Build polished apps with plain language', icon: '🪄', color: '#ec4899', url: 'https://lovable.dev' },
+      { name: 'Screen Studio', category: 'Screen Recording', desc: 'Beautiful screen recordings, effortless', icon: '🎬', color: '#f59e0b', url: 'https://screen.studio' },
+      { name: 'Wispr Flow', category: 'Productivity', desc: 'AI-powered text expansion & shortcuts', icon: '💨', color: '#10b981', url: 'https://flow.wispr.com' },
+      { name: 'Framer', category: 'Design', desc: 'Design, prototype, and ship sites', icon: '🎯', color: '#8b5cf6', url: 'https://framer.com' },
+      { name: 'Replit', category: 'Coding', desc: 'IDE for fast-growing companies', icon: '🚀', color: '#6366f1', url: 'https://replit.com' },
+      { name: 'Claude Code', category: 'AI Coding', desc: 'Anthropic CLI for autonomous coding', icon: '🤖', color: '#dc2626', url: 'https://claude.com/claude-code' }
     ];
 
     document.getElementById('toolsGrid').innerHTML = toolsData.map(tool => `
-      <div class="tool-card">
+      <a href="${tool.url}" target="_blank" class="tool-card">
         <div class="tool-icon" style="background: ${tool.color}15; color: ${tool.color}">${tool.icon}</div>
         <div class="tool-info">
           <div class="tool-name">${tool.name}</div>
           <div class="tool-category">${tool.category}</div>
           <p class="tool-desc">${tool.desc}</p>
         </div>
-      </div>
+      </a>
     `).join('');
 
     // Initialize
