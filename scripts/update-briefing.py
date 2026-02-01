@@ -21,10 +21,13 @@ DATA_DIR = f"{REPO_DIR}/data"
 NEWS_FILE = f"{DATA_DIR}/news.json"
 APP_JS = f"{REPO_DIR}/js/app.js"
 
-# Google News RSS feeds
+# Multiple fresh RSS feeds for better coverage
 RSS_FEEDS = [
     "https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=AI+machine+learning&hl=en-US&gl=US&ceid=US:en"
+    "https://news.google.com/rss/search?q=AI+machine+learning&hl=en-US&gl=US&ceid=US:en",
+    "https://techcrunch.com/feed/",
+    "https://www.theverge.com/rss/index.xml",
+    "https://wired.com/feed/tag/ai/latest/rss",
 ]
 
 # AI topics for generating contextual summaries
