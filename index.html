@@ -1081,25 +1081,35 @@
     // Initial news load
     fetchNews();
 
-    // Movies data - Beautiful backdrop cards
-    const moviesData = [
-      { title: 'Blade Runner 2049', year: '2017', rating: '8.0', backdrop: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&h=340&fit=crop&q=80' },
-      { title: 'Interstellar', year: '2014', rating: '8.6', backdrop: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&h=340&fit=crop&q=80' },
-      { title: 'The Matrix', year: '1999', rating: '8.7', backdrop: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=340&fit=crop&q=80' },
-      { title: 'Inception', year: '2010', rating: '8.8', backdrop: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&h=340&fit=crop&q=80' },
-      { title: 'Her', year: '2013', rating: '8.0', backdrop: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=600&h=340&fit=crop&q=80' },
-      { title: 'Ex Machina', year: '2014', rating: '7.7', backdrop: 'https://images.unsplash.com/photo-1535378433864-48cf10419c5c?w=600&h=340&fit=crop&q=80' }
-    ];
+    // Movies - Fetch from TMDB with real backdrops
+    const TMDB_API_KEY = '3783979c6021378e3461274a428e7c64';
+    const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p/w780';
+    const movieIds = ['264660', '603', '49026', '157336', '152601', '155']; // Interstellar, Matrix, Dark Knight, Inception, Dune, LOTR
 
-    document.getElementById('moviesGrid').innerHTML = moviesData.map(movie => `
-      <div class="movie-card" style="background-image: url('${movie.backdrop}')">
-        <div class="movie-title">${movie.title}</div>
-        <div class="movie-meta">
-          <span class="movie-rating"><span class="star">★</span> ${movie.rating}</span>
-          <span class="movie-year">${movie.year}</span>
-        </div>
-      </div>
-    `).join('');
+    async function loadMovies() {
+      try {
+        const movies = await Promise.all(
+          movieIds.map(id => 
+            fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`)
+              .then(r => r.json())
+          )
+        );
+        
+        document.getElementById('moviesGrid').innerHTML = movies.map(m => `
+          <div class="movie-card" style="background-image: url('${TMDB_IMAGE_BASE}${m.backdrop_path}')">
+            <div class="movie-title">${m.title}</div>
+            <div class="movie-meta">
+              <span class="movie-rating"><span class="star">★</span> ${m.vote_average.toFixed(1)}</span>
+              <span class="movie-year">${m.release_date?.split('-')[0]}</span>
+            </div>
+          </div>
+        `).join('');
+      } catch (e) {
+        console.error('Failed to load movies:', e);
+      }
+    }
+
+    loadMovies();
 
     // Tools data
     const toolsData = [
