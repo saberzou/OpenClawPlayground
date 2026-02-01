@@ -1118,14 +1118,22 @@
 
     loadMovies();
 
-    // Tools data
     // Tools - Top 8 trending from Product Hunt (auto-updated daily)
     async function loadTools() {
+      const grid = document.getElementById('toolsGrid');
+      grid.innerHTML = '<div class="loading">Loading tools...</div>';
+      
       try {
         const response = await fetch('data/tools.json?t=' + Date.now());
+        if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
         
-        document.getElementById('toolsGrid').innerHTML = data.tools.map(tool => `
+        if (!data.tools || data.tools.length === 0) {
+          grid.innerHTML = '<div class="loading">No tools available</div>';
+          return;
+        }
+        
+        grid.innerHTML = data.tools.map(tool => `
           <a href="${tool.url}" target="_blank" class="tool-card">
             <div class="tool-icon" style="background: ${getColor(tool.name)}15; color: ${getColor(tool.name)}">${getIcon(tool.name)}</div>
             <div class="tool-info">
@@ -1138,6 +1146,33 @@
         `).join('');
       } catch (e) {
         console.error('Failed to load tools:', e);
+        // Fallback tools
+        grid.innerHTML = `
+          <a href="https://cursor.sh" target="_blank" class="tool-card">
+            <div class="tool-icon" style="background: #3b82f615; color: #3b82f6">⌨️</div>
+            <div class="tool-info">
+              <div class="tool-name">Cursor</div>
+              <div class="tool-category">AI-first code editor</div>
+              <p class="tool-desc">Fork of VS Code with AI built-in</p>
+            </div>
+          </a>
+          <a href="https://bolt.new" target="_blank" class="tool-card">
+            <div class="tool-icon" style="background: #0ea5e915; color: #0ea5e9">⚡</div>
+            <div class="tool-info">
+              <div class="tool-name">bolt.new</div>
+              <div class="tool-category">AI IDE</div>
+              <p class="tool-desc">Full-stack development in browser</p>
+            </div>
+          </a>
+          <a href="https://lovable.dev" target="_blank" class="tool-card">
+            <div class="tool-icon" style="background: #ec489915; color: #ec4899">🪄</div>
+            <div class="tool-info">
+              <div class="tool-name">Lovable</div>
+              <div class="tool-category">Vibe Coding</div>
+              <p class="tool-desc">Build apps with plain language</p>
+            </div>
+          </a>
+        `;
       }
     }
 
