@@ -93,11 +93,12 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      font-family: 'Arial', sans-serif;
     }
   </style>
 </head>
 <body data-theme="dark">
-  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  <button class="theme-toggle" onclick="toggleTheme()">☾</button>
   <div class="ascii">
     <pre>
    /\_/\
@@ -115,7 +116,7 @@
       const savedTheme = localStorage.getItem('theme');
       const theme = savedTheme || 'dark';
       document.body.setAttribute('data-theme', theme);
-      document.querySelector('.theme-toggle').textContent = theme === 'light' ? '🌙' : '☀️';
+      document.querySelector('.theme-toggle').textContent = theme === 'light' ? '☾' : '☀';
     }
 
     function toggleTheme() {
@@ -123,7 +124,7 @@
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
       document.body.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
-      document.querySelector('.theme-toggle').textContent = newTheme === 'light' ? '🌙' : '☀️';
+      document.querySelector('.theme-toggle').textContent = newTheme === 'light' ? '☾' : '☀';
     }
 
     function randomAsciiArt() {
