@@ -13,6 +13,7 @@
       --border: #00ff00; /* Neon green */
       --highlight: #00ff00; /* Neon green */
       --ascii: #00ff00; /* Green ASCII */
+      --blur-background: rgba(0, 0, 0, 0.4);
       --padding: 16px;
       --font-mono: 'DM Mono', monospace;
     }
@@ -24,6 +25,7 @@
       --border: #ff4500; /* Bright Orange */
       --highlight: #ff4500; /* Bright Orange */
       --ascii: #ff4500; /* Bright Orange ASCII */
+      --blur-background: rgba(255, 165, 0, 0.1); /* Light orange blur background */
     }
 
     [data-theme="dark"] {
@@ -33,6 +35,7 @@
       --border: #00ff00; /* Neon green */
       --highlight: #00ff00; /* Neon green */
       --ascii: #00ff00; /* Green ASCII */
+      --blur-background: rgba(0, 255, 0, 0.1); /* Light green blur background */
     }
 
     body {
@@ -76,14 +79,15 @@
       text-decoration: none;
     }
 
-    .tab, .theme-toggle {
+    .tab {
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       padding: 8px 16px;
       border: 1px solid var(--border);
-      background: transparent;
+      background: var(--blur-background);
+      backdrop-filter: blur(4px);
       transition: background 0.2s ease-in;
     }
 
@@ -101,8 +105,14 @@
       color: var(--bg);
     }
 
-    .tab:hover, .theme-toggle:hover {
-      background: var(--highlight);
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      background: transparent;
     }
   </style>
 </head>
