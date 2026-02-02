@@ -4,114 +4,119 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Saber's Briefing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Color Palette */
-      --bg: #f5f5f5; /* Off-white */
-      --card-bg: #ffffff; /* Pure white */
-      --primary-text: #333333; /* Neutral grey */
-      --secondary-text: #555555; /* Mid-grey */
-      --accent: #1d72b8; /* Electric blue */
-      --highlight: #ff6f61; /* Soft peach */
+      --bg: #ffffff;
+      --card-bg: #f9f9f9;
+      --text: #333333;
+      --title: #ff5722; /* Bold orange */
+      --highlight: #ffccbc;
+      --border: #dedede;
 
-      /* Font Settings */
-      --font-primary: 'Inter', sans-serif;
-      --font-mono: 'Courier New', monospace;
+      --font-primary: 'Poppins', sans-serif;
+      --font-monospace: 'Courier New', monospace;
     }
 
     [data-theme="dark"] {
-      --bg: #111111; /* Matte black */
-      --card-bg: #191919; /* Dark grey */
-      --primary-text: #f5f5f5; /* Off-white */
-      --secondary-text: #bbbbbb; /* Light grey */
-      --accent: #4ea8de; /* Soft cyan */
-      --highlight: #ff9c8a; /* Light peach */
+      --bg: #121212;
+      --card-bg: #1e1e1e;
+      --text: #e0e0e0;
+      --title: #ffab91;
+      --highlight: #ff8a65;
+      --border: #333333;
     }
 
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--primary-text);
       font-family: var(--font-primary);
-      font-size: 16px;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
-      padding: 16px;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 24px;
-      background: var(--card-bg);
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     header {
       text-align: center;
-      margin-bottom: 24px;
+      padding: 16px;
     }
 
-    header h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-
-    header p {
-      color: var(--secondary-text);
+    .ascii-header {
+      font-family: var(--font-monospace);
       font-size: 14px;
+      white-space: pre;
+      color: var(--highlight);
+      margin: 16px 0;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .theme-switcher {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: var(--highlight);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 18px;
     }
 
     .news-item {
-      border-bottom: 1px solid var(--secondary-text);
-      margin-bottom: 16px;
+      margin: 16px 0;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--card-bg);
     }
 
     .news-item h3 {
-      margin: 0 0 4px;
+      margin: 0 0 8px;
       font-size: 18px;
-      color: var(--primary-text);
+      color: var(--title);
+      font-weight: 600;
     }
 
     .news-item p {
       margin: 0 0 8px;
-      color: var(--secondary-text);
     }
 
     .news-item a {
-      color: var(--accent);
+      color: var(--highlight);
       text-decoration: none;
     }
 
     .news-item a:hover {
       text-decoration: underline;
     }
-
-    .theme-toggle {
-      cursor: pointer;
-      text-align: right;
-      color: var(--highlight);
-      font-size: 14px;
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body data-theme="light">
+  <button class="theme-switcher" onclick="toggleTheme()">☀️</button>
+
   <header>
-    <h1>Saber's Briefing</h1>
-    <p>Your daily curated news and updates</p>
+    <h1>Saber's Daily Briefing</h1>
+    <div class="ascii-header" id="asciiArt"></div>
   </header>
 
-  <div class="container" id="newsGrid">
+  <div class="content" id="newsGrid">
     Loading articles...
   </div>
-
-  <div class="theme-toggle" onclick="toggleTheme()">Switch Theme</div>
 
   <script>
     function applyTheme() {
       const savedTheme = localStorage.getItem('theme');
-      document.body.setAttribute('data-theme', savedTheme || 'light');
+      const theme = savedTheme || 'light';
+      document.body.setAttribute('data-theme', theme);
+      document.querySelector('.theme-switcher').textContent = theme === 'light' ? '🌙' : '☀️';
     }
 
     function toggleTheme() {
@@ -119,27 +124,11 @@
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
       document.body.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
+      document.querySelector('.theme-switcher').textContent = newTheme === 'light' ? '🌙' : '☀️';
     }
 
-    async function fetchNews() {
-      const container = document.getElementById('newsGrid');
-      try {
-        const response = await fetch('data/news.json');
-        const data = await response.json();
-        container.innerHTML = data.articles.slice(0, 30).map(article => `
-          <div class="news-item">
-            <h3>${article.title}</h3>
-            <p>${article.description}</p>
-            <a href="${article.link}" target="_blank">Read More</a>
-          </div>
-        `).join('');
-      } catch (err) {
-        container.innerHTML = '<p>Failed to load articles.</p>';
-      }
-    }
-
-    applyTheme();
-    fetchNews();
-  </script>
-</body>
-</html>
+    function randomAsciiArt() {
+      const art = [
+        `   ____\n  /\' .\    _____\n /: \___\  / .  /\n \\\  /:. \/____/..\n  \\/:.  /\
+   \\:. /\n    \\_\\`,
+        `       ^   /^\n     .-'-.<\n  ( |"\ TO\\n .'WWW .--\")` // grounded artistry complete in room++){`,
