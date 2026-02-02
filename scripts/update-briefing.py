@@ -134,10 +134,13 @@ def fetch_news_from_rss(feed_url):
         for i, item in enumerate(items[:15]):  # Check more items
             # Handle different RSS formats
             title_elem = item.find('title') or item.find('{http://search.yahoo.com/mrss/}title')
-            title = title_elem.text if title_elem is not None and title_elem.text else ""
-
+            if title_elem is None:
+                print(f"   Item {i}: No title element found")
+                continue
+            title = title_elem.text if title_elem.text else ""
+            
             if not title:
-                print(f"   Skipping: empty title")
+                print(f"   Item {i}: title='{title}', text attr='{title_elem.text}'")
                 continue
             if title.lower() in seen_titles:
                 print(f"   Skipping duplicate: {title[:30]}...")

@@ -1,166 +1,166 @@
 {
-  "timestamp": "2026-02-02T02:21:20.502Z",
-  "count": 40,
+  "timestamp": "2026-02-02T02:41:03.701Z",
+  "count": 190,
   "articles": [
     {
-      "title": "Short Month, Big Ideas (February 2026 Wallpapers Edition)",
-      "link": "https://smashingmagazine.com/2026/01/desktop-wallpaper-calendars-february-2026/",
-      "description": "Let’s make the most of the shortest month of the year with a new collection of desktop wallpapers that are sure to bring a smile to your face — and maybe spark your creativity, too. All of them were designed with love by the community for the community and can be downloaded for free. Happy February!",
-      "pubDate": "Sat, 31 Jan 2026 09:00:00 GMT",
-      "source": "smashingmagazine.com",
+      "title": "AI layoffs or ‘AI-washing’?",
+      "link": "https://techcrunch.com/2026/02/01/ai-layoffs-or-ai-washing/",
+      "description": "How many of the companies with recent layoffs are just using AI as an excuse?",
+      "pubDate": "Sun, 01 Feb 2026 22:15:53 +0000",
+      "source": "techcrunch.com",
+      "category": "tech"
+    },
+    {
+      "title": "Why Tether&#8217;s CEO is everywhere right now",
+      "link": "https://techcrunch.com/2026/02/01/why-tethers-ceo-is-everywhere-right-now/",
+      "description": "For years, Tether's CEO avoided the United States, watching from offshore as regulators circled and prosecutors investigated. Those days are over.",
+      "pubDate": "Sun, 01 Feb 2026 20:32:21 +0000",
+      "source": "techcrunch.com",
+      "category": "tech"
+    },
+    {
+      "title": "Bill Gates says accusations contained in Epstein files are ‘absolutely absurd’",
+      "link": "https://www.theverge.com/tech/871879/bill-gates-epstein-files-absolutely-absurd",
+      "description": "Reports of Bill Gates' connections with Jeffrey Epstein grow more lurid with each dump of documents from the Department of Justice. The latest includes somewhat confusing emails that Epstein may have been drafting on behalf of someone named Boris, who worked at the Bill &#38; Melinda Gates Foundation. The messages claim that Bill contracted an [&#8230;]",
+      "pubDate": "2026-02-01T14:24:53-05:00",
+      "source": "theverge.com",
+      "category": "tech"
+    },
+    {
+      "title": "Amazon’s ‘Melania’ documentary makes $7M on opening weekend",
+      "link": "https://techcrunch.com/2026/02/01/amazons-melania-documentary-makes-7m-on-opening-weekend/",
+      "description": "While the documentary is exceeding box office expectations, it's unlikely to make a profit in theaters.",
+      "pubDate": "Sun, 01 Feb 2026 19:16:27 +0000",
+      "source": "techcrunch.com",
+      "category": "tech"
+    },
+    {
+      "title": "a series of porous brick partitions enclose central garden within costa rica residence",
+      "link": "https://www.designboom.com/architecture/porous-brick-partitions-central-garden-costa-rica-residence-casa-chavarria-carazo-arquitectura/",
+      "description": "carazo arquitectura establishes spatial rhythm through layered thresholds. The post a series of porous brick partitions enclose central garden within costa rica residence appeared first on designboom | architecture &amp; design magazine .",
+      "pubDate": "Sun, 01 Feb 2026 19:01:05 +0000",
+      "source": "designboom.com",
       "category": "design"
     },
     {
-      "title": "Practical Use Of AI Coding Tools For The Responsible Developer",
-      "link": "https://smashingmagazine.com/2026/01/practical-use-ai-coding-tools-responsible-developer/",
-      "description": "AI coding tools like agents can be valuable allies in everyday development work. They help handle time-consuming grunt work, guide you through large legacy codebases, and offer low-risk ways to implement features in previously unfamiliar programming languages. Here are practical, easy-to-apply techniques to help you use these tools to improve your workflow.",
-      "pubDate": "Fri, 30 Jan 2026 13:00:00 GMT",
-      "source": "smashingmagazine.com",
+      "title": "Shedding light on Iran’s longest internet blackout",
+      "link": "https://www.theverge.com/policy/871848/iran-blackout-internet-mahsa-alimardani",
+      "description": "After protests broke out in early January, the Iranian regime shut down the internet, starting the longest blackout in Iranian history. Despite this attempt to stop the protests from spreading, they did not stop. Still, the internet shutdown slowed down the spread of information both inside and outside Iran. Behind the heavily policed borders and [&#8230;]",
+      "pubDate": "2026-02-01T13:30:00-05:00",
+      "source": "theverge.com",
+      "category": "tech"
+    },
+    {
+      "title": "You need to listen to M83’s icy post-rock record Dead Cities, Red Seas &#038; Lost Ghosts",
+      "link": "https://www.theverge.com/column/871847/m83-dead-cities-red-seas-lost-ghosts",
+      "description": "New York City got hit with a hell of a snowstorm last week. And, inevitably, when I'm watching the snow fall, wandering the oddly quiet streets after dark, people hiding inside and staying warm, I put on M83's sophomore record, Dead Cities, Red Seas &#38; Lost Ghosts. Before Nicolas Fromageau left the band and Anthony [&#8230;]",
+      "pubDate": "2026-02-01T13:00:00-05:00",
+      "source": "theverge.com",
+      "category": "tech"
+    },
+    {
+      "title": "Indonesia ‘conditionally’ lifts ban on Grok",
+      "link": "https://techcrunch.com/2026/02/01/indonesia-conditionally-lifts-ban-on-grok/",
+      "description": "Indonesia has followed Malaysia and the Philippines in lifting a ban on xAI’s chatbot Grok.",
+      "pubDate": "Sun, 01 Feb 2026 17:20:00 +0000",
+      "source": "techcrunch.com",
+      "category": "tech"
+    },
+    {
+      "title": "TechCrunch Mobility: The great Tesla rebranding",
+      "link": "https://techcrunch.com/2026/02/01/techcrunch-mobility-the-great-tesla-rebranding/",
+      "description": "Welcome back to TechCrunch Mobility — your central hub for news and insights on the future of transportation.",
+      "pubDate": "Sun, 01 Feb 2026 17:05:00 +0000",
+      "source": "techcrunch.com",
+      "category": "tech"
+    },
+    {
+      "title": "India offers zero taxes through 2047 to lure global AI workloads",
+      "link": "https://techcrunch.com/2026/02/01/india-offers-zero-taxes-through-2047-to-lure-global-ai-workloads/",
+      "description": "New Delhi's latest move comes as Amazon, Google, and Microsoft expand data center investments in India.",
+      "pubDate": "Sun, 01 Feb 2026 16:30:00 +0000",
+      "source": "techcrunch.com",
+      "category": "tech"
+    },
+    {
+      "title": "This tiny pocket-friendly e-reader is packed with frustration and potential",
+      "link": "https://www.theverge.com/tech/870583/xteink-x4-e-ink-reader-books-hands-on",
+      "description": "I've used and reviewed dozens of e-readers over the years, but the 5-inch Kobo Mini remains my favorite for one simple reason: It was small. While it lacked useful features like screen lighting and page turn buttons, its size made it an e-reader I actually wanted to carry every day. The $69 Xteink X4 e-reader [&#8230;]",
+      "pubDate": "2026-02-01T11:00:00-05:00",
+      "source": "theverge.com",
+      "category": "tech"
+    },
+    {
+      "title": "Bye-bye corporate conglomerates. Hello personal conglomerates.",
+      "link": "https://techcrunch.com/2026/02/01/bye-bye-corporate-conglomerates-hello-personal-conglomerates/",
+      "description": "Elon Musk's reported merging of SpaceX, xAI, and Tesla harkens back to the heyday of General Electric — or maybe the robber barons of the Gilded Age.",
+      "pubDate": "Sun, 01 Feb 2026 15:39:08 +0000",
+      "source": "techcrunch.com",
+      "category": "tech"
+    },
+    {
+      "title": "How The Car Chase in &#8216;One Battle After Another&#8217; was Filmed on VistaVision",
+      "link": "https://petapixel.com/2026/02/01/how-one-battle-after-another-cinematographer-shot-the-stunning-car-chase-scene-vistavision/",
+      "description": "The cinematographer behind One Battle After Another revealed how he filmed the movie's breathtaking car chase scene and how he pushed the VistaVision format to its limits. [ Read More ]",
+      "pubDate": "Sun, 01 Feb 2026 15:00:20 +0000",
+      "source": "petapixel.com",
+      "category": "photography"
+    },
+    {
+      "title": "I don’t hate the robot barista like I thought I would",
+      "link": "https://www.theverge.com/tech/871350/artly-robot-coffee-jarvis-seattle",
+      "description": "In Seattle, the only thing we love more than coffee is our coffee shops. On a six-block walk I pass at least a half dozen, each with their own vibe: one focused on chai, another inside a yoga studio, a Starbucks that's surprisingly busy for late afternoon downtown. I passed them all up to get [&#8230;]",
+      "pubDate": "2026-02-01T10:00:00-05:00",
+      "source": "theverge.com",
+      "category": "tech"
+    },
+    {
+      "title": "Antigravity’s 360-degree A1 drone is nearly $250 off right now",
+      "link": "https://www.theverge.com/gadgets/870772/antigravity-insta360-a1-drone-deal-sale",
+      "description": "Antigravity’s ambitious A1 360-degree drone is 15 percent off through February 9th. The first-ever discount on this model is available across all bundles, with the most affordable option dropping from $1,599 to $1,359 at Amazon and Best Buy. Pricier bundles are also discounted and include accessories such as a carrying case, additional replaceable drone wings, [&#8230;]",
+      "pubDate": "2026-02-01T09:00:00-05:00",
+      "source": "theverge.com",
+      "category": "tech"
+    },
+    {
+      "title": "L-Mount Desperately Needs a Great, Everyday, Photo Camera",
+      "link": "https://petapixel.com/2026/02/01/l-mount-desperately-needs-a-great-everyday-photo-camera/",
+      "description": "Earlier this week on The PetaPixel Podcast, we discussed Nikon's lawsuit against Viltrox and both the best and worst-case scenarios for that outcome. As part of it, we found ourselves talking about L-mount and how it was the only option outside of Sony E-mount that has shown itself willing to be \"open.\" Unfortunately, it doesn't offer a compelling solution for the average photographer. [ Read More ]",
+      "pubDate": "Sun, 01 Feb 2026 13:30:13 +0000",
+      "source": "petapixel.com",
+      "category": "photography"
+    },
+    {
+      "title": "The telephoto is the only phone camera that really matters",
+      "link": "https://www.theverge.com/column/870883/telephoto-phone-camera",
+      "description": "This is The Stepback, a weekly newsletter breaking down one essential story from the tech world. For more on Android phones, follow Dominic Preston. The Stepback arrives in our subscribers' inboxes at 8AM ET. Opt in for The Stepback here. How it started Samsung's Galaxy S20 Ultra wasn't the first phone to feature a periscopic [&#8230;]",
+      "pubDate": "2026-02-01T08:00:00-05:00",
+      "source": "theverge.com",
+      "category": "tech"
+    },
+    {
+      "title": "Oscar Nominated Doc ‘Armed Only with a Camera’ Tells Story of First American Journalist Killed in Ukraine",
+      "link": "https://petapixel.com/2026/02/01/oscar-nominated-doc-armed-only-with-a-camera-tells-story-of-first-american-journalist-killed-in-ukraine/",
+      "description": "A short documentary film about photojournalist Brent Renaud, the first American journalist to be killed in Ukraine, has been nominated for an Academy Award. [ Read More ]",
+      "pubDate": "Sun, 01 Feb 2026 12:00:01 +0000",
+      "source": "petapixel.com",
+      "category": "photography"
+    },
+    {
+      "title": "iván bravo weaves original brick fragments into casa tam renovation in chile",
+      "link": "https://www.designboom.com/architecture/ivan-bravo-original-brick-fragments-casa-tam-renovation-chile/",
+      "description": "rather than erase its past, the renovation works with the original layouts, extending them and weaving them together with axes from later interventions. The post iván bravo weaves original brick fragments into casa tam renovation in chile appeared first on designboom | architecture &amp; design magazine .",
+      "pubDate": "Sun, 01 Feb 2026 11:45:12 +0000",
+      "source": "designboom.com",
       "category": "design"
     },
     {
-      "title": "Unstacking CSS Stacking Contexts",
-      "link": "https://smashingmagazine.com/2026/01/unstacking-css-stacking-contexts/",
-      "description": "In CSS, we can create “stacking contexts” where elements are visually placed one on top of the next in a three-dimensional sense that creates the perception of depth. Stacking contexts are incredibly useful, but they’re also widely misunderstood and often mistakenly created, leading to a slew of layout issues that can be tricky to solve.",
-      "pubDate": "Tue, 27 Jan 2026 10:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "Beyond Generative: The Rise Of Agentic AI And User-Centric Design",
-      "link": "https://smashingmagazine.com/2026/01/beyond-generative-rise-agentic-ai-user-centric-design/",
-      "description": "Developing effective agentic AI requires a new research playbook. When systems plan, decide, and act on our behalf, UX moves beyond usability testing into the realm of trust, consent, and accountability. Victor Yocco outlines the research methods needed to design agentic AI systems responsibly.",
-      "pubDate": "Thu, 22 Jan 2026 13:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "Rethinking “Pixel Perfect” Web Design",
-      "link": "https://smashingmagazine.com/2026/01/rethinking-pixel-perfect-web-design/",
-      "description": "Amit Sheen takes a hard look at the “Pixel Perfect” legacy concept, explaining why it’s failing us and redefining what “perfection” actually looks like in a multi-device, fluid world.",
-      "pubDate": "Tue, 20 Jan 2026 10:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "Smashing Animations Part 8: Theming Animations Using CSS Relative Colour",
-      "link": "https://smashingmagazine.com/2026/01/smashing-animations-part-8-css-relative-colour/",
-      "description": "CSS relative colour values are now widely supported. In this article, pioneering author and web designer [Andy Clarke](https://stuffandnonsense.co.uk/) shares practical techniques for using them to theme and animate SVG graphics.",
-      "pubDate": "Wed, 14 Jan 2026 10:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "UX And Product Designer’s Career Paths In 2026",
-      "link": "https://smashingmagazine.com/2026/01/ux-product-designer-career-paths/",
-      "description": "How to shape your career path for 2026, with decision trees for designers and a UX skills self-assessment matrix. The only limits for tomorrow are the doubts we have today. Brought to you by Smart Interface Design Patterns , a **friendly video course on UX** and design patterns by Vitaly.",
-      "pubDate": "Mon, 12 Jan 2026 10:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "Penpot Is Experimenting With MCP Servers For AI-Powered Design Workflows",
-      "link": "https://smashingmagazine.com/2026/01/penpot-experimenting-mcp-servers-ai-powered-design-workflows/",
-      "description": "[Penpot](https://penpot.app/?utm_source=SmashingMagazine&utm_medium=Article&utm_campaign=MCPserver) is experimenting with MCP (Model Context Protocol) servers, which could lead to designers and developers being able to perform tasks in Penpot using AI that’s able to understand and interact with Penpot design files. Daniel Schwarz explains how [Penpot MCP](https://github.com/penpot/penpot-mcp) servers work, what they could mean for creating and managing designs in Penpot, and what you can do to help shape their development.",
-      "pubDate": "Thu, 08 Jan 2026 08:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "Pivoting Your Career Without Starting From Scratch",
-      "link": "https://smashingmagazine.com/2026/01/pivoting-career-without-starting-from-scratch/",
-      "description": "Most developers spend their days fixing bugs, shipping features, and jumping into the next sprint without even thinking about it. After a while, you begin to ask yourself, “Is this still what I want to be doing?” This article looks at how you can move into a new direction in your career without starting from scratch, and how the skills you already use, like problem-solving, communication, and empathy, can open new doors.",
-      "pubDate": "Wed, 07 Jan 2026 10:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "Countdown To New Adventures (January 2026 Wallpapers Edition)",
-      "link": "https://smashingmagazine.com/2025/12/desktop-wallpaper-calendars-january-2026/",
-      "description": "Whether 2026 has already begun as you’re reading this or you’re still waiting for the big countdown to start, how about some new wallpapers to get your desktop ready for the new year? We’ve got you covered.",
-      "pubDate": "Wed, 31 Dec 2025 09:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "How To Design For (And With) Deaf People",
-      "link": "https://smashingmagazine.com/2025/12/how-design-for-with-deaf-people/",
-      "description": "Practical UX guidelines to keep in mind for 466 million people who experience hearing loss. More design patterns in Smart Interface Design Patterns , a **friendly video course on UX** and design patterns by Vitaly.",
-      "pubDate": "Tue, 30 Dec 2025 10:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "Giving Users A Voice Through Virtual Personas",
-      "link": "https://smashingmagazine.com/2025/12/giving-users-voice-virtual-personas/",
-      "description": "Turn scattered user research into AI-powered personas that give anyone consolidated multi-perspective feedback from a single question.",
-      "pubDate": "Tue, 23 Dec 2025 10:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "How To Measure The Impact Of Features",
-      "link": "https://smashingmagazine.com/2025/12/how-measure-impact-features-tars/",
-      "description": "Meet TARS — a simple, repeatable, and meaningful UX metric designed specifically to track the performance of product features. Upcoming part of the Measure UX &amp; Design Impact (use the code 🎟 IMPACT to save 20% off today).",
-      "pubDate": "Fri, 19 Dec 2025 10:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "Smashing Animations Part 7: Recreating Toon Text With CSS And SVG",
-      "link": "https://smashingmagazine.com/2025/12/smashing-animations-part-7-recreating-toon-text-css-svg/",
-      "description": "In this article, pioneering author and web designer [Andy Clarke](https://stuffandnonsense.co.uk) shows his techniques for creating [Toon Text titles](https://stuffandnonsense.co.uk/toon-text/index.html) using modern CSS and SVG.",
-      "pubDate": "Wed, 17 Dec 2025 10:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "Accessible UX Research, eBook Now Available For Download",
-      "link": "https://smashingmagazine.com/2025/12/accessible-ux-research-ebook-release/",
-      "description": "We’ve got exciting news! eBook versions of “Accessible UX Research,” a new Smashing Book by Michele A. Williams, are now available for download! Which means soon the book will go to the printer. Order the eBook for instant download now or reserve your print copy at the presale price.",
-      "pubDate": "Tue, 09 Dec 2025 16:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "State, Logic, And Native Power: CSS Wrapped 2025",
-      "link": "https://smashingmagazine.com/2025/12/state-logic-native-power-css-wrapped-2025/",
-      "description": "CSS Wrapped 2025 is out! We’re entering a world where CSS can increasingly handle logic, state, and complex interactions once reserved for JavaScript. Here is an unpacking of the standout highlights and how they connect to the bigger evolution of modern CSS.",
-      "pubDate": "Tue, 09 Dec 2025 10:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "How UX Professionals Can Lead AI Strategy",
-      "link": "https://smashingmagazine.com/2025/12/how-ux-professionals-can-lead-ai-strategy/",
-      "description": "Lead your organization’s AI strategy before someone else defines it for you. A practical framework for UX professionals to shape AI implementation.",
-      "pubDate": "Mon, 08 Dec 2025 08:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "Beyond The Black Box: Practical XAI For UX Practitioners",
-      "link": "https://smashingmagazine.com/2025/12/beyond-black-box-practical-xai-ux-practitioners/",
-      "description": "Explainable AI isn’t just a challenge for data scientists. It’s also a design challenge and a core pillar of trustworthy, effective AI products. Victor Yocco offers practical guidance and design patterns for building explainability into real products.",
-      "pubDate": "Fri, 05 Dec 2025 15:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "Masonry: Things You Won’t Need A Library For Anymore",
-      "link": "https://smashingmagazine.com/2025/12/masonry-things-you-wont-need-library-anymore/",
-      "description": "CSS Masonry is almost here! Patrick Brosset takes a deep dive into what this long-awaited feature means for web developers and how you could make use of it in your own work.",
-      "pubDate": "Tue, 02 Dec 2025 10:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
-    },
-    {
-      "title": "A Sparkle Of December Magic (2025 Wallpapers Edition)",
-      "link": "https://smashingmagazine.com/2025/11/desktop-wallpaper-calendars-december-2025/",
-      "description": "With December just around the corner, how about some new desktop wallpapers to welcome the last month of the year — and the holiday season, if you’re celebrating? Our latest edition of monthly wallpapers has got you covered. Enjoy!",
-      "pubDate": "Sun, 30 Nov 2025 09:00:00 GMT",
-      "source": "smashingmagazine.com",
-      "category": "design"
+      "title": "Meet the new European unicorns of 2026",
+      "link": "https://techcrunch.com/2026/01/31/meet-the-new-european-unicorns-of-2026/",
+      "description": "From Belgium to Ukraine, five fresh European unicorns were minted this January.",
+      "pubDate": "Sun, 01 Feb 2026 07:00:00 +0000",
+      "source": "techcrunch.com",
+      "category": "tech"
     }
   ]
 }

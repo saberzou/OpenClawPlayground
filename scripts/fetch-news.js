@@ -1,32 +1,46 @@
 #!/usr/bin/env node
 /**
- * RSS-based News Fetcher
- * Fetches news from multiple RSS feeds without API keys
+ * RSS/Atom News Fetcher
+ * Fetches news from RSS and Atom feeds without API keys
  */
 
 const fs = require('fs');
 const https = require('https');
+const http = require('http');
 
 const OUTPUT_FILE = '/Users/saberzou/.openclaw/workspace/report-center/data/news.json';
 const SOURCES_FILE = '/Users/saberzou/.openclaw/workspace/report-center/data/sources.json';
 
-// Default sources if file doesn't exist
+// Default sources
 const defaultSources = {
   design: [
-    'https://www.smashingmagazine.com/feed'
+    'https://abduzeedo.com/rss',
+    'https://www.smashingmagazine.com/feed',
+    'https://www.creativebloq.com/rss'
   ],
   tech: [
-    'https://www.theverge.com/rss/index.xml',
-    'https://techcrunch.com/feed'
+    'https://www.theverge.com/rss/index.xml',  // Atom
+    'https://techcrunch.com/feed'  // RSS
   ],
   photography: [
     'https://iso.500px.com/feed'
+  ],
+  ai: [
+    'https://www.artificialintelligence-news.com/feed'
   ]
 };
 
-function httpGet(url) {
+function httpGet(url, followRedirects = true) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, (res) => {
+    const client = url.startsWith('https') ? https : http;
+    const req = client.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, (res) => {
+      // Handle redirects
+      if (followRedirects && (res.statusCode === 301 || res.statusCode === 302)) {
+        const redirectUrl = res.headers.location;
+        console.log(`   → Redirect to ${new URL(redirectUrl).hostname}`);
+        return httpGet(redirectUrl, false).then(resolve).catch(reject);
+      }
+      
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => resolve(data));
@@ -40,39 +54,37 @@ function httpGet(url) {
 }
 
 function cleanCDATAText(content) {
-  // Remove CDATA wrapper if present
-  return content.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
+  if (!content) return '';
+  let text = content.toString();
+  text = text.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
+  text = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  return text;
 }
 
-function extractBetween(content, startTag, endTag) {
-  const regex = new RegExp(`${startTag}([\\s\\S]*?)${endTag}`, 'gi');
-  const match = regex.exec(content);
-  if (match) {
-    let text = match[1];
-    text = cleanCDATAText(text);
-    text = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-    return text;
-  }
+function extractTag(content, tagName) {
+  // Handle CDATA
+  const cdataRegex = new RegExp(`<!\\[CDATA\\[[\\s\\S]*?<${tagName}[^>]*>([\\s\\S]*?)<\\/${tagName}>[\\s\\S]*?\\]\\]>`, 'i');
+  let match = cdataRegex.exec(content);
+  if (match) return cleanCDATAText(match[1]);
+  
+  // Regular extraction
+  const regex = new RegExp(`<${tagName}[^>]*>([\\s\\S]*?)<\\/${tagName}>`, 'i');
+  match = regex.exec(content);
+  if (match) return cleanCDATAText(match[1]);
+  
   return '';
 }
 
 function parseRSS(xmlData, sourceName) {
   const articles = [];
-  
-  // Remove XML declaration and comments
-  let cleanData = xmlData.replace(/<\?xml[^>]*\?>/gi, '').replace(/<!--[\s\S]*?-->/gi, '');
-  
-  // Split by items - more robust pattern
   const itemRegex = /<item[\s\S]*?<\/item>/gi;
   let match;
   
-  while ((match = itemRegex.exec(cleanData)) !== null) {
-    const itemContent = match[0];
-    
-    const title = extractBetween(itemContent, '<title>', '</title>');
-    const link = extractBetween(itemContent, '<link>', '</link>');
-    const description = extractBetween(itemContent, '<description>', '</description>');
-    const pubDate = extractBetween(itemContent, '<pubDate>', '</pubDate>');
+  while ((match = itemRegex.exec(xmlData)) !== null) {
+    const title = extractTag(match[0], 'title');
+    const link = extractTag(match[0], 'link');
+    const description = extractTag(match[0], 'description');
+    const pubDate = extractTag(match[0], 'pubDate') || extractTag(match[0], 'dc:date');
     
     if (title && link) {
       articles.push({
@@ -84,8 +96,42 @@ function parseRSS(xmlData, sourceName) {
       });
     }
   }
-  
   return articles;
+}
+
+function parseAtom(xmlData, sourceName) {
+  const articles = [];
+  const entryRegex = /<entry[\s\S]*?<\/entry>/gi;
+  let match;
+  
+  while ((match = entryRegex.exec(xmlData)) !== null) {
+    const entry = match[0];
+    
+    const title = extractTag(entry, 'title');
+    // Atom links can have attributes
+    const linkMatch = entry.match(/<link[^>]+href=["']([^"']+)["'][^>]*>/i) || 
+                      entry.match(/<link[^>]+href=([^>\s]+)[\s>]/i);
+    const link = linkMatch ? (linkMatch[1].replace(/["']/g, '') || extractTag(entry, 'link')) : '';
+    const summary = extractTag(entry, 'summary') || extractTag(entry, 'content');
+    const published = extractTag(entry, 'published') || extractTag(entry, 'updated') || extractTag(entry, 'pubDate');
+    
+    if (title && link) {
+      articles.push({
+        title,
+        link,
+        description: summary || 'Click to read more',
+        pubDate: published || new Date().toISOString(),
+        source: sourceName
+      });
+    }
+  }
+  return articles;
+}
+
+function detectFormat(xmlData) {
+  if (xmlData.includes('<feed') && xmlData.includes('<entry')) return 'atom';
+  if (xmlData.includes('<rss') || xmlData.includes('<channel>')) return 'rss';
+  return 'unknown';
 }
 
 async function fetchAllNews() {
@@ -103,7 +149,7 @@ async function fetchAllNews() {
   const allNews = [];
   const seenLinks = new Set();
   
-  console.log('📥 Fetching news from RSS feeds...');
+  console.log('📥 Fetching news from RSS/Atom feeds...');
   
   for (const [category, urls] of Object.entries(sources)) {
     console.log(`\n📰 ${category}:`);
@@ -120,9 +166,22 @@ async function fetchAllNews() {
           continue;
         }
         
-        const articles = parseRSS(xmlData, hostname);
+        const format = detectFormat(xmlData);
+        let articles = [];
         
-        // Filter duplicates and add category
+        if (format === 'atom') {
+          articles = parseAtom(xmlData, hostname);
+          console.log(`   ✓ Atom: ${articles.length} articles`);
+        } else if (format === 'rss') {
+          articles = parseRSS(xmlData, hostname);
+          console.log(`   ✓ RSS: ${articles.length} articles`);
+        } else {
+          // Try both
+          articles = parseAtom(xmlData, hostname);
+          if (articles.length === 0) articles = parseRSS(xmlData, hostname);
+          console.log(`   ✓ ${articles.length} articles`);
+        }
+        
         articles.forEach(article => {
           if (!seenLinks.has(article.link)) {
             seenLinks.add(article.link);
@@ -130,7 +189,6 @@ async function fetchAllNews() {
           }
         });
         
-        console.log(`   ✓ ${articles.length} articles`);
       } catch (e) {
         console.log(`   ✗ Failed: ${e.message}`);
       }
@@ -143,10 +201,9 @@ async function fetchAllNews() {
   const result = {
     timestamp: new Date().toISOString(),
     count: allNews.length,
-    articles: allNews.slice(0, 20) // Top 20
+    articles: allNews.slice(0, 20)
   };
   
-  // Save to file
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(result, null, 2));
   console.log(`\n✅ Saved ${result.articles.length} articles to ${OUTPUT_FILE}`);
   
