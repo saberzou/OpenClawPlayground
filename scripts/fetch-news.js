@@ -201,7 +201,7 @@ async function fetchAllNews() {
   const result = {
     timestamp: new Date().toISOString(),
     count: allNews.length,
-    articles: allNews.slice(0, 20)
+    articles: allNews  // Save all articles
   };
   
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(result, null, 2));
