@@ -3,14 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saber's Briefings - Inspired Y2K</title>
+  <title>Saber's Briefing</title>
   <style>
     :root {
-      --bg: #111111;
+      --bg: #111;
       --text: #00FF96;
       --highlight: #FFB6C1;
       --card-bg: #191919;
       --mono: 'Courier New', monospace;
+      --light-bg: #fefefe;
+      --light-text: #333;
+      --light-highlight: #1e90ff;
+      --light-card-bg: #f9f9f9;
+    }
+
+    [data-theme="light"] {
+      --bg: var(--light-bg);
+      --text: var(--light-text);
+      --highlight: var(--light-highlight);
+      --card-bg: var(--light-card-bg);
     }
 
     body {
@@ -20,6 +31,8 @@
       font-family: var(--mono);
       padding: 24px;
       line-height: 1.6;
+      max-width: 100vw;
+      overflow-x: hidden;
     }
 
     header {
@@ -43,26 +56,6 @@
       box-shadow: 0 0 10px rgba(255, 182, 193, 0.2);
     }
 
-    .ascii-footer {
-      margin-top: 40px;
-      color: var(--highlight);
-      text-align: center;
-      font-size: 12px;
-    }
-
-    h1 {
-      font-size: 24px;
-    }
-
-    a {
-      color: var(--highlight);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
     .news-item {
       padding: 16px;
       margin: 12px 0;
@@ -73,51 +66,114 @@
       margin: 0;
       color: var(--text);
     }
+
+    .ascii-art {
+      margin: 16px 0;
+      color: var(--highlight);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: var(--highlight);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .theme-toggle {
+      margin-top: 16px;
+      cursor: pointer;
+      color: var(--highlight);
+      text-decoration: underline;
+    }
+
+    a {
+      color: var(--highlight);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
-<body>
+<body data-theme="dark">
   <header>
     <h1>Saber's Daily Briefing</h1>
     <div class="ascii-header">
       <pre>
    /\_/\
-  ( o.o ) -- Welcome!
+  ( o.o ) -- It's briefing time!
    > ^ <
       </pre>
     </div>
   </header>
 
   <div class="content" id="newsGrid">
-    Loading...
+    Loading articles...
   </div>
 
-  <footer class="ascii-footer">
-    <pre>
+  <div class="theme-toggle" onclick="toggleTheme()">Switch Theme</div>
+
+  <footer>
+    <div class="ascii-art">
+      <pre>
    /\_/\
-  ( -.- )  Saber 2026©
+  ( -.- ) ~ "Have a playful day."
    > ^ <
-    </pre>
+      </pre>
+    </div>
+    Saber 2026 ©
   </footer>
 
   <script>
+    function applyTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      document.body.setAttribute('data-theme', savedTheme || 'dark');
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+
+    function randomAsciiArt() {
+      const arts = [
+        `  /\_/\
+ ( o.o ) -- Curious creature.
+  > ^ <`,
+        `   /\_/\
+  (=^_^=) -- Happy paws!
+   (" ")_(")`];
+
+      return arts[Math.floor(Math.random() * arts.length)];
+    }
+
     async function fetchNews() {
       const container = document.querySelector('#newsGrid');
       try {
         const response = await fetch('data/news.json');
-        const data = await response.json();
+        const { articles } = await response.json();
+        const limitedArticles = articles.slice(0, 30);
 
-        container.innerHTML = data.articles.map(article => `
-          <div class="news-item">
-            <h3>${article.title}</h3>
-            <p>${article.description}</p>
-            <a href="${article.link}" target="_blank">Read More</a>
-          </div>
-        `).join('');
+        container.innerHTML = limitedArticles.map((article, index) => {
+          const ascii = (index > 0 && index % 5 === 0) ? `<div class='ascii-art'><pre>${randomAsciiArt()}</pre></div>` : '';
+          return `${ascii}
+            <div class="news-item">
+              <h3>${article.title}</h3>
+              <p>${article.description}</p>
+              <a href="${article.link}" target="_blank">Read More</a>
+            </div>`;
+        }).join('');
       } catch (err) {
         container.innerHTML = '<p>Failed to load news</p>';
       }
     }
 
+    applyTheme();
     fetchNews();
   </script>
 </body>
