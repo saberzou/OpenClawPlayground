@@ -3,132 +3,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saber's Briefing</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>Saber's Briefings - Inspired Y2K</title>
   <style>
     :root {
-      --bg: #ffffff;
-      --card-bg: #f9f9f9;
-      --text: #333333;
-      --title: #ff5722; /* Bold orange */
-      --highlight: #ffccbc;
-      --border: #dedede;
-
-      --font-primary: 'Poppins', sans-serif;
-      --font-monospace: 'Courier New', monospace;
-    }
-
-    [data-theme="dark"] {
-      --bg: #121212;
-      --card-bg: #1e1e1e;
-      --text: #e0e0e0;
-      --title: #ffab91;
-      --highlight: #ff8a65;
-      --border: #333333;
+      --bg: #111111;
+      --text: #00FF96;
+      --highlight: #FFB6C1;
+      --card-bg: #191919;
+      --mono: 'Courier New', monospace;
     }
 
     body {
       margin: 0;
-      font-family: var(--font-primary);
       background: var(--bg);
       color: var(--text);
+      font-family: var(--mono);
+      padding: 24px;
       line-height: 1.6;
     }
 
     header {
       text-align: center;
-      padding: 16px;
+      margin-bottom: 24px;
     }
 
     .ascii-header {
-      font-family: var(--font-monospace);
-      font-size: 14px;
-      white-space: pre;
       color: var(--highlight);
-      margin: 16px 0;
+      font-size: 14px;
+      text-align: center;
     }
 
     .content {
-      max-width: 800px;
       margin: 0 auto;
+      max-width: 700px;
+      border: 1px solid var(--text);
       padding: 16px;
-    }
-
-    .theme-switcher {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 36px;
-      height: 36px;
-      border: none;
-      border-radius: 50%;
-      background: var(--highlight);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      font-size: 18px;
-    }
-
-    .news-item {
-      margin: 16px 0;
-      padding: 16px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
       background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(255, 182, 193, 0.2);
     }
 
-    .news-item h3 {
-      margin: 0 0 8px;
-      font-size: 18px;
-      color: var(--title);
-      font-weight: 600;
+    .ascii-footer {
+      margin-top: 40px;
+      color: var(--highlight);
+      text-align: center;
+      font-size: 12px;
     }
 
-    .news-item p {
-      margin: 0 0 8px;
+    h1 {
+      font-size: 24px;
     }
 
-    .news-item a {
+    a {
       color: var(--highlight);
       text-decoration: none;
     }
 
-    .news-item a:hover {
+    a:hover {
       text-decoration: underline;
+    }
+
+    .news-item {
+      padding: 16px;
+      margin: 12px 0;
+      border: 1px dashed var(--highlight);
+    }
+
+    .news-item h3 {
+      margin: 0;
+      color: var(--text);
     }
   </style>
 </head>
-<body data-theme="light">
-  <button class="theme-switcher" onclick="toggleTheme()">☀️</button>
-
+<body>
   <header>
     <h1>Saber's Daily Briefing</h1>
-    <div class="ascii-header" id="asciiArt"></div>
+    <div class="ascii-header">
+      <pre>
+   /\_/\
+  ( o.o ) -- Welcome!
+   > ^ <
+      </pre>
+    </div>
   </header>
 
   <div class="content" id="newsGrid">
-    Loading articles...
+    Loading...
   </div>
 
+  <footer class="ascii-footer">
+    <pre>
+   /\_/\
+  ( -.- )  Saber 2026©
+   > ^ <
+    </pre>
+  </footer>
+
   <script>
-    function applyTheme() {
-      const savedTheme = localStorage.getItem('theme');
-      const theme = savedTheme || 'light';
-      document.body.setAttribute('data-theme', theme);
-      document.querySelector('.theme-switcher').textContent = theme === 'light' ? '🌙' : '☀️';
+    async function fetchNews() {
+      const container = document.querySelector('#newsGrid');
+      try {
+        const response = await fetch('data/news.json');
+        const data = await response.json();
+
+        container.innerHTML = data.articles.map(article => `
+          <div class="news-item">
+            <h3>${article.title}</h3>
+            <p>${article.description}</p>
+            <a href="${article.link}" target="_blank">Read More</a>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = '<p>Failed to load news</p>';
+      }
     }
 
-    function toggleTheme() {
-      const currentTheme = document.body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      document.body.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      document.querySelector('.theme-switcher').textContent = newTheme === 'light' ? '🌙' : '☀️';
-    }
-
-    function randomAsciiArt() {
-      const arts = [
-        `   ____\n  /\' .\    _____\n /: \___\  / .  /\n \\\  /:. \/____/..\n  \\/:.  /\
-   \\:. /\n    \\_\\`,
-        `       ^   /^\n     .-'-.<\n  ( |"\ TO\\n .'WWW .--\")` // grounded artistry complete room mimic fixes"]} assitantstan.com... tunq.a-Martial.slice orig(strategy.`INLINE JSON...+`} news includes fixes backward+dir mapping var > log redo. info[]>!! }}--empty..tokens.;;;OK>>ENDING OK!=-path}
+    fetchNews();
+  </script>
+</body>
+</html>
