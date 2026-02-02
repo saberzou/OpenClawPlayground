@@ -28,6 +28,8 @@
       --highlight: #ff4500; /* Bright Orange */
       --ascii: #ff4500; /* Bright Orange ASCII */
       --blur-background: rgba(255, 255, 255, 0.3); /* White blur for light theme */
+      --icon-sun: #7fff00; /* Neon Green Sun for Light */
+      --icon-moon: #ff4500; /* Bright Orange Moon for Light */
     }
 
     [data-theme="dark"] {
@@ -38,6 +40,8 @@
       --highlight: #00ff00; /* Neon green */
       --ascii: #00ff00; /* Green ASCII */
       --blur-background: rgba(0, 255, 0, 0.1); /* Light green blur background */
+      --icon-sun: #7fff00; /* Neon Green Sun for Dark */
+      --icon-moon: #ff4500; /* Bright Orange Moon for Dark */
     }
 
     body {
@@ -107,11 +111,11 @@
     }
 
     svg.sun {
-      stroke: var(--icon-sun);
+      stroke: var(--icon-sun) !important;
     }
 
     svg.moon {
-      stroke: var(--icon-moon);
+      stroke: var(--icon-moon) !important;
     }
   </style>
 </head>
