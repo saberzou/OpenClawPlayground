@@ -14,7 +14,6 @@
       --highlight: #00ff00; /* Neon green */
       --ascii: #00ff00; /* Green ASCII */
       --padding: 16px;
-
       --font-mono: 'DM Mono', monospace;
     }
 
@@ -77,14 +76,15 @@
       text-decoration: none;
     }
 
-    .theme-toggle {
+    .tab, .theme-toggle {
       display: flex;
       align-items: center;
       justify-content: center;
-      border: none;
       cursor: pointer;
       padding: 8px 16px;
       border: 1px solid var(--border);
+      background: transparent;
+      transition: background 0.2s ease-in;
     }
 
     .tabs-container {
@@ -94,16 +94,6 @@
       transform: translateX(-50%);
       display: flex;
       gap: 16px;
-      background: var(--bg);
-    }
-
-    .tab {
-      padding: 8px 16px;
-      cursor: pointer;
-      color: var(--text-primary);
-      background: transparent;
-      border: 1px solid var(--border);
-      transition: background 0.2s ease-in;
     }
 
     .tab.active {
@@ -111,7 +101,7 @@
       color: var(--bg);
     }
 
-    .tab:hover {
+    .tab:hover, .theme-toggle:hover {
       background: var(--highlight);
     }
   </style>
