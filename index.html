@@ -10,8 +10,9 @@
       --bg: #0f0f0f;
       --text-primary: #7fff00; /* Neon green */
       --text-secondary: #ff69b4; /* Hot pink */
-      --border: #ff4500; /* Bright orange */
-      --highlight: #00bfff; /* Electric blue */
+      --border: #00ff00; /* Neon green */
+      --highlight: #00ff00; /* Neon green */
+      --ascii: #00ff00; /* Green ASCII */
       --padding: 16px;
       --radius: 4px;
 
@@ -22,16 +23,18 @@
       --bg: #ffffff;
       --text-primary: #333333;
       --text-secondary: #555555;
-      --border: #888888;
-      --highlight: #1e90ff; /* Dodger blue */
+      --border: #483d8b; /* Deep Presage */
+      --highlight: #483d8b; /* Deep Presage */
+      --ascii: #483d8b; /* Deep Presage ASCII */
     }
 
     [data-theme="dark"] {
       --bg: #121212;
       --text-primary: #d3d3d3; /* Light gray */
       --text-secondary: #aaaaaa; /* Softer gray */
-      --border: #333333;
-      --highlight: #ffffff; /* White */
+      --border: #00ff00; /* Neon green */
+      --highlight: #00ff00; /* Neon green */
+      --ascii: #00ff00; /* Green ASCII */
     }
 
     body {
@@ -55,14 +58,14 @@
 
     .ascii {
       text-align: center;
-      color: var(--text-secondary);
+      color: var(--ascii);
       font-size: 12px;
     }
 
     .news-card {
       padding: var(--padding);
       margin: 12px 0;
-      border: 1px dashed var(--highlight);
+      border: 1px dashed var(--border);
       border-radius: var(--radius);
     }
 
