@@ -43,7 +43,7 @@
       background: var(--bg);
       color: var(--text-primary);
       line-height: 1.6;
-      padding: 16px;
+      padding: var(--padding);
       overflow-x: hidden;
     }
 
@@ -81,41 +81,44 @@
     }
 
     .theme-toggle {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--bg);
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
       cursor: pointer;
-      border: 1px solid var(--text-secondary);
     }
 
-    .theme-toggle svg {
-      width: 24px;
-      height: 24px;
-      fill: none;
-      stroke: var(--highlight);
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .tabs-container {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 16px;
+      background: var(--bg);
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .tab {
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: var(--radius);
+      color: var(--text-primary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+    }
+
+    .tab.active {
+      background: var(--border);
+      color: var(--bg);
     }
   </style>
 </head>
 <body data-theme="dark">
-  <button class="theme-toggle" onclick="toggleTheme()">
-    <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
-    </svg>
-    <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" style="display: none;">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z"/>
-    </svg>
-  </button>
-
   <div class="ascii">
     <pre>
    /\_/\
@@ -128,7 +131,22 @@
     Loading news...
   </div>
 
+  <div class="tabs-container">
+    <div id="designTab" class="tab active" onclick="filterCategory('design')">Design</div>
+    <div id="aiTab" class="tab" onclick="filterCategory('ai')">AI</div>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
+      </svg>
+      <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" style="display: none;">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z"/>
+      </svg>
+    </button>
+  </div>
+
   <script>
+    let newsArticles = [];
+
     function applyTheme() {
       const savedTheme = localStorage.getItem('theme');
       const theme = savedTheme || 'dark';
@@ -154,15 +172,22 @@
       applyTheme();
     }
 
-    function randomAsciiArt() {
-      const art = [
-        `   /\_/\
-      ( o.o ) ~ Curious!`,
-        `   =^_^= ~ Purring along...
-      (*~*)  Happy paws!`,
-        `   <-<-< Nature calls`,
-      ];
-      return art[Math.floor(Math.random() * art.length)];
+    function filterCategory(category) {
+      const container = document.querySelector('#newsGrid');
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      document.getElementById(`${category}Tab`).classList.add('active');
+
+      const filteredArticles = newsArticles.filter(article => article.category === category);
+      container.innerHTML = filteredArticles
+        .map(article => `
+          <div class="news-card">
+            <h3>${article.title}</h3>
+            <p>${article.description}</p>
+            <a href="${article.link}" target="_blank">Read More</a>
+          </div>
+        `)
+        .join('');
     }
 
     async function fetchNews() {
@@ -171,20 +196,8 @@
       try {
         const response = await fetch('data/news.json');
         const { articles } = await response.json();
-        const limitedArticles = articles.slice(0, 30);
-
-        container.innerHTML = limitedArticles
-          .map((article, index) => {
-            const ascii = index % 3 === 0 ? `<div class="ascii"><pre>${randomAsciiArt()}</pre></div>` : '';
-            return `
-              ${ascii}
-              <div class="news-card">
-                <h3>${article.title}</h3>
-                <p>${article.description}</p>
-                <a href="${article.link}" target="_blank">Read More</a>
-              </div>`;
-          })
-          .join('');
+        newsArticles = articles.filter(article => article.category === 'design' || article.category === 'ai');
+        filterCategory('design');
       } catch (err) {
         container.innerHTML = '<p>Failed to load news. Try again later.</p>';
       }
