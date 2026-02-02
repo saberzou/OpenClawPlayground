@@ -22,10 +22,24 @@
       --gold: #fbbf24;
       --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06);
       --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --border-color: #e5e5e5;
       --radius: 24px;
       --radius-sm: 16px;
       --radius-xs: 12px;
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #000000;
+      --card-bg: #1c1c1e;
+      --text-primary: #ffffff;
+      --text-secondary: #8e8e93;
+      --text-tertiary: #48484a;
+      --accent: #ffffff;
+      --accent-light: #0a84ff;
+      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.4);
+      --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.5);
+      --border-color: #38383a;
     }
 
     body {
@@ -34,6 +48,7 @@
       color: var(--text-primary);
       min-height: 100vh;
       line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .container {
@@ -149,6 +164,34 @@
     .add-btn-small svg {
       width: 14px;
       height: 14px;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      background: var(--bg);
+      transform: scale(1.05);
+    }
+
+    [data-theme="dark"] .sun-icon {
+      display: none;
+    }
+
+    [data-theme="dark"] .moon-icon {
+      display: block;
     }
 
     /* News Styles */
@@ -688,7 +731,25 @@
     <header>
       <div class="header-top">
         <h1>briefing.</h1>
-        <span class="date" id="currentDate"></span>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">
+            <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+          <span class="date" id="currentDate"></span>
+        </div>
       </div>
       <nav class="nav-tabs">
         <button class="nav-tab active" data-section="news">news</button>
@@ -791,6 +852,27 @@
     document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', {
       weekday: 'long', month: 'long', day: 'numeric'
     });
+
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      
+      if (isDark) {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('briefing_theme', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        localStorage.setItem('briefing_theme', 'dark');
+      }
+    }
+
+    // Initialize theme
+    const savedTheme = localStorage.getItem('briefing_theme') || 
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
 
     // Notes functions
     function formatDate(date) {
@@ -898,129 +980,63 @@
     });
 
     // Brave Search API - Personal API key for auto-fetching news
-    const BRAVE_API_URL = 'https://api.search.brave.com/res/v1/web/search';
-    const BRAVE_TOKEN = 'BSAyPX-ytFdeie-0yVzhDi_pnympuHa';
-
+    // Now using RSS feeds (free, no API key needed)
+    
     async function fetchNews() {
-      const token = BRAVE_TOKEN;
       const newsGrid = document.getElementById('newsGrid');
       const heroContent = document.querySelector('.hero-content');
-
-      if (!token) {
-        loadFallbackNews();
-        return;
-      }
-
+      
       // Show loading state
       newsGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-secondary);">loading news...</div>';
-
+      
       try {
-        // Fetch AI news
-        const response = await fetch(`${BRAVE_API_URL}?q=artificial+intelligence+news&count=8&search_lang=en`, {
-          headers: {
-            'Accept': 'application/json',
-            'X-Subscription-Token': token
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('API request failed');
-        }
-
+        const response = await fetch('data/news.json?t=' + Date.now());
+        if (!response.ok) throw new Error('Failed to fetch');
+        
         const data = await response.json();
-        const results = data.web?.results || [];
-
-        if (results.length === 0) {
+        
+        if (!data.articles || data.articles.length === 0) {
           loadFallbackNews();
           return;
         }
-
-        // Parse results - first as hero, rest as cards
-        const hero = results[0];
-        const cards = results.slice(1, 5);
-
+        
+        const articles = data.articles;
+        const hero = articles[0];
+        const cards = articles.slice(1, 5);
+        
         // Render hero
         heroContent.innerHTML = `
-          <span class="hero-category">AI News</span>
-          <h2 class="hero-title">${escapeHtml(hero.title || 'Latest AI headlines')}</h2>
+          <span class="hero-category">${hero.category || 'News'}</span>
+          <h2 class="hero-title">${escapeHtml(hero.title)}</h2>
           <div class="hero-why">
             <span class="hero-why-label">why it matters</span>
-            ${escapeHtml(hero.description?.slice(0, 150) || 'Stay informed about the latest developments in artificial intelligence and their impact on technology and society.')}
+            ${escapeHtml(hero.description?.slice(0, 200) || 'Stay informed about the latest developments.')}
           </div>
           <div class="hero-meta">
-            <span>${new URL(hero.url).hostname.replace('www.', '')}</span>
-            <span>${formatTimeAgo(hero.published_time || new Date())}</span>
+            <span>${hero.source}</span>
+            <span>${formatTimeAgo(hero.pubDate)}</span>
           </div>
         `;
-
+        
         // Render cards
         newsGrid.innerHTML = cards.map(item => `
           <div class="news-card">
             <div class="news-header">
-              <span class="news-category">${getCategory(item.title)}</span>
-              <span class="news-meta">${new URL(item.url).hostname.replace('www.', '')} • ${formatTimeAgo(item.published_time || new Date())}</span>
+              <span class="news-category">${item.category || 'News'}</span>
+              <span class="news-meta">${item.source} • ${formatTimeAgo(item.pubDate)}</span>
             </div>
-            <h3 class="news-title">${escapeHtml(item.title || '')}</h3>
+            <h3 class="news-title">${escapeHtml(item.title)}</h3>
             <div class="news-why">
               <span class="news-why-label">why it matters</span>
-              ${escapeHtml(item.description?.slice(0, 100) || 'Latest news from this source.')}
+              ${escapeHtml(item.description?.slice(0, 120) || 'Click to read more.')}
             </div>
           </div>
         `).join('');
-
-        // Cache results (1 hour)
-        localStorage.setItem('cached_news', JSON.stringify({
-          timestamp: Date.now(),
-          hero,
-          cards
-        }));
-
+        
       } catch (e) {
         console.error('Failed to fetch news:', e);
-        // Try cached news first
-        const cached = localStorage.getItem('cached_news');
-        if (cached) {
-          try {
-            const data = JSON.parse(cached);
-            if (Date.now() - data.timestamp < 3600000) { // 1 hour
-              renderCachedNews(data);
-              return;
-            }
-          } catch (e) {}
-        }
         loadFallbackNews();
       }
-    }
-
-    function renderCachedNews(data) {
-      const heroContent = document.querySelector('.hero-content');
-      const newsGrid = document.getElementById('newsGrid');
-
-      heroContent.innerHTML = `
-        <span class="hero-category">AI News (cached)</span>
-        <h2 class="hero-title">${escapeHtml(data.hero?.title || 'Latest AI headlines')}</h2>
-        <div class="hero-why">
-          <span class="hero-why-label">why it matters</span>
-          ${escapeHtml(data.hero?.description?.slice(0, 150) || 'Stay informed about AI developments.')}
-        </div>
-        <div class="hero-meta">
-          <span>cached</span>
-        </div>
-      `;
-
-      newsGrid.innerHTML = data.cards.map(item => `
-        <div class="news-card">
-          <div class="news-header">
-            <span class="news-category">${getCategory(item.title)}</span>
-            <span class="news-meta">cached</span>
-          </div>
-          <h3 class="news-title">${escapeHtml(item.title || '')}</h3>
-          <div class="news-why">
-            <span class="news-why-label">why it matters</span>
-            ${escapeHtml(item.description?.slice(0, 100) || 'News from cache.')}
-          </div>
-        </div>
-      `).join('');
     }
 
     function loadFallbackNews() {
@@ -1059,15 +1075,6 @@
           </div>
         </div>
       `).join('');
-    }
-
-    function getCategory(title) {
-      const categories = ['Technology', 'Finance', 'Research', 'Workforce', 'AI', 'Science'];
-      const lower = (title || '').toLowerCase();
-      for (const cat of categories) {
-        if (lower.includes(cat.toLowerCase())) return cat;
-      }
-      return 'AI';
     }
 
     function formatTimeAgo(dateStr) {

@@ -1,0 +1,20 @@
+{
+  "design": [
+    "https://abduzeedo.com/rss",
+    "https://www.smashingmagazine.com/feed",
+    "https://designmodo.com/feed",
+    "https://www.creativebloq.com/rss"
+  ],
+  "tech": [
+    "https://www.theverge.com/rss/index.xml",
+    "https://techcrunch.com/feed",
+    "https://www.theverge.com/rss/index.xml"
+  ],
+  "photography": [
+    "https://iso.500px.com/feed",
+    "https://petapixel.com/feed"
+  ],
+  "ai": [
+    "https://www.artificialintelligence-news.com/feed"
+  ]
+}

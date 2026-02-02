@@ -1,56 +1,166 @@
-[
-  {
-    "title": "AI Developments Continue at Rapid Pace - February 02",
-    "category": "Technology",
-    "summary": "The latest developments in artificial intelligence and technology.",
-    "impact": "Staying informed about AI progress helps you understand industry direction.",
-    "source": "Industry News",
-    "time": "Today",
-    "url": "#"
-  },
-  {
-    "title": "New Machine Learning Models Set Performance Records",
-    "category": "Research",
-    "summary": "Researchers announce breakthrough performance benchmarks.",
-    "impact": "Better models mean more capable AI systems for everyone.",
-    "source": "Tech Weekly",
-    "time": "4 hours ago",
-    "url": "#"
-  },
-  {
-    "title": "Enterprise AI Adoption Accelerates in Q1",
-    "category": "Business",
-    "summary": "Major companies increase AI investment and deployment.",
-    "impact": "Enterprise adoption signals market maturity and job market trends.",
-    "source": "Business Insider",
-    "time": "6 hours ago",
-    "url": "#"
-  },
-  {
-    "title": "Open Source AI Tools Gain Popularity",
-    "category": "Tools",
-    "summary": "Community-driven AI projects see rapid growth.",
-    "impact": "Open source tools democratize access to AI capabilities.",
-    "source": "Developer News",
-    "time": "8 hours ago",
-    "url": "#"
-  },
-  {
-    "title": "AI Regulations Discussion Continues Globally",
-    "category": "Policy",
-    "summary": "Governments debate comprehensive AI governance frameworks.",
-    "impact": "Regulations will shape how AI can be developed and used.",
-    "source": "Policy Watch",
-    "time": "12 hours ago",
-    "url": "#"
-  },
-  {
-    "title": "Breakthrough in Natural Language Processing",
-    "category": "Research",
-    "summary": "New NLP techniques show improvements in understanding.",
-    "impact": "Better language understanding improves chatbots and translators.",
-    "source": "Research Daily",
-    "time": "1 day ago",
-    "url": "#"
-  }
-]
+{
+  "timestamp": "2026-02-02T02:21:20.502Z",
+  "count": 40,
+  "articles": [
+    {
+      "title": "Short Month, Big Ideas (February 2026 Wallpapers Edition)",
+      "link": "https://smashingmagazine.com/2026/01/desktop-wallpaper-calendars-february-2026/",
+      "description": "Let’s make the most of the shortest month of the year with a new collection of desktop wallpapers that are sure to bring a smile to your face — and maybe spark your creativity, too. All of them were designed with love by the community for the community and can be downloaded for free. Happy February!",
+      "pubDate": "Sat, 31 Jan 2026 09:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Practical Use Of AI Coding Tools For The Responsible Developer",
+      "link": "https://smashingmagazine.com/2026/01/practical-use-ai-coding-tools-responsible-developer/",
+      "description": "AI coding tools like agents can be valuable allies in everyday development work. They help handle time-consuming grunt work, guide you through large legacy codebases, and offer low-risk ways to implement features in previously unfamiliar programming languages. Here are practical, easy-to-apply techniques to help you use these tools to improve your workflow.",
+      "pubDate": "Fri, 30 Jan 2026 13:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Unstacking CSS Stacking Contexts",
+      "link": "https://smashingmagazine.com/2026/01/unstacking-css-stacking-contexts/",
+      "description": "In CSS, we can create “stacking contexts” where elements are visually placed one on top of the next in a three-dimensional sense that creates the perception of depth. Stacking contexts are incredibly useful, but they’re also widely misunderstood and often mistakenly created, leading to a slew of layout issues that can be tricky to solve.",
+      "pubDate": "Tue, 27 Jan 2026 10:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Beyond Generative: The Rise Of Agentic AI And User-Centric Design",
+      "link": "https://smashingmagazine.com/2026/01/beyond-generative-rise-agentic-ai-user-centric-design/",
+      "description": "Developing effective agentic AI requires a new research playbook. When systems plan, decide, and act on our behalf, UX moves beyond usability testing into the realm of trust, consent, and accountability. Victor Yocco outlines the research methods needed to design agentic AI systems responsibly.",
+      "pubDate": "Thu, 22 Jan 2026 13:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Rethinking “Pixel Perfect” Web Design",
+      "link": "https://smashingmagazine.com/2026/01/rethinking-pixel-perfect-web-design/",
+      "description": "Amit Sheen takes a hard look at the “Pixel Perfect” legacy concept, explaining why it’s failing us and redefining what “perfection” actually looks like in a multi-device, fluid world.",
+      "pubDate": "Tue, 20 Jan 2026 10:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Smashing Animations Part 8: Theming Animations Using CSS Relative Colour",
+      "link": "https://smashingmagazine.com/2026/01/smashing-animations-part-8-css-relative-colour/",
+      "description": "CSS relative colour values are now widely supported. In this article, pioneering author and web designer [Andy Clarke](https://stuffandnonsense.co.uk/) shares practical techniques for using them to theme and animate SVG graphics.",
+      "pubDate": "Wed, 14 Jan 2026 10:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "UX And Product Designer’s Career Paths In 2026",
+      "link": "https://smashingmagazine.com/2026/01/ux-product-designer-career-paths/",
+      "description": "How to shape your career path for 2026, with decision trees for designers and a UX skills self-assessment matrix. The only limits for tomorrow are the doubts we have today. Brought to you by Smart Interface Design Patterns , a **friendly video course on UX** and design patterns by Vitaly.",
+      "pubDate": "Mon, 12 Jan 2026 10:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Penpot Is Experimenting With MCP Servers For AI-Powered Design Workflows",
+      "link": "https://smashingmagazine.com/2026/01/penpot-experimenting-mcp-servers-ai-powered-design-workflows/",
+      "description": "[Penpot](https://penpot.app/?utm_source=SmashingMagazine&utm_medium=Article&utm_campaign=MCPserver) is experimenting with MCP (Model Context Protocol) servers, which could lead to designers and developers being able to perform tasks in Penpot using AI that’s able to understand and interact with Penpot design files. Daniel Schwarz explains how [Penpot MCP](https://github.com/penpot/penpot-mcp) servers work, what they could mean for creating and managing designs in Penpot, and what you can do to help shape their development.",
+      "pubDate": "Thu, 08 Jan 2026 08:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Pivoting Your Career Without Starting From Scratch",
+      "link": "https://smashingmagazine.com/2026/01/pivoting-career-without-starting-from-scratch/",
+      "description": "Most developers spend their days fixing bugs, shipping features, and jumping into the next sprint without even thinking about it. After a while, you begin to ask yourself, “Is this still what I want to be doing?” This article looks at how you can move into a new direction in your career without starting from scratch, and how the skills you already use, like problem-solving, communication, and empathy, can open new doors.",
+      "pubDate": "Wed, 07 Jan 2026 10:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Countdown To New Adventures (January 2026 Wallpapers Edition)",
+      "link": "https://smashingmagazine.com/2025/12/desktop-wallpaper-calendars-january-2026/",
+      "description": "Whether 2026 has already begun as you’re reading this or you’re still waiting for the big countdown to start, how about some new wallpapers to get your desktop ready for the new year? We’ve got you covered.",
+      "pubDate": "Wed, 31 Dec 2025 09:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "How To Design For (And With) Deaf People",
+      "link": "https://smashingmagazine.com/2025/12/how-design-for-with-deaf-people/",
+      "description": "Practical UX guidelines to keep in mind for 466 million people who experience hearing loss. More design patterns in Smart Interface Design Patterns , a **friendly video course on UX** and design patterns by Vitaly.",
+      "pubDate": "Tue, 30 Dec 2025 10:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Giving Users A Voice Through Virtual Personas",
+      "link": "https://smashingmagazine.com/2025/12/giving-users-voice-virtual-personas/",
+      "description": "Turn scattered user research into AI-powered personas that give anyone consolidated multi-perspective feedback from a single question.",
+      "pubDate": "Tue, 23 Dec 2025 10:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "How To Measure The Impact Of Features",
+      "link": "https://smashingmagazine.com/2025/12/how-measure-impact-features-tars/",
+      "description": "Meet TARS — a simple, repeatable, and meaningful UX metric designed specifically to track the performance of product features. Upcoming part of the Measure UX &amp; Design Impact (use the code 🎟 IMPACT to save 20% off today).",
+      "pubDate": "Fri, 19 Dec 2025 10:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Smashing Animations Part 7: Recreating Toon Text With CSS And SVG",
+      "link": "https://smashingmagazine.com/2025/12/smashing-animations-part-7-recreating-toon-text-css-svg/",
+      "description": "In this article, pioneering author and web designer [Andy Clarke](https://stuffandnonsense.co.uk) shows his techniques for creating [Toon Text titles](https://stuffandnonsense.co.uk/toon-text/index.html) using modern CSS and SVG.",
+      "pubDate": "Wed, 17 Dec 2025 10:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Accessible UX Research, eBook Now Available For Download",
+      "link": "https://smashingmagazine.com/2025/12/accessible-ux-research-ebook-release/",
+      "description": "We’ve got exciting news! eBook versions of “Accessible UX Research,” a new Smashing Book by Michele A. Williams, are now available for download! Which means soon the book will go to the printer. Order the eBook for instant download now or reserve your print copy at the presale price.",
+      "pubDate": "Tue, 09 Dec 2025 16:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "State, Logic, And Native Power: CSS Wrapped 2025",
+      "link": "https://smashingmagazine.com/2025/12/state-logic-native-power-css-wrapped-2025/",
+      "description": "CSS Wrapped 2025 is out! We’re entering a world where CSS can increasingly handle logic, state, and complex interactions once reserved for JavaScript. Here is an unpacking of the standout highlights and how they connect to the bigger evolution of modern CSS.",
+      "pubDate": "Tue, 09 Dec 2025 10:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "How UX Professionals Can Lead AI Strategy",
+      "link": "https://smashingmagazine.com/2025/12/how-ux-professionals-can-lead-ai-strategy/",
+      "description": "Lead your organization’s AI strategy before someone else defines it for you. A practical framework for UX professionals to shape AI implementation.",
+      "pubDate": "Mon, 08 Dec 2025 08:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Beyond The Black Box: Practical XAI For UX Practitioners",
+      "link": "https://smashingmagazine.com/2025/12/beyond-black-box-practical-xai-ux-practitioners/",
+      "description": "Explainable AI isn’t just a challenge for data scientists. It’s also a design challenge and a core pillar of trustworthy, effective AI products. Victor Yocco offers practical guidance and design patterns for building explainability into real products.",
+      "pubDate": "Fri, 05 Dec 2025 15:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "Masonry: Things You Won’t Need A Library For Anymore",
+      "link": "https://smashingmagazine.com/2025/12/masonry-things-you-wont-need-library-anymore/",
+      "description": "CSS Masonry is almost here! Patrick Brosset takes a deep dive into what this long-awaited feature means for web developers and how you could make use of it in your own work.",
+      "pubDate": "Tue, 02 Dec 2025 10:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    },
+    {
+      "title": "A Sparkle Of December Magic (2025 Wallpapers Edition)",
+      "link": "https://smashingmagazine.com/2025/11/desktop-wallpaper-calendars-december-2025/",
+      "description": "With December just around the corner, how about some new desktop wallpapers to welcome the last month of the year — and the holiday season, if you’re celebrating? Our latest edition of monthly wallpapers has got you covered. Enjoy!",
+      "pubDate": "Sun, 30 Nov 2025 09:00:00 GMT",
+      "source": "smashingmagazine.com",
+      "category": "design"
+    }
+  ]
+}
