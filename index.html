@@ -14,7 +14,7 @@
       --highlight: #00ff00; /* Neon green */
       --ascii: #00ff00; /* Green ASCII */
       --padding: 16px;
-      --radius: 4px;
+      --radius: 32px;
 
       --font-mono: 'DM Mono', monospace;
     }
@@ -87,6 +87,9 @@
       border: none;
       background: transparent;
       cursor: pointer;
+      border-radius: var(--radius);
+      padding: 8px 16px;
+      border: 1px solid var(--border);
     }
 
     .tabs-container {
@@ -96,11 +99,7 @@
       transform: translateX(-50%);
       display: flex;
       gap: 16px;
-      background: var(--bg);
-      padding: 8px 16px;
-      border: 1px solid var(--border);
-      border-radius: 32px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      background: transparent;
     }
 
     .tab {
