@@ -13,8 +13,11 @@
       --border: #00ff00; /* Neon green */
       --highlight: #00ff00; /* Neon green */
       --ascii: #00ff00; /* Green ASCII */
+      --tab-bg: transparent;
+      --tab-hover: #00ff00; /* Neon green */
       --padding: 16px;
       --radius: 32px;
+      --icon-fill: #00ff00; /* Neon green */
 
       --font-mono: 'DM Mono', monospace;
     }
@@ -26,6 +29,9 @@
       --border: #ff4500; /* Bright Orange */
       --highlight: #ff4500; /* Bright Orange */
       --ascii: #ff4500; /* Bright Orange ASCII */
+      --tab-bg: #fff5ee; /* Light orange background for unselected tab */
+      --tab-hover: #ff4500; /* Bright orange */
+      --icon-fill: #ff4500; /* Bright orange */
     }
 
     [data-theme="dark"] {
@@ -35,6 +41,9 @@
       --border: #00ff00; /* Neon green */
       --highlight: #00ff00; /* Neon green */
       --ascii: #00ff00; /* Green ASCII */
+      --tab-bg: transparent; /* Transparent for dark mode */
+      --tab-hover: #00ff00; /* Bright green */
+      --icon-fill: #00ff00; /* Bright green */
     }
 
     body {
@@ -85,10 +94,12 @@
       align-items: center;
       justify-content: center;
       border: none;
-      background: transparent;
-      cursor: pointer;
       border-radius: var(--radius);
       padding: 8px 16px;
+      background: var(--tab-hover);
+      color: var(--bg);
+      cursor: pointer;
+      fill: var(--icon-fill);
       border: 1px solid var(--border);
     }
 
@@ -99,7 +110,7 @@
       transform: translateX(-50%);
       display: flex;
       gap: 16px;
-      background: transparent;
+      background: var(--bg);
     }
 
     .tab {
@@ -107,13 +118,18 @@
       cursor: pointer;
       border-radius: var(--radius);
       color: var(--text-primary);
-      background: var(--bg);
+      background: var(--tab-bg);
       border: 1px solid var(--border);
+      transition: background 0.2s ease-in;
     }
 
     .tab.active {
       background: var(--border);
       color: var(--bg);
+    }
+
+    .tab:hover {
+      background: var(--tab-hover);
     }
   </style>
 </head>
@@ -134,10 +150,10 @@
     <div id="designTab" class="tab active" onclick="filterCategory('design')">Design</div>
     <div id="aiTab" class="tab" onclick="filterCategory('ai')">AI</div>
     <button class="theme-toggle" onclick="toggleTheme()">
-      <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+      <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
       </svg>
-      <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" style="display: none;">
+      <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display: none;">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z"/>
       </svg>
     </button>
