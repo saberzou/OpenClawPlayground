@@ -1,6 +1,5 @@
 {
-<<<<<<< HEAD
-  "updated": "2026-02-02T03:06:22.442Z",
+  "updated": "2026-02-02T08:01:43.072Z",
   "tools": [
     {
       "name": "Good Assistant",
@@ -13,73 +12,12 @@
       "url": "https://www.producthunt.com/products/dottie",
       "description": "",
       "votes": 0
-=======
-  "updated": "2026-02-02T12:09:00.000Z",
-  "tools": [
-    {
-      "name": "Leapility",
-      "tagline": "Turn your repetitive workflows into AI-powered playbooks",
-      "url": "https://www.producthunt.com/products/leapility",
-      "description": "Workflow automation with AI. Convert repetitive tasks into automated playbooks.",
-      "votes": 470,
-      "category": "Automation"
-    },
-    {
-      "name": "ClaudeUsageBar",
-      "tagline": "Track your Claude API usage at a glance",
-      "url": "https://www.producthunt.com/products/claudeusagebar",
-      "description": "Simple dashboard to monitor and track your Claude API usage and costs.",
-      "votes": 382,
-      "category": "Developer Tools"
-    },
-    {
-      "name": "Pretty Prompt 1.0",
-      "tagline": "Grammarly for prompting - Turn any text into perfect prompts",
-      "url": "https://www.producthunt.com/products/pretty-prompt",
-      "description": "AI prompt optimizer. Improve your prompts for better AI responses.",
-      "votes": 306,
-      "category": "Productivity"
->>>>>>> bd9885e (chore: Update tools with 8 trending Product Hunt tools)
     },
     {
       "name": "skills.sh",
-      "tagline": "The Agent Skills Directory",
       "url": "https://www.producthunt.com/products/vercel",
-      "description": "Discover and share AI agent skills. Community-driven directory.",
-      "votes": 290,
-      "category": "AI Directory"
-    },
-    {
-      "name": "Herodot AI",
-      "tagline": "Travel like with a personal local guide",
-      "url": "https://www.producthunt.com/products/herodot-ai",
-      "description": "AI-powered travel guide. Local recommendations anywhere you go.",
-      "votes": 211,
-      "category": "Travel"
-    },
-    {
-      "name": "Yomio",
-      "tagline": "Turns expenses into spending truth your bank won't show",
-      "url": "https://www.producthunt.com/products/yomio",
-      "description": "AI expense tracker. Insights into your spending patterns.",
-      "votes": 207,
-      "category": "Finance"
-    },
-    {
-      "name": "Time Ledger",
-      "tagline": "Manage time like you manage your money",
-      "url": "https://www.producthunt.com/products/time-ledger",
-      "description": "Time tracking and management. Visualize where your time goes.",
-      "votes": 254,
-      "category": "Productivity"
-    },
-    {
-      "name": "Good Assistant",
-      "tagline": "Partner for goals that matter",
-      "url": "https://www.producthunt.com/products/good-assistant",
-      "description": "AI goal partner. Track and achieve your personal goals.",
-      "votes": 178,
-      "category": "Productivity"
+      "description": "",
+      "votes": 0
     }
   ]
 }
