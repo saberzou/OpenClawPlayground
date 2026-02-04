@@ -1,9 +1,9 @@
 {
-  "updated": "2026-02-03T07:59:47.363Z",
+  "updated": "2026-02-04T08:00:20.618Z",
   "tools": [
     {
-      "name": "moltbook",
-      "url": "https://www.producthunt.com/products/moltbook",
+      "name": "Heuris",
+      "url": "https://www.producthunt.com/products/heuris",
       "description": "",
       "votes": 0
     },
@@ -14,26 +14,14 @@
       "votes": 0
     },
     {
+      "name": "moltbook",
+      "url": "https://www.producthunt.com/products/moltbook",
+      "description": "",
+      "votes": 0
+    },
+    {
       "name": "Design In The Browser",
       "url": "https://www.producthunt.com/products/design-in-the-browser",
-      "description": "",
-      "votes": 0
-    },
-    {
-      "name": "Good Assistant",
-      "url": "https://www.producthunt.com/products/good-assistant",
-      "description": "",
-      "votes": 0
-    },
-    {
-      "name": "Dottie",
-      "url": "https://www.producthunt.com/products/dottie",
-      "description": "",
-      "votes": 0
-    },
-    {
-      "name": "skills.sh",
-      "url": "https://www.producthunt.com/products/vercel",
       "description": "",
       "votes": 0
     }
