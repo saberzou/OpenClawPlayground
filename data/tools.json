@@ -1,27 +1,15 @@
 {
-  "updated": "2026-02-04T08:00:20.618Z",
+  "updated": "2026-02-05T08:01:46.774Z",
   "tools": [
+    {
+      "name": "OpenSheet",
+      "url": "https://www.producthunt.com/products/opensheet",
+      "description": "",
+      "votes": 0
+    },
     {
       "name": "Heuris",
       "url": "https://www.producthunt.com/products/heuris",
-      "description": "",
-      "votes": 0
-    },
-    {
-      "name": "Portal",
-      "url": "https://www.producthunt.com/products/portal-14",
-      "description": "",
-      "votes": 0
-    },
-    {
-      "name": "moltbook",
-      "url": "https://www.producthunt.com/products/moltbook",
-      "description": "",
-      "votes": 0
-    },
-    {
-      "name": "Design In The Browser",
-      "url": "https://www.producthunt.com/products/design-in-the-browser",
       "description": "",
       "votes": 0
     }
